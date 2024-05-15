@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Bullet.hpp"
+#include "../Bullets/Bullet.hpp"
 #include "../Resources/Fonts.hpp"
 #include "../Resources/Textures.hpp"
 

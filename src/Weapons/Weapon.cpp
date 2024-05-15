@@ -1,15 +1,12 @@
 #include "../../include/Weapons/Weapon.hpp"
 
 Weapon::Weapon()
-    : fireRate(0), fireRateMax(10), weaponTexture(nullptr), bulletTexture(nullptr),
+    : fireRate(0), fireRateMax(10), weaponTexture(nullptr),
       level(1), damage(1), damageMax(2)
-{
-    sprite.setTexture(*weaponTexture);
-    sprite.setOrigin(sprite.getGlobalBounds().width / 2, sprite.getGlobalBounds().height / 2);
-}
+{}
 
-Weapon::Weapon(Texture* weaponTexture, Texture* bulletTexture, int UpOrDown, int fireRateMax, int damageMax)
-    : fireRate(0), fireRateMax(fireRateMax), weaponTexture(weaponTexture), bulletTexture(bulletTexture),
+Weapon::Weapon(Texture* weaponTexture, int UpOrDown, int fireRateMax, int damageMax)
+    : fireRate(0), fireRateMax(fireRateMax), weaponTexture(weaponTexture),
       level(1), damage(1), damageMax(damageMax), UpOrDown(UpOrDown)
 {
     sprite.setTexture(*weaponTexture);
@@ -37,7 +34,7 @@ void Weapon::Render(RenderTarget& target)
     // Render bullets
     for (size_t i = 0; i < bullets.size(); i++)
     {
-        bullets[i].Render(target);
+        bullets[i]->Render(target);
     }
    
     // Render the weapon

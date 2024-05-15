@@ -10,11 +10,9 @@ private:
 public:
     // Constructors/Destructors
     PeaShooter();
-    PeaShooter(Texture *weaponTexture, Texture *bulletTexture, int UpOrDown);
+    PeaShooter(Texture *weaponTexture, int UpOrDown);
     virtual ~PeaShooter();
 
-    // Accessors
-    Texture *getBulletTexture() const { return bulletTexture; }
 
     // Functions
     void Update(Vector2f targetPosition, FloatRect bounds) override;

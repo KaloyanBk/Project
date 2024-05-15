@@ -1,19 +1,29 @@
-#include "../include/Bullet.hpp"
+#include "../../include/Bullets/Bullet.hpp"
+#include <iostream>
 
-Bullet::Bullet(Texture* texture, Vector2f pos,  Vector2f scale,
-               Vector2f direction, float initialVelocity,
-               float maxVelocity, float acceleration)
+Bullet::Bullet(Vector2f pos, Vector2f direction,
+               float initialVelocity, float maxVelocity,
+               float acceleration)
     : direction(direction), currentVelocity(initialVelocity * direction),
       maxVelocity(maxVelocity), acceleration(acceleration)
 {
-    this->texture = texture;
-    this->sprite.setTexture(*this->texture);
-    this->sprite.setScale(scale);
-
     this->sprite.setPosition(pos - Vector2f(0.f, this->sprite.getGlobalBounds().height / 2));
+    this->texture = new Texture();
 }
 
-Bullet::~Bullet() {}
+Bullet::~Bullet()
+{
+    delete this->texture;
+}
+
+void Bullet::setTexture(int type)
+{
+    if (!this->texture->loadFromFile(resourcePathsBullets.at(static_cast<BulletTextures>(type))))
+    {
+        std::cerr << "Failed to load texture: " << resourcePathsBullets.at(static_cast<BulletTextures>(type)) << std::endl;
+    }
+    this->sprite.setTexture(*this->texture);
+}
 
 void Bullet::Move()
 {
@@ -38,7 +48,7 @@ void Bullet::Update()
     this->Move();
 }
 
-void Bullet::Render(RenderTarget& target)
+void Bullet::Render(RenderTarget &target)
 {
     target.draw(this->sprite);
 }

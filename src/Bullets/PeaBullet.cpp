@@ -1,0 +1,19 @@
+#include "../../include/Bullets/PeaBullet.hpp"
+
+PeaBullet::PeaBullet(  Vector2f pos, Vector2f direction,
+                float initialVelocity, float maxVelocity,
+                float acceleration)
+    : Bullet(pos, direction, initialVelocity, maxVelocity, acceleration)
+{
+    this->setTexture(SIDE_GUN_PEA_SHOOTER_BULLET);
+        this->sprite.setOrigin(this->sprite.getGlobalBounds().width / 2, this->sprite.getGlobalBounds().height / 2);
+    this->sprite.setScale(Vector2f(0.2f, 0.2f));
+
+}
+
+void PeaBullet::Update()
+{
+    // Implement LASERBullet specific behavior here
+    // For example, adjust position, check for collisions, etc.
+    Move();
+}

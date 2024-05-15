@@ -1,12 +1,20 @@
 #pragma once
 
-#include "Bullet.hpp"
+#include "./Bullets/Bullet.hpp"
 #include "../include/Weapons/Weapon.hpp"
 #include "../include/Weapons/PeaShooter.hpp"
 #include "./Resources/Fonts.hpp"
 #include "./Resources/Textures.hpp"
 
-class Player {
+#include "../include/Bullets/LaserBullet.hpp"
+#include "../include/Bullets/Lightning.hpp"
+#include "../include/Bullets/DarkMatter.hpp"
+#include "../include/Bullets/NuclierMaterial.hpp"
+#include "../include/Bullets/Plasma.hpp"
+#include "../include/Bullets/PlanetaryBomb.hpp"
+
+class Player
+{
 private:
     unsigned playerNumber;
 
@@ -17,7 +25,7 @@ private:
     Vector2u windowBounds;
 
     // Bullets
-    std::vector<Bullet> bullets;
+    std::vector<Bullet *> bullets;
 
     // Controls
     int controls[5];
@@ -42,17 +50,9 @@ private:
     int score;
 
     // Weapons
-    std::vector<Weapon*> weapons;
-    Weapon* sideGunUp;
-    Weapon* sideGunDown;
-
-    // Main gun
-    Texture* laserBullet;
-    Texture* lightningBullet;
-    Texture* darkMatterBullet;
-    Texture* nuclierMaterialBullet;
-    Texture* plasmaBullet;
-    Texture* planetaryBombBullet;
+    std::vector<Weapon *> weapons;
+    Weapon *sideGunUp;
+    Weapon *sideGunDown;
 
     int currentWeapon;
 
@@ -63,22 +63,22 @@ private:
     int sideGunLevel;
 
 public:
-
     // Constructor
-    Player(std::vector<Texture> &textures, Vector2u windowBounds, int UP = 22, int DOWN = 18, int LEFT = 0, int RIGHT = 3, int FIRE = 57);
+    Player(std::vector<Texture> &textures, Vector2u windowBounds,
+           int UP = 22, int DOWN = 18, int LEFT = 0, int RIGHT = 3, int FIRE = 57);
     ~Player();
 
     // Accessors
-    inline std::vector<Bullet> &getBullets() { return this->bullets; }
+    inline std::vector<Bullet *> &getBullets() { return this->bullets; }
     inline const Vector2f &getPosition() const { return this->sprite.getPosition(); }
-    inline std::vector<Weapon*> &getWeapons() { return this->weapons; };
+    inline std::vector<Weapon *> &getWeapons() { return this->weapons; };
     inline const String getHpS() const { return std::to_string(this->hp) + "/" + std::to_string(this->hpMax); }
     inline const FloatRect getBounds() const { return this->sprite.getGlobalBounds(); }
     inline const bool isDead() const { return this->hp <= 0; }
 
-    // Functions
+    // Functionsc
     void Move();
-    void addWeapon(Texture* weaponTexture, Texture* bulletTexture, int UpOrDown);
+    void addWeapon(Texture *weaponTexture, int UpOrDown);
     void CombatUpdate();
     void UpdateAccessories();
     void TakeDamage(int damage);
@@ -89,15 +89,17 @@ public:
 };
 
 // Enumerations
-enum controls {
+enum controls
+{
     UP = 0,
     DOWN,
     LEFT,
     RIGHT,
     FIRE
 };
-enum mainWeapons {
-    LASER=0,
+enum mainWeapons
+{
+    LASER = 0,
     LIGHTNING,
     DARK_MATTER,
     NUCLIER_MATERIAL,
@@ -105,7 +107,8 @@ enum mainWeapons {
     PLANETARY_BOMB
 };
 
-enum sideWeapons {
-    WEAPON_DOWN = 0,
-    WEAPON_UP
+enum sideWeapons
+{
+    WEAPON_UP = 0,
+    WEAPON_DOWN
 };

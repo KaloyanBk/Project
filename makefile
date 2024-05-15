@@ -2,10 +2,10 @@
 CC = g++
 
 # Compiler flags
-CFLAGS = -std=c++11 -I/opt/homebrew/Cellar/sfml/2.6.1/include
+CFLAGS = -std=c++11 -g -fsanitize=address -I/opt/homebrew/Cellar/sfml/2.6.1/include
 
 # Linker flags
-LDFLAGS = -L/opt/homebrew/Cellar/sfml/2.6.1/lib
+LDFLAGS = -L/opt/homebrew/Cellar/sfml/2.6.1/lib -fsanitize=address
 
 # Libraries
 LIBS = -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lsfml-network

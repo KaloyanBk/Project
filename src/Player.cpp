@@ -1,5 +1,4 @@
 #include "../include/Player.hpp"
-#include "../include/Weapons/Weapon.hpp"
 
 unsigned Player::players = 0;
 
@@ -13,25 +12,23 @@ Player::Player(std::vector<Texture> &textures, Vector2u windowBounds, int UP, in
     this->sprite.setScale(0.1f, 0.1f);
     this->sprite.setPosition(100.f, 100.f);
 
-    // Bullet
-    this->laserBullet = &textures[LASER_BULLET];
-    this->lightningBullet = &textures[LIGHTNING_BULLET];
-    this->darkMatterBullet = &textures[DARK_MATTER_BULLET];
-    this->nuclierMaterialBullet = &textures[NUCLIER_MATERIAL_BULLET];
-    this->plasmaBullet = &textures[PLASMA_BULLET];
-    this->planetaryBombBullet = &textures[PLANETARY_BOMB_BULLET];
-
     this->fireRateMax = 25;
     this->fireRate = this->fireRateMax;
     this->damageTimerMax = 10;
     this->damageTimer = this->damageTimerMax;
 
     // Weapons
-    this->currentWeapon = LASER;
-    this->mainGunLevel = 0;
+    // this->currentWeapon = LASER;
+    // this->currentWeapon = LIGHTNING;
+    // this->currentWeapon = DARK_MATTER;
+    // this->currentWeapon = NUCLIER_MATERIAL;
+    // this->currentWeapon = PLASMA;
+    this->currentWeapon = PLANETARY_BOMB;
 
-    this->addWeapon(&textures[SIDE_GUN_UP], &textures[SIDE_GUN_BULLET], WEAPON_UP);
-    this->addWeapon(&textures[SIDE_GUN_DOWN], &textures[SIDE_GUN_BULLET], WEAPON_DOWN);
+    this->mainGunLevel = 2;
+
+    this->addWeapon(&textures[SIDE_GUN_UP], WEAPON_UP);
+    this->addWeapon(&textures[SIDE_GUN_DOWN], WEAPON_DOWN);
 
     // Controls
     this->controls[controls::UP] = UP;
@@ -115,16 +112,16 @@ void Player::Move()
     else if (this->sprite.getPosition().y + this->sprite.getGlobalBounds().height / 2.f > this->windowBounds.y)
         this->sprite.setPosition(this->sprite.getPosition().x, this->windowBounds.y - this->sprite.getGlobalBounds().height / 2.f);
 }
-void Player::addWeapon(Texture *weaponTexture, Texture *bulletTexture, int UpOrDown)
+void Player::addWeapon(Texture *weaponTexture, int UpOrDown)
 {
     if (UpOrDown == 0)
     {
-        sideGunUp = new PeaShooter(weaponTexture, bulletTexture, UpOrDown);
+        sideGunUp = new PeaShooter(weaponTexture, UpOrDown);
         weapons.push_back(sideGunUp);
     }
     else
     {
-        sideGunDown = new PeaShooter(weaponTexture, bulletTexture, UpOrDown);
+        sideGunDown = new PeaShooter(weaponTexture, UpOrDown);
         weapons.push_back(sideGunDown);
     }
 }
@@ -138,117 +135,170 @@ void Player::UpdateAccessories()
 void Player::CombatUpdate()
 
 {
-    if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::FIRE])) && this->fireRate >= this->fireRateMax)
+    Vector2f bulletPosition = this->sprite.getPosition() + Vector2f(30.f, 0.f);
+    // Fire main gun
+    if (this->currentWeapon == LASER)
     {
-        Vector2f bulletPosition = this->sprite.getPosition() + Vector2f(30.f, 0.f);
-        // Fire main gun
-        if (this->currentWeapon == LASER)
+        if (!this->dualBullets && !this->tripleBullets)
         {
-            if (!this->dualBullets && !this->tripleBullets)
-            {
-                this->bullets.push_back(
-                    Bullet(this->laserBullet,
-                           bulletPosition,
-                           Vector2f(0.1f, 0.1f),
-                           Vector2f(1.f, 0.f),
-                           2.f, 50.f, 1.f));
-            }
-            else if (this->dualBullets && !this->tripleBullets)
-            {
-                this->bullets.push_back(
-                    Bullet(this->laserBullet,
-                           bulletPosition + Vector2f(0.f, 10.f),
-                           Vector2f(0.1f, 0.1f),
-                           Vector2f(1.f, 0.1f),
-                           2.f, 50.f, 1.f));
-
-                this->bullets.push_back(
-                    Bullet(this->laserBullet,
-                           bulletPosition - Vector2f(0.f, 10.f),
-                           Vector2f(0.1f, 0.1f),
-                           Vector2f(1.f, -0.1f),
-                           2.f, 50.f, 1.f));
-            }
-            else if (!this->dualBullets && this->tripleBullets)
-            {
-                this->bullets.push_back(
-                    Bullet(this->laserBullet,
-                           bulletPosition + Vector2f(0.f, 10.f),
-                           Vector2f(0.1f, 0.1f),
-                           Vector2f(1.f, 0.1f),
-                           2.f, 50.f, 1.f));
-
-                this->bullets.push_back(
-                    Bullet(this->laserBullet,
-                           bulletPosition,
-                           Vector2f(0.1f, 0.1f),
-                           Vector2f(1.f, 0.f),
-                           2.f, 50.f, 1.f));
-
-                this->bullets.push_back(
-                    Bullet(this->laserBullet,
-                           bulletPosition - Vector2f(0.f, 10.f),
-                           Vector2f(0.1f, 0.1f),
-                           Vector2f(1.f, -0.1f),
-                           2.f, 50.f, 1.f));
-            }
+            this->bullets.push_back(new LaserBullet(bulletPosition));
         }
-        else if (this->currentWeapon == LIGHTNING)
+        else if (this->dualBullets && !this->tripleBullets)
         {
-            // Create a new bullet
             this->bullets.push_back(
-                Bullet(this->lightningBullet,
-                       this->sprite.getPosition(),
-                       Vector2f(0.2f, 0.2f),
-                       Vector2f(1.f, 0.f),
-                       2.f, 50.f, 1.f));
-        }
-        else if (this->currentWeapon == DARK_MATTER)
-        {
-            // Create a new bullet
-            this->bullets.push_back(
-                Bullet(this->darkMatterBullet,
-                       this->sprite.getPosition(),
-                       Vector2f(0.2f, 0.2f),
-                       Vector2f(1.f, 0.f),
-                       2.f, 50.f, 1.f));
-        }
-        else if (this->currentWeapon == NUCLIER_MATERIAL)
-        {
-            // Create a new bullet
-            this->bullets.push_back(
-                Bullet(this->nuclierMaterialBullet,
-                       this->sprite.getPosition(),
-                       Vector2f(0.2f, 0.2f),
-                       Vector2f(1.f, 0.f),
-                       2.f, 50.f, 1.f));
-        }
-        else if (this->currentWeapon == PLASMA)
-        {
-            // Create a new bullet
-            this->bullets.push_back(
-                Bullet(this->plasmaBullet,
-                       this->sprite.getPosition(),
-                       Vector2f(0.2f, 0.2f),
-                       Vector2f(1.f, 0.f),
-                       2.f, 50.f, 1.f));
-        }
-        else if (this->currentWeapon == PLANETARY_BOMB)
-        {
-            // Create a new bullet
-            this->bullets.push_back(
-                Bullet(this->planetaryBombBullet,
-                       this->sprite.getPosition(),
-                       Vector2f(0.2f, 0.2f),
-                       Vector2f(1.f, 0.f),
-                       2.f, 50.f, 1.f));
-        }
+                new LaserBullet(bulletPosition + Vector2f(0.f, 10.f), Vector2f(1.f, 0.1f)));
 
-        this->fireRate = 0;
+            this->bullets.push_back(
+                new LaserBullet(bulletPosition - Vector2f(0.f, 10.f), Vector2f(1.f, -0.1f)));
+        }
+        else if (!this->dualBullets && this->tripleBullets)
+        {
+            this->bullets.push_back(
+                new LaserBullet(bulletPosition + Vector2f(0.f, 10.f), Vector2f(1.f, 0.1f)));
 
-        // Fire side guns
-        for (auto &w : weapons)
-            w->Fire(w->getPosition(), Vector2f(1.f, 0.f), Vector2f(0.2f, 0.2f));
+            this->bullets.push_back(
+                new LaserBullet(bulletPosition));
+
+            this->bullets.push_back(
+                new LaserBullet(bulletPosition - Vector2f(0.f, 10.f), Vector2f(1.f, -0.1f)));
+        }
+    }
+    else if (this->currentWeapon == LIGHTNING)
+    {
+        if (!this->dualBullets && !this->tripleBullets)
+        {
+            this->bullets.push_back(new Lightning(bulletPosition));
+        }
+        else if (this->dualBullets && !this->tripleBullets)
+        {
+            this->bullets.push_back(
+                new Lightning(bulletPosition + Vector2f(0.f, 10.f), Vector2f(1.f, 0.1f)));
+
+            this->bullets.push_back(
+                new Lightning(bulletPosition - Vector2f(0.f, 10.f), Vector2f(1.f, -0.1f)));
+        }
+        else if (!this->dualBullets && this->tripleBullets)
+        {
+            this->bullets.push_back(
+                new Lightning(bulletPosition + Vector2f(0.f, 10.f), Vector2f(1.f, 0.1f)));
+
+            this->bullets.push_back(
+                new Lightning(bulletPosition));
+
+            this->bullets.push_back(
+                new Lightning(bulletPosition - Vector2f(0.f, 10.f), Vector2f(1.f, -0.1f)));
+        }
+    }
+    else if (this->currentWeapon == DARK_MATTER)
+    {
+        if (!this->dualBullets && !this->tripleBullets)
+        {
+            this->bullets.push_back(new DarkMatter(bulletPosition));
+        }
+        else if (this->dualBullets && !this->tripleBullets)
+        {
+            this->bullets.push_back(
+                new DarkMatter(bulletPosition + Vector2f(0.f, 10.f), Vector2f(1.f, 0.1f)));
+
+            this->bullets.push_back(
+                new DarkMatter(bulletPosition - Vector2f(0.f, 10.f), Vector2f(1.f, -0.1f)));
+        }
+        else if (!this->dualBullets && this->tripleBullets)
+        {
+            this->bullets.push_back(
+                new DarkMatter(bulletPosition + Vector2f(0.f, 10.f), Vector2f(1.f, 0.1f)));
+
+            this->bullets.push_back(
+                new DarkMatter(bulletPosition));
+
+            this->bullets.push_back(
+                new DarkMatter(bulletPosition - Vector2f(0.f, 10.f), Vector2f(1.f, -0.1f)));
+        }
+    }
+    else if (this->currentWeapon == NUCLIER_MATERIAL)
+    {
+        if (!this->dualBullets && !this->tripleBullets)
+        {
+            this->bullets.push_back(new NuclierMaterial(bulletPosition));
+        }
+        else if (this->dualBullets && !this->tripleBullets)
+        {
+            this->bullets.push_back(
+                new NuclierMaterial(bulletPosition + Vector2f(0.f, 10.f), Vector2f(1.f, 0.1f)));
+
+            this->bullets.push_back(
+                new NuclierMaterial(bulletPosition - Vector2f(0.f, 10.f), Vector2f(1.f, -0.1f)));
+        }
+        else if (!this->dualBullets && this->tripleBullets)
+        {
+            this->bullets.push_back(
+                new NuclierMaterial(bulletPosition + Vector2f(0.f, 10.f), Vector2f(1.f, 0.1f)));
+
+            this->bullets.push_back(
+                new NuclierMaterial(bulletPosition));
+
+            this->bullets.push_back(
+                new NuclierMaterial(bulletPosition - Vector2f(0.f, 10.f), Vector2f(1.f, -0.1f)));
+        }
+    }
+    else if (this->currentWeapon == PLASMA)
+    {
+        if (!this->dualBullets && !this->tripleBullets)
+        {
+            this->bullets.push_back(new Plasma(bulletPosition));
+        }
+        else if (this->dualBullets && !this->tripleBullets)
+        {
+            this->bullets.push_back(
+                new Plasma(bulletPosition + Vector2f(0.f, 10.f), Vector2f(1.f, 0.1f)));
+
+            this->bullets.push_back(
+                new Plasma(bulletPosition - Vector2f(0.f, 10.f), Vector2f(1.f, -0.1f)));
+        }
+        else if (!this->dualBullets && this->tripleBullets)
+        {
+            this->bullets.push_back(
+                new Plasma(bulletPosition + Vector2f(0.f, 10.f), Vector2f(1.f, 0.1f)));
+
+            this->bullets.push_back(
+                new Plasma(bulletPosition));
+
+            this->bullets.push_back(
+                new Plasma(bulletPosition - Vector2f(0.f, 10.f), Vector2f(1.f, -0.1f)));
+        }
+    }
+    else if (this->currentWeapon == PLANETARY_BOMB)
+    {
+        if (!this->dualBullets && !this->tripleBullets)
+        {
+            this->bullets.push_back(new PlanetaryBomb(bulletPosition));
+        }
+        else if (this->dualBullets && !this->tripleBullets)
+        {
+            this->bullets.push_back(
+                new PlanetaryBomb(bulletPosition + Vector2f(0.f, 10.f), Vector2f(1.f, 0.1f)));
+
+            this->bullets.push_back(
+                new PlanetaryBomb(bulletPosition - Vector2f(0.f, 10.f), Vector2f(1.f, -0.1f)));
+        }
+        else if (!this->dualBullets && this->tripleBullets)
+        {
+            this->bullets.push_back(
+                new PlanetaryBomb(bulletPosition + Vector2f(0.f, 10.f), Vector2f(1.f, 0.1f)));
+
+            this->bullets.push_back(
+                new PlanetaryBomb(bulletPosition));
+
+            this->bullets.push_back(
+                new PlanetaryBomb(bulletPosition - Vector2f(0.f, 10.f), Vector2f(1.f, -0.1f)));
+        }
+    }
+    this->fireRate = 0;
+
+    // Fire side guns
+    for (auto &w : weapons)
+    {
+        w->Fire(w->getPosition(), Vector2f(1.f, 0.f), Vector2f(0.2f, 0.2f));
     }
 }
 
@@ -294,21 +344,28 @@ void Player::Update(Vector2u windowBounds)
     {
         for (size_t i = 0; i < w->getBullets().size(); i++)
         {
-            w->getBullets()[i].Update();
-            if (w->getBullets()[i].getPosition().x > windowBounds.x)
+            w->getBullets()[i]->Update();
+            if (w->getBullets()[i]->getPosition().x > windowBounds.x)
+            {
+                delete w->getBullets()[i];
                 w->getBullets().erase(w->getBullets().begin() + i);
+                return;
+            }
         }
     }
     this->Move();
     this->UpdateAccessories();
-    this->CombatUpdate();
+    if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::FIRE])) && this->fireRate >= this->fireRateMax)
+    {
+        this->CombatUpdate();
+    }
 }
 
 void Player::Render(RenderTarget &target)
 {
     // Render bullets
     for (size_t i = 0; i < this->bullets.size(); i++)
-        this->bullets[i].Render(target);
+        this->bullets[i]->Render(target);
 
     // Render weapons
     for (size_t i = 0; i < this->weapons.size(); i++)

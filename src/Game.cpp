@@ -2,6 +2,7 @@
 
 #include "../include/Game.hpp"
 #include "../include/Weapons/PeaShooter.hpp"
+#include <iostream>
 
 Game::Game(RenderWindow *window) : window(window)
 {
@@ -131,37 +132,40 @@ void Game::Update()
     {
         // Player Update
         p->Update(this->window->getSize());
-
-        // Bullet Update
-        for (size_t i = 0; i < p->getBullets().size(); i++)
-        {
-            p->getBullets()[i].Update();
-
-            // Bullet collision with enemy
-            for (size_t j = 0; j < enemys.size(); j++)
+        if (p->getBullets().size() > 0)
+        { // Bullet Update
+            for (size_t i = 0; i < p->getBullets().size(); i++)
             {
+                bool flag = true;
+                p->getBullets()[i]->Update();
 
-                if (p->getBullets()[i].getBounds().intersects(enemys[j]->getBounds()))
+                // Bullet collision with window bounds
+                if (p->getBullets()[i]->getPosition().x > this->window->getSize().x)
                 {
-                    enemys[j]->TakeDamage(1);
+                    delete p->getBullets()[i];
                     p->getBullets().erase(p->getBullets().begin() + i);
-                    if (enemys[j]->isDead())
+                    return;
+                }
+
+                // Bullet collision with enemy
+                for (size_t j = 0; j < enemys.size() && flag; j++)
+                {
+                    if (p->getBullets()[i]->getBounds().intersects(enemys[j]->getBounds()))
                     {
-                        delete enemys[j];
-                        enemys.erase(enemys.begin() + j);
-                        return;
+                        enemys[j]->TakeDamage(1);
+                        delete p->getBullets()[i];
+                        p->getBullets().erase(p->getBullets().begin() + i);
+                        flag = false;
+                        if (enemys[j]->isDead())
+                        {
+                            delete enemys[j];
+                            enemys.erase(enemys.begin() + j);
+                            break;
+                        }
                     }
                 }
             }
-
-            // Bullet collision with window bounds
-            if (p->getBullets()[i].getPosition().x > this->window->getSize().x)
-            {
-                p->getBullets().erase(p->getBullets().begin() + i);
-                return;
-            }
         }
-        
         // Player sideGunUp Bullet collision with enemy
         for (size_t j = 0; j < enemys.size(); j++)
         {
@@ -170,9 +174,10 @@ void Game::Update()
 
                 for (size_t l = 0; l < p->getWeapons()[k]->getBullets().size(); l++)
                 {
-                    if (p->getWeapons()[k]->getBullets()[l].getBounds().intersects(enemys[j]->getBounds()))
+                    if (p->getWeapons()[k]->getBullets()[l]->getBounds().intersects(enemys[j]->getBounds()))
                     {
                         enemys[j]->TakeDamage(1);
+                        delete p->getWeapons()[k]->getBullets()[l];
                         p->getWeapons()[k]->getBullets().erase(p->getWeapons()[k]->getBullets().begin() + l);
                         if (enemys[j]->isDead())
                         {
