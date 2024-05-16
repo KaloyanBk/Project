@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 
 #include "./Bullets/Bullet.hpp"
 #include "../include/Weapons/Weapon.hpp"
@@ -58,8 +59,6 @@ private:
 
     // Upgarde system
     int mainGunLevel;
-    bool dualBullets = false;
-    bool tripleBullets = false;
     int sideGunLevel;
 
 public:
@@ -76,6 +75,10 @@ public:
     inline const FloatRect getBounds() const { return this->sprite.getGlobalBounds(); }
     inline const bool isDead() const { return this->hp <= 0; }
 
+    // Templait function adding to bullet vector
+template <typename T>
+    void setBulletType(Vector2f pos, int level, int bulletType,  Vector2f directionUp = Vector2f(1.f, -0.1f), Vector2f directionDown = Vector2f(1.f, 0.1f),
+                          float initialVelocity = 2.f, float maxVelocity = 50.f, float acceleration = 1.f);
     // Functionsc
     void Move();
     void addWeapon(Texture *weaponTexture, int UpOrDown);

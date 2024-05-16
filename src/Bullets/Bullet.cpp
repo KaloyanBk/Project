@@ -2,11 +2,12 @@
 #include <iostream>
 
 Bullet::Bullet(Vector2f pos, Vector2f direction,
-               float initialVelocity, float maxVelocity,
+            float initialVelocity, float maxVelocity,
                float acceleration)
-    : direction(direction), currentVelocity(initialVelocity * direction),
+    :  direction(direction), currentVelocity(initialVelocity * direction),
       maxVelocity(maxVelocity), acceleration(acceleration)
 {
+
     this->sprite.setPosition(pos - Vector2f(0.f, this->sprite.getGlobalBounds().height / 2));
     this->texture = new Texture();
 }
@@ -18,11 +19,16 @@ Bullet::~Bullet()
 
 void Bullet::setTexture(int type)
 {
-    if (!this->texture->loadFromFile(resourcePathsBullets.at(static_cast<BulletTextures>(type))))
+    if (!this->texture->loadFromFile(resourcePathsBullets.at(static_cast<BulletTypes>(type))))
     {
-        std::cerr << "Failed to load texture: " << resourcePathsBullets.at(static_cast<BulletTextures>(type)) << std::endl;
+        std::cerr << "Failed to load texture: " << resourcePathsBullets.at(static_cast<BulletTypes>(type)) << std::endl;
     }
     this->sprite.setTexture(*this->texture);
+}
+
+void Bullet::setDamage(int type)
+{
+    this->damage=resourcePathsBulletsDamage.at(static_cast<BulletTypes>(type));
 }
 
 void Bullet::Move()

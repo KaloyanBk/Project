@@ -1,13 +1,15 @@
 #include "../../include/Bullets/Plasma.hpp"
 
-Plasma::Plasma( Vector2f pos, Vector2f direction,
-                float initialVelocity, float maxVelocity,
-                float acceleration)
+Plasma::Plasma(Vector2f pos, Vector2f direction,
+               float initialVelocity, float maxVelocity,
+               float acceleration)
     : Bullet(pos, direction, initialVelocity, maxVelocity, acceleration)
 {
     this->setTexture(PLASMA_BULLET);
-        this->sprite.setOrigin(this->sprite.getGlobalBounds().width / 2, this->sprite.getGlobalBounds().height / 2);
-    this->sprite.setScale(Vector2f(0.1f, 0.1f));
+    this->setDamage(PLASMA_BULLET);
+
+    this->sprite.setOrigin(this->sprite.getGlobalBounds().width / 2, this->sprite.getGlobalBounds().height / 2);
+    this->sprite.setScale(Vector2f(0.5f, 0.5f));
 }
 
 void Plasma::Update()

@@ -6,6 +6,7 @@ PeaBullet::PeaBullet(  Vector2f pos, Vector2f direction,
     : Bullet(pos, direction, initialVelocity, maxVelocity, acceleration)
 {
     this->setTexture(SIDE_GUN_PEA_SHOOTER_BULLET);
+    this->setDamage(SIDE_GUN_PEA_SHOOTER_BULLET);
         this->sprite.setOrigin(this->sprite.getGlobalBounds().width / 2, this->sprite.getGlobalBounds().height / 2);
     this->sprite.setScale(Vector2f(0.2f, 0.2f));
 

@@ -10,7 +10,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
 
-#include "../Resources/BulletTextures.hpp"
+#include "../Resources/BulletResources.hpp"
 
 using namespace sf;
 
@@ -36,11 +36,11 @@ public:
     // Accessors
     const FloatRect getBounds() const { return this->sprite.getGlobalBounds(); }
     const Vector2f &getPosition() const { return this->sprite.getPosition(); }
+    const int &getDamage() const { return this->damage; }
 
     // Setters
     void setTexture(int type);
     void setDamage(int damage);
-
 
     // Functions
 

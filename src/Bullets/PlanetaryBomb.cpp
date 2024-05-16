@@ -6,6 +6,7 @@ PlanetaryBomb::PlanetaryBomb( Vector2f pos, Vector2f direction,
     : Bullet(pos, direction, initialVelocity, maxVelocity, acceleration)
 {
     this->setTexture(PLANETARY_BOMB_BULLET);
+    this->setDamage(PLANETARY_BOMB_BULLET);
         this->sprite.setOrigin(this->sprite.getGlobalBounds().width / 2, this->sprite.getGlobalBounds().height / 2);
     this->sprite.setScale(Vector2f(0.5f, 0.5f));
     

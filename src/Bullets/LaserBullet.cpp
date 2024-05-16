@@ -6,8 +6,10 @@ LaserBullet::LaserBullet(  Vector2f pos, Vector2f direction,
     : Bullet(pos, direction, initialVelocity, maxVelocity, acceleration)
 {
     this->setTexture(LASER_BULLET);
+    this->setDamage(LASER_BULLET);
+
     this->sprite.setOrigin(this->sprite.getGlobalBounds().width / 2, this->sprite.getGlobalBounds().height / 2);
-    this->sprite.setScale(Vector2f(0.1f, 0.1f));
+    this->sprite.setScale(Vector2f(0.5f, 0.5f));
 
 }
 

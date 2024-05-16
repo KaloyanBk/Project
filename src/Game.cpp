@@ -152,7 +152,7 @@ void Game::Update()
                 {
                     if (p->getBullets()[i]->getBounds().intersects(enemys[j]->getBounds()))
                     {
-                        enemys[j]->TakeDamage(1);
+                        enemys[j]->TakeDamage(p->getBullets()[i]->getDamage());
                         delete p->getBullets()[i];
                         p->getBullets().erase(p->getBullets().begin() + i);
                         flag = false;
@@ -176,7 +176,7 @@ void Game::Update()
                 {
                     if (p->getWeapons()[k]->getBullets()[l]->getBounds().intersects(enemys[j]->getBounds()))
                     {
-                        enemys[j]->TakeDamage(1);
+                        enemys[j]->TakeDamage(p->getWeapons()[k]->getBullets()[l]->getDamage());
                         delete p->getWeapons()[k]->getBullets()[l];
                         p->getWeapons()[k]->getBullets().erase(p->getWeapons()[k]->getBullets().begin() + l);
                         if (enemys[j]->isDead())
