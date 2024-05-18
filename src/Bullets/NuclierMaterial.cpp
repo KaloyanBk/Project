@@ -12,9 +12,9 @@ NuclierMaterial::NuclierMaterial(Vector2f pos, Vector2f direction,
     this->sprite.setScale(Vector2f(0.5f, 0.5f));
 }
 
-void NuclierMaterial::Update()
+void NuclierMaterial::Update(const float &dt)
 {
     // Implement LASERBullet specific behavior here
     // For example, adjust position, check for collisions, etc.
-    Move();
+    Move(dt);
 }

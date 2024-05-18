@@ -17,6 +17,8 @@ using namespace sf;
 class Bullet
 {
 protected:
+    float dtMultiplier;
+
     Sprite sprite;
     Texture *texture;
     Vector2f currentVelocity;
@@ -44,7 +46,7 @@ public:
 
     // Functions
 
-    virtual void Move();
-    virtual void Update();
+    virtual void Move(const float &dt);
+    virtual void Update(const float &dt);
     void Render(RenderTarget &target);
 };

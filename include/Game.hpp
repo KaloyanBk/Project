@@ -9,6 +9,7 @@ class Game
 {
 private:
     RenderWindow *window;
+    float dtMultiplier;
     bool gameOver = false;
 
     // UI
@@ -28,8 +29,8 @@ private:
 
     // Enemies
     std::vector<Enemy *> enemys;
-    int enemySpawnTimer;
-    int enemySpawnTimerMax;
+    float enemySpawnTimer;
+    float enemySpawnTimerMax;
 
     // Private member functions
     void loadTextures();
@@ -47,7 +48,7 @@ public:
                          int upKey, int downKey, int leftKey, int rightKey, int fireKey);
     void InItUi();
     void UpdateUI();
-    void Update();
+    void Update(const float &dt);
     void RenderUI();
     void Render();
 };

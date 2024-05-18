@@ -9,13 +9,15 @@ Weapon::Weapon(Texture* weaponTexture, int UpOrDown, int fireRateMax, int damage
     : fireRate(0), fireRateMax(fireRateMax), weaponTexture(weaponTexture),
       level(1), damage(1), damageMax(damageMax), UpOrDown(UpOrDown)
 {
+    this->dtMultiplier = 60.f;
+
     sprite.setTexture(*weaponTexture);
     sprite.setOrigin(sprite.getGlobalBounds().width / 2, sprite.getGlobalBounds().height / 2);
 }
 
 Weapon::~Weapon() {}
 
-void Weapon::Update(Vector2f targetPosition, FloatRect bounds)
+void Weapon::Update(Vector2f targetPosition, FloatRect bounds, const float &dt)
 {
 }
 

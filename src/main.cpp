@@ -1,4 +1,5 @@
 #include "../include/Game.hpp"
+#include <iostream>
 
 int main()
 {
@@ -15,6 +16,9 @@ int main()
         std::cerr << "Failed to create window!" << std::endl;
         return EXIT_FAILURE;
     }
+
+    Clock clock;
+    float dt = 0.f;
 
     Game game(&window);
 
@@ -33,8 +37,11 @@ int main()
             }
         }
 
+        // Update dt
+        dt = clock.restart().asSeconds();
+
         // Update
-        game.Update();
+        game.Update(dt);
 
         // Render
         game.Render();

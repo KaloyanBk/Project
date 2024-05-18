@@ -7,6 +7,7 @@ Bullet::Bullet(Vector2f pos, Vector2f direction,
     :  direction(direction), currentVelocity(initialVelocity * direction),
       maxVelocity(maxVelocity), acceleration(acceleration)
 {
+    this->dtMultiplier = 60.f;
 
     this->sprite.setPosition(pos - Vector2f(0.f, this->sprite.getGlobalBounds().height / 2));
     this->texture = new Texture();
@@ -31,27 +32,27 @@ void Bullet::setDamage(int type)
     this->damage=resourcePathsBulletsDamage.at(static_cast<BulletTypes>(type));
 }
 
-void Bullet::Move()
+void Bullet::Move(const float &dt)
 {
     if (this->acceleration > 0.f)
     {
         if (this->currentVelocity.x < this->maxVelocity)
-            this->currentVelocity.x += this->acceleration * this->direction.x;
+            this->currentVelocity.x += this->acceleration * this->direction.x * dt * this->dtMultiplier;
 
         if (this->currentVelocity.y < this->maxVelocity)
-            this->currentVelocity.y += this->acceleration * this->direction.y;
+            this->currentVelocity.y += this->acceleration * this->direction.y * dt * this->dtMultiplier;
     }
     else
     {
-        this->currentVelocity = Vector2f(this->maxVelocity * this->direction.x, this->maxVelocity * this->direction.y);
+        this->currentVelocity = Vector2f(this->maxVelocity * this->direction.x * dt * this->dtMultiplier , this->maxVelocity * this->direction.y* dt * this->dtMultiplier);
     }
 
-    this->sprite.move(this->currentVelocity);
+    this->sprite.move(this->currentVelocity * dt * this->dtMultiplier);
 }
 
-void Bullet::Update()
+void Bullet::Update(const float &dt)
 {
-    this->Move();
+    this->Move(dt);
 }
 
 void Bullet::Render(RenderTarget &target)

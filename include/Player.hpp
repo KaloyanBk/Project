@@ -18,6 +18,7 @@ class Player
 {
 private:
     unsigned playerNumber;
+    float dtMultiplier;
 
     // Player sprite
     Sprite sprite;
@@ -37,10 +38,10 @@ private:
     float drag;
 
     // Player stats
-    int fireRate;
-    int fireRateMax;
-    int damageTimer;
-    int damageTimerMax;
+    float fireRate;
+    float fireRateMax;
+    float damageTimer;
+    float damageTimerMax;
     int level;
     int exp;
     int expNext;
@@ -82,12 +83,12 @@ template <typename T>
                           float initialVelocity = 2.f, float maxVelocity = 50.f, float acceleration = 1.f);
     
     // Functionsc
-    void Move();
+    void Move(const float &dt);
     void addWeapon(Texture *weaponTexture, int UpOrDown);
     void CombatUpdate();
-    void UpdateAccessories();
+    void UpdateAccessories(const float &dt);
     void TakeDamage(int damage);
-    void Update(Vector2u windowBounds);
+    void Update(Vector2u windowBounds, const float &dt);
     void Render(RenderTarget &target);
 
     static unsigned players;

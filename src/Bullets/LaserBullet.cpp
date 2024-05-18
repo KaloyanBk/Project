@@ -13,9 +13,9 @@ LaserBullet::LaserBullet(  Vector2f pos, Vector2f direction,
 
 }
 
-void LaserBullet::Update()
+void LaserBullet::Update(const float &dt)
 {
     // Implement LASERBullet specific behavior here
     // For example, adjust position, check for collisions, etc.
-    Move();
+    Move(dt);
 }

@@ -8,5 +8,5 @@ public:
                 float initialVelocity = 2.f, float maxVelocity = 50.f,
                 float acceleration = 1.f);
     
-    void Update() override;
+    void Update(const float &dt) override;
 };

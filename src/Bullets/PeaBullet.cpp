@@ -12,9 +12,9 @@ PeaBullet::PeaBullet(  Vector2f pos, Vector2f direction,
 
 }
 
-void PeaBullet::Update()
+void PeaBullet::Update(const float &dt)
 {
     // Implement LASERBullet specific behavior here
     // For example, adjust position, check for collisions, etc.
-    Move();
+    Move(dt);
 }

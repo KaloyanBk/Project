@@ -7,7 +7,8 @@
 Game::Game(RenderWindow *window) : window(window)
 {
     // Window
-    this->window->setFramerateLimit(60);
+    // this->window->setFramerateLimit(60);
+    this->dtMultiplier = 60.f;
 
     // Textures
     this->loadTextures();
@@ -115,12 +116,13 @@ void Game::UpdateUI()
     }
 }
 
-void Game::Update()
+void Game::Update(const float &dt)
 {
     if (!gameOver)
-    { // Update timer
+    { 
+        // Update timer
         if (enemySpawnTimer < enemySpawnTimerMax)
-            enemySpawnTimer++;
+            enemySpawnTimer += 1.f * dt * this->dtMultiplier;
 
         // Enemy spawn
         if (enemySpawnTimer >= enemySpawnTimerMax)
@@ -135,13 +137,13 @@ void Game::Update()
         for (auto &p : players)
         {
             // Player Update
-            p->Update(this->window->getSize());
+            p->Update(this->window->getSize(), dt);
             if (p->getBullets().size() > 0)
             { // Bullet Update
                 for (size_t i = 0; i < p->getBullets().size(); i++)
                 {
                     bool flag = true;
-                    p->getBullets()[i]->Update();
+                    p->getBullets()[i]->Update(dt);
 
                     // Bullet collision with window bounds
                     if (p->getBullets()[i]->getPosition().x > this->window->getSize().x)
@@ -201,7 +203,7 @@ void Game::Update()
         // Enemy Update
         for (size_t i = 0; i < enemys.size(); i++)
         {
-            enemys[i]->Update();
+            enemys[i]->Update(dt);
 
             // Enemy collision with window bounds
             if (enemys[i]->getPosition().x <= 0 - enemys[i]->getBounds().width)
@@ -239,7 +241,7 @@ void Game::Update()
     }
     else
     {
-        this->gameOverText.move(10.f, 0.f);
+        this->gameOverText.move(10.f * dt * dtMultiplier, 0.f);
         if (this->gameOverText.getPosition().x > this->window->getSize().x)
         {
             this->gameOverText.setPosition(

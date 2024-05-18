@@ -6,6 +6,7 @@ Player::Player(std::vector<Texture> &textures, Vector2u windowBounds, int UP, in
     : windowBounds(windowBounds), level(1), exp(0), expNext(100), hp(10), hpMax(10), damage(1), damageMax(2),
       score(0), maxVelocity(25.f), acceleration(0.8f), drag(0.4f)
 {
+    this->dtMultiplier = 60.f;
     // Set up the sprite
     this->sprite.setTexture(textures[PLAYER]);
     this->sprite.setOrigin(this->sprite.getGlobalBounds().width / 2, this->sprite.getGlobalBounds().height / 2);
@@ -49,59 +50,59 @@ Player::~Player()
         delete w;
 }
 
-void Player::Move()
+void Player::Move(const float &dt)
 {
     // Update velocity
     if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::UP])))
     {
         this->direction = Vector2f(0.f, -1.f);
         if (this->currentVelocity.y > -this->maxVelocity && this->direction.y < 0)
-            this->currentVelocity.y += this->direction.y * this->acceleration;
+            this->currentVelocity.y += this->direction.y * this->acceleration * dt * this->dtMultiplier;
     }
     else if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::DOWN])))
     {
         this->direction = Vector2f(0.f, 1.f);
         if (this->currentVelocity.y < this->maxVelocity && this->direction.y > 0)
-            this->currentVelocity.y += this->direction.y * this->acceleration;
+            this->currentVelocity.y += this->direction.y * this->acceleration * dt * this->dtMultiplier;
     }
     if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::LEFT])))
     {
         this->direction = Vector2f(-1.f, 0.f);
         if (this->currentVelocity.x < this->maxVelocity && this->direction.x < 0)
-            this->currentVelocity.x += this->direction.x * this->acceleration;
+            this->currentVelocity.x += this->direction.x * this->acceleration * dt * this->dtMultiplier;
     }
     else if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::RIGHT])))
     {
         this->direction = Vector2f(1.f, 0.f);
         if (this->currentVelocity.x < this->maxVelocity && this->direction.x > 0)
-            this->currentVelocity.x += this->direction.x * this->acceleration;
+            this->currentVelocity.x += this->direction.x * this->acceleration * dt * this->dtMultiplier;
     }
     // Drag
     if (this->currentVelocity.x > 0)
     {
-        this->currentVelocity.x -= this->drag;
+        this->currentVelocity.x -= this->drag * dt * this->dtMultiplier;
         if (this->currentVelocity.x < 0)
             this->currentVelocity.x = 0;
     }
     else if (this->currentVelocity.x < 0)
     {
-        this->currentVelocity.x += this->drag;
+        this->currentVelocity.x += this->drag * dt * this->dtMultiplier;
         if (this->currentVelocity.x > 0)
             this->currentVelocity.x = 0;
     }
     if (this->currentVelocity.y > 0)
     {
-        this->currentVelocity.y -= this->drag;
+        this->currentVelocity.y -= this->drag * dt * this->dtMultiplier;
         if (this->currentVelocity.y < 0)
             this->currentVelocity.y = 0;
     }
     else if (this->currentVelocity.y < 0)
     {
-        this->currentVelocity.y += this->drag;
+        this->currentVelocity.y += this->drag * dt * this->dtMultiplier;
         if (this->currentVelocity.y > 0)
             this->currentVelocity.y = 0;
     }
-    this->sprite.move(this->currentVelocity);
+    this->sprite.move(this->currentVelocity.x * dt * this->dtMultiplier, this->currentVelocity.y * dt * this->dtMultiplier);
 
     // Wall collision
     if (this->sprite.getPosition().x - this->sprite.getGlobalBounds().width / 2.f < 0)
@@ -127,10 +128,10 @@ void Player::addWeapon(Texture *weaponTexture, int UpOrDown)
     }
 }
 
-void Player::UpdateAccessories()
+void Player::UpdateAccessories(const float &dt)
 {
     for (auto &w : weapons)
-        w->Update(this->sprite.getPosition(), getBounds());
+        w->Update(this->sprite.getPosition(), getBounds(), dt);
 }
 
 template <typename T>
@@ -243,21 +244,21 @@ void Player::TakeDamage(int damage)
         this->hp = 0;
 }
 
-void Player::Update(Vector2u windowBounds)
+void Player::Update(Vector2u windowBounds, const float &dt)
 {
 
     // Update fire rate
     if (this->fireRate < this->fireRateMax)
-        this->fireRate++;
+        this->fireRate += 1.f * dt * this->dtMultiplier;
     if (this->damageTimer < this->damageTimerMax)
-        this->damageTimer++;
+        this->damageTimer += 1.f * dt * this->dtMultiplier;
 
     // Update weapons
     for (auto &w : weapons)
     {
         for (size_t i = 0; i < w->getBullets().size(); i++)
         {
-            w->getBullets()[i]->Update();
+            w->getBullets()[i]->Update(dt);
             if (w->getBullets()[i]->getPosition().x > windowBounds.x)
             {
                 delete w->getBullets()[i];
@@ -266,8 +267,8 @@ void Player::Update(Vector2u windowBounds)
             }
         }
     }
-    this->Move();
-    this->UpdateAccessories();
+    this->Move(dt);
+    this->UpdateAccessories(dt);
     if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::FIRE])) && this->fireRate >= this->fireRateMax)
     {
         this->CombatUpdate();

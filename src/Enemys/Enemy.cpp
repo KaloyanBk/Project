@@ -8,6 +8,7 @@ Enemy::Enemy(Texture *texture, Vector2u windowBounds,
       hpMax(hpMax), direction(direction),
       damageMax(damageMax), damageMin(damageMin)
 {
+    this->dtMultiplier = 60.f;
     this->sprite.setTexture(*this->texture);
     this->sprite.setScale(scale);
 
@@ -27,12 +28,12 @@ void Enemy::TakeDamage(int damage)
         this->hp = 0;
 }
 
-void Enemy::Move()
+void Enemy::Move(const float &dt)
 {
     switch (this->type)
     {
     case MOVE_LEFT:
-        this->sprite.move(this->direction.x * 10.f, this->direction.y * 10.f);
+        this->sprite.move(this->direction.x * 10.f * dt * this->dtMultiplier , this->direction.y * 10.f * dt * this->dtMultiplier);
         break;
     case FOLLOW:
         break;
@@ -44,9 +45,9 @@ void Enemy::Move()
         break;
     }
 }
-void Enemy::Update()
+void Enemy::Update(const float &dt)
 {
-    Move();
+    Move(dt);
 
     // enemy Death
 }

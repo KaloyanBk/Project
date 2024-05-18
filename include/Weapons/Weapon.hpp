@@ -5,6 +5,8 @@
 class Weapon
 {
 protected:
+    float dtMultiplier;
+
     int fireRate;
     int fireRateMax;
     Sprite sprite;
@@ -31,7 +33,7 @@ public:
     void setPosition(const Vector2f& position) { sprite.setPosition(position); }
 
     // Virtual functions
-    virtual void Update(Vector2f targetPosition, FloatRect bounds);
+    virtual void Update(Vector2f targetPosition, FloatRect bounds, const float &dt);
     virtual void Fire(const Vector2f& position, const Vector2f& direction, const Vector2f& scale);
     virtual void Upgrade();
 
