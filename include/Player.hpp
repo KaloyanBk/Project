@@ -74,11 +74,13 @@ public:
     inline const String getHpS() const { return std::to_string(this->hp) + "/" + std::to_string(this->hpMax); }
     inline const FloatRect getBounds() const { return this->sprite.getGlobalBounds(); }
     inline const bool isDead() const { return this->hp <= 0; }
+    inline const int getPlayerNumber() const { return this->playerNumber; }
 
     // Templait function adding to bullet vector
 template <typename T>
     void setBulletType(Vector2f pos, int level, int bulletType,  Vector2f directionUp = Vector2f(1.f, -0.1f), Vector2f directionDown = Vector2f(1.f, 0.1f),
                           float initialVelocity = 2.f, float maxVelocity = 50.f, float acceleration = 1.f);
+    
     // Functionsc
     void Move();
     void addWeapon(Texture *weaponTexture, int UpOrDown);

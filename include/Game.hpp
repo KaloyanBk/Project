@@ -9,13 +9,18 @@ class Game
 {
 private:
     RenderWindow *window;
+    bool gameOver = false;
 
     // UI
     std::vector<Text> followPlayerTexts;
     std::vector<Text> stationaryTexts;
+    Text ftext;
+    Text sText;
+    Text gameOverText;
+    Font font;
+    Font gameOverFont;
 
     // Resources
-    Font font;
     std::vector<Texture> textures;
 
     // Players
@@ -28,7 +33,6 @@ private:
 
     // Private member functions
     void loadTextures();
-    void loadResources();
     void createPlayers();
 
 public:

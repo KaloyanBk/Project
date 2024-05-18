@@ -39,8 +39,8 @@ Player::Player(std::vector<Texture> &textures, Vector2u windowBounds, int UP, in
     this->controls[controls::FIRE] = FIRE;
 
     // Player number
-    this->playerNumber = Player::players;
     Player::players++;
+    this->playerNumber = Player::players;
 }
 
 Player::~Player()
@@ -154,6 +154,7 @@ void Player::setBulletType(Vector2f pos, int level, int bulletType, Vector2f dir
         break;
     }
 }
+
 
 void Player::CombatUpdate()
 
