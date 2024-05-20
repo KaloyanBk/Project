@@ -1,12 +1,12 @@
 #include "../../include/Bullets/PlanetaryBomb.hpp"
 
-PlanetaryBomb::PlanetaryBomb( Vector2f pos, Vector2f direction,
+PlanetaryBomb::PlanetaryBomb( Vector2f pos, int level, Vector2f direction,
                 float initialVelocity, float maxVelocity,
                 float acceleration)
-    : Bullet(pos, direction, initialVelocity, maxVelocity, acceleration)
+    : Bullet(pos, level, direction, initialVelocity, maxVelocity, acceleration)
 {
-    this->setTexture(PLANETARY_BOMB_BULLET);
-    this->setDamage(PLANETARY_BOMB_BULLET);
+    this->setTexture(PLANETARY_BOMB_BULLET, this->level);
+    this->setDamage(PLANETARY_BOMB_BULLET, this->level);
         this->sprite.setOrigin(this->sprite.getGlobalBounds().width / 2, this->sprite.getGlobalBounds().height / 2);
     this->sprite.setScale(Vector2f(0.5f, 0.5f));
     

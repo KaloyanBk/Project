@@ -13,13 +13,15 @@ private:
     bool gameOver = false;
 
     // UI
-    std::vector<Text> followPlayerTexts;
-    std::vector<Text> stationaryTexts;
-    Text ftext;
-    Text sText;
+    Text followPlayerText;
+    Text stationaryText;
+
     Text gameOverText;
     Font font;
     Font gameOverFont;
+
+    RectangleShape playerHealthBar;
+    RectangleShape playerExpBar;
 
     // Resources
     std::vector<Texture> textures;
@@ -47,7 +49,7 @@ public:
     Player *createPlayer(std::vector<Texture> &textures, Vector2u windowBounds,
                          int upKey, int downKey, int leftKey, int rightKey, int fireKey);
     void InItUi();
-    void UpdateUI();
+    void UpdateUI(int index);
     void Update(const float &dt);
     void RenderUI();
     void Render();

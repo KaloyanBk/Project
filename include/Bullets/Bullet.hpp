@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <cstdlib>
+#include <math.h>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -29,8 +30,10 @@ protected:
     int damage;
     int damageMax;
 
+    int level;
+
 public:
-    Bullet(Vector2f pos, Vector2f direction = Vector2f(1.f, 0.f),
+    Bullet(Vector2f pos, int level,Vector2f direction = Vector2f(1.f, 0.f),
                 float initialVelocity = 2.f, float maxVelocity = 50.f,
                 float acceleration = 1.f);
     virtual ~Bullet();
@@ -41,8 +44,8 @@ public:
     const int &getDamage() const { return this->damage; }
 
     // Setters
-    void setTexture(int type);
-    void setDamage(int damage);
+    void setTexture(int type, int level);
+    void setDamage(int damage, int level);
 
     // Functions
 

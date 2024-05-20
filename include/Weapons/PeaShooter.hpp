@@ -10,7 +10,7 @@ private:
 public:
     // Constructors/Destructors
     PeaShooter();
-    PeaShooter(Texture *weaponTexture, int UpOrDown);
+    PeaShooter(Texture *weaponTexture, int level, int UpOrDown);
     virtual ~PeaShooter();
 
 

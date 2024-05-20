@@ -1,14 +1,14 @@
 #include "../../include/Weapons/PeaShooter.hpp"
 #include "../../include/Bullets/PeaBullet.hpp"
+#include <iostream>
 
 PeaShooter::PeaShooter()
     : Weapon(), upgradeLevel(0)
 {}
 
-PeaShooter::PeaShooter(Texture *weaponTexture, int UpOrDown)
-    : Weapon(weaponTexture, UpOrDown, 10, 1), upgradeLevel(0)
+PeaShooter::PeaShooter(Texture *weaponTexture, int level, int UpOrDown)
+    : Weapon(weaponTexture, level, UpOrDown, 10, 1), upgradeLevel(0)
 {
-
 }
 
 PeaShooter::~PeaShooter()
@@ -30,9 +30,9 @@ void PeaShooter::Fire(const Vector2f &position, const Vector2f &direction, const
     Vector2f positionUp = Vector2f(position.x, position.y - 5.f);
     Vector2f positionDown = Vector2f(position.x, position.y + 5.f);
 
-    bullets.push_back(new PeaBullet(positionUp, direction));
-    bullets.push_back(new PeaBullet(position, direction));
-    bullets.push_back(new PeaBullet(positionDown, direction));
+    bullets.push_back(new PeaBullet(positionUp, this->bulletLevel, direction));
+    bullets.push_back(new PeaBullet(position, this->bulletLevel, direction));
+    bullets.push_back(new PeaBullet(positionDown, this->bulletLevel, direction));
 }
 
 void PeaShooter::Upgrade()

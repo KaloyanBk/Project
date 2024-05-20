@@ -68,58 +68,71 @@ void Game::InItUi()
     {
         std::cerr << "Failed to load font: " << resourcePathsFonts.at(DOSIS_LIGHT) << std::endl;
     }
+    this->followPlayerText.setFont(font);
+    this->stationaryText.setFont(font);
 
+    // Follow Player Text
+    this->followPlayerText.setCharacterSize(24);
+    this->followPlayerText.setFillColor(Color::White);
+
+    // Stationary Text
+    this->stationaryText.setCharacterSize(12);
+    this->stationaryText.setFillColor(Color::White);
+
+    // Player Exp Bar
+    this->playerExpBar.setSize(Vector2f(110.f, 10.f));
+    this->playerExpBar.setFillColor(Color(0.f, 100.f, 200.f, 200.f));
+
+
+    // Game Over Text
     if (!this->gameOverFont.loadFromFile(resourcePathsFonts.at(GAME_OVER)))
     {
         std::cerr << "Failed to load font: " << resourcePathsFonts.at(GAME_OVER) << std::endl;
     }
-    this->ftext.setFont(font);
-    this->sText.setFont(font);
     this->gameOverText.setFont(gameOverFont);
-
-    for (size_t i = 0; i < players.size(); i++)
-    {
-        ftext.setCharacterSize(24);
-        ftext.setFillColor(Color::White);
-        ftext.setString("");
-        this->followPlayerTexts.push_back(ftext);
-
-        // Stationary Text
-        sText.setCharacterSize(12);
-        sText.setFillColor(Color::White);
-        sText.setString("");
-        this->stationaryTexts.push_back(sText);
-
-        // Game Over Text
-        this->gameOverText.setCharacterSize(60);
-        this->gameOverText.setFillColor(Color::White);
-        this->gameOverText.setString("Game Over");
-        this->gameOverText.setPosition(
-            0.f - this->gameOverText.getGlobalBounds().width,
-            this->window->getSize().y / 2.f - this->gameOverText.getGlobalBounds().height / 2.f);
-    }
+    this->gameOverText.setCharacterSize(60);
+    this->gameOverText.setFillColor(Color::White);
+    this->gameOverText.setString("Game Over");
+    this->gameOverText.setPosition(
+        0.f - this->gameOverText.getGlobalBounds().width,
+        this->window->getSize().y / 2.f - this->gameOverText.getGlobalBounds().height / 2.f);
 }
 
-void Game::UpdateUI()
+void Game::UpdateUI(int index)
 {
-    for (size_t i = 0; i < players.size(); i++)
+    if (index >= players.size())
     {
-        this->followPlayerTexts[i].setPosition(
-            this->players[i]->getPosition().x -
-                this->players[i]->getBounds().width / 2.f,
-            this->players[i]->getPosition().y -
-                this->players[i]->getBounds().height / 2.f -
-                followPlayerTexts[i].getGlobalBounds().height -
-                20.f);
-        this->followPlayerTexts[i].setString("Player: " + std::to_string(players[i]->getPlayerNumber()) + "\n" +
-                                             "HP: " + players[i]->getHpS());
+        std::cerr << "Player index out of bounds" << std::endl;
     }
+    else
+    {
+        this->followPlayerText.setPosition(
+            this->players[index]->getPosition().x -
+                this->players[index]->getBounds().width / 2.f,
+
+            this->players[index]->getPosition().y -
+                this->players[index]->getBounds().height / 2.f -
+                this->followPlayerText.getGlobalBounds().height -
+                20.f);
+
+        this->followPlayerText.setString(
+            "Player: " + std::to_string(players[index]->getPlayerNumber()) + "\n" +
+            "HP: " + players[index]->getHpS());
+    }
+    // Exp Bar
+    this->playerExpBar.setPosition(
+        this->players[index]->getPosition().x - this->players[index]->getBounds().width / 2.f + 10.f,
+        this->players[index]->getPosition().y + this->players[index]->getBounds().height / 2.f + 10.f);
+
+    this->playerExpBar.setScale(
+        static_cast<float>(this->players[index]->getExp()) / static_cast<float>(this->players[index]->getExpNext()), 1.f);
+
 }
 
 void Game::Update(const float &dt)
 {
     if (!gameOver)
-    { 
+    {
         // Update timer
         if (enemySpawnTimer < enemySpawnTimerMax)
             enemySpawnTimer += 1.f * dt * this->dtMultiplier;
@@ -130,7 +143,7 @@ void Game::Update(const float &dt)
             enemys.push_back(new Enemy(
                 &this->textures.at(ENEMY), this->window->getSize(),
                 Vector2f(0.f, 0.f), Vector2f(-1.f, 0.f), Vector2f(0.5f, 0.5f),
-                MOVE_LEFT, rand() % 3 + 1, 3, 1));
+                MOVE_LEFT, 2.f, rand() % 3 + 1, 3, 1));
             enemySpawnTimer = 0;
         }
 
@@ -164,6 +177,7 @@ void Game::Update(const float &dt)
                             flag = false;
                             if (enemys[j]->isDead())
                             {
+                                p->gainExp(enemys[j]->getExp());
                                 delete enemys[j];
                                 enemys.erase(enemys.begin() + j);
                                 break;
@@ -196,9 +210,6 @@ void Game::Update(const float &dt)
                 }
             }
         }
-
-        // UI Update
-        this->UpdateUI();
 
         // Enemy Update
         for (size_t i = 0; i < enemys.size(); i++)
@@ -253,10 +264,20 @@ void Game::Update(const float &dt)
 
 void Game::RenderUI()
 {
-    for (size_t i = 0; i < players.size(); i++)
+    if (!gameOver)
     {
-        this->window->draw(this->followPlayerTexts[i]);
-        this->window->draw(this->stationaryTexts[i]);
+
+        for (size_t i = 0; i < players.size(); i++)
+        {
+            this->UpdateUI(i);
+            this->window->draw(this->followPlayerText);
+            // this->window->draw(this->stationaryText);
+            this->window->draw(this->playerExpBar);
+        }
+    }
+    else
+    {
+        this->window->draw(this->gameOverText);
     }
 }
 
@@ -275,14 +296,9 @@ void Game::Render()
         {
             e->Render(*this->window);
         }
-
-        // Render UI
-        this->RenderUI();
     }
-    else
-    {
-        this->window->draw(this->gameOverText);
-    }
+    // Render UI
+    this->RenderUI();
 
     this->window->display();
 }

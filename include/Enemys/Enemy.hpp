@@ -19,10 +19,12 @@ protected:
     int damageMin;
     int damageMax;
 
+    float exp;
+
 public:
     Enemy(Texture *texture, Vector2u windowBounds,
           Vector2f position, Vector2f direction,
-          Vector2f scale, int type,
+          Vector2f scale, int type, float exp,
           int hpMax, int damageMax, int damageMin);
     virtual ~Enemy();
 
@@ -30,6 +32,7 @@ public:
     inline const int getdamage() const { return rand() % this->damageMax + this->damageMin; }
     inline const int getHp() const { return this->hp; }
     inline const int getHpMax() const { return this->hpMax; }
+    inline const float getExp() const { return this->exp; }
     inline const bool isDead() const { return this->hp <= 0; }
 
     inline const FloatRect getBounds() const { return this->sprite.getGlobalBounds(); }

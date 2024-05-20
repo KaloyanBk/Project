@@ -1,12 +1,12 @@
 #include "../../include/Bullets/Lightning.hpp"
 
-Lightning::Lightning(Vector2f pos, Vector2f direction,
+Lightning::Lightning(Vector2f pos, int level, Vector2f direction,
                      float initialVelocity, float maxVelocity,
                      float acceleration)
-    : Bullet(pos, direction, initialVelocity, maxVelocity, acceleration)
+    : Bullet(pos, level, direction, initialVelocity, maxVelocity, acceleration)
 {
-    this->setTexture(LIGHTNING_BULLET);
-    this->setDamage(LIGHTNING_BULLET);
+    this->setTexture(LIGHTNING_BULLET, this->level);
+    this->setDamage(LIGHTNING_BULLET, this->level);
     
     this->sprite.setOrigin(this->sprite.getGlobalBounds().width / 2, this->sprite.getGlobalBounds().height / 2);
     this->sprite.setScale(Vector2f(0.5f, 0.5f));

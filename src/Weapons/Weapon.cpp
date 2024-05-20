@@ -2,12 +2,12 @@
 
 Weapon::Weapon()
     : fireRate(0), fireRateMax(10), weaponTexture(nullptr),
-      level(1), damage(1), damageMax(2)
+      bulletLevel(1), damage(1), damageMax(2)
 {}
 
-Weapon::Weapon(Texture* weaponTexture, int UpOrDown, int fireRateMax, int damageMax)
+Weapon::Weapon(Texture* weaponTexture, int level, int UpOrDown,int fireRateMax, int damageMax)
     : fireRate(0), fireRateMax(fireRateMax), weaponTexture(weaponTexture),
-      level(1), damage(1), damageMax(damageMax), UpOrDown(UpOrDown)
+      bulletLevel(level), damage(1), damageMax(damageMax), UpOrDown(UpOrDown)
 {
     this->dtMultiplier = 60.f;
 

@@ -13,7 +13,7 @@ protected:
     Texture* weaponTexture;
     std::vector<Bullet *> bullets;
 
-    int level;
+    int bulletLevel;
     int damage;
     int damageMax;
     int UpOrDown;
@@ -21,7 +21,7 @@ protected:
 public:
     // Constructor
     Weapon();
-    Weapon(Texture* weaponTexture, int UpOrDown, int fireRateMax = 25, int damageMax = 1);
+    Weapon(Texture* weaponTexture, int level, int UpOrDown,int fireRateMax = 25, int damageMax = 1);
     virtual ~Weapon();
 
     // Accessors

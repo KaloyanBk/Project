@@ -3,29 +3,36 @@
 unsigned Player::players = 0;
 
 Player::Player(std::vector<Texture> &textures, Vector2u windowBounds, int UP, int DOWN, int LEFT, int RIGHT, int FIRE)
-    : windowBounds(windowBounds), level(1), exp(0), expNext(100), hp(10), hpMax(10), damage(1), damageMax(2),
-      score(0), maxVelocity(25.f), acceleration(0.8f), drag(0.4f)
+    : windowBounds(windowBounds), level(0), exp(0), hp(10), hpMax(10), damage(1), damageMax(2),
+      score(0), maxVelocity(25.f), acceleration(0.8f), drag(0.4f), upgrade(0)
 {
+    // Delta time multiplier
     this->dtMultiplier = 60.f;
+
+    // Stats
+    this->expNext = static_cast<int>((50 / 3) *
+                                     (pow((this->level + 1), 3) -
+                                      6 * pow((this->level + 1), 2) +
+                                      17 * (this->level + 1) - 11));
+
     // Set up the sprite
     this->sprite.setTexture(textures[PLAYER]);
     this->sprite.setOrigin(this->sprite.getGlobalBounds().width / 2, this->sprite.getGlobalBounds().height / 2);
     this->sprite.setScale(0.1f, 0.1f);
     this->sprite.setPosition(100.f, 100.f);
 
-    this->fireRateMax = 25;
+    this->fireRateMax = 25.f;
     this->fireRate = this->fireRateMax;
-    this->damageTimerMax = 10;
+    this->damageTimerMax = 10.f;
     this->damageTimer = this->damageTimerMax;
 
     // Weapons
-
-    this->currentWeapon = LASER;
+    // this->currentWeapon = LASER;
     // this->currentWeapon = LIGHTNING;
     // this->currentWeapon = DARK_MATTER;
     // this->currentWeapon = NUCLIER_MATERIAL;
     // this->currentWeapon = PLASMA;
-    // this->currentWeapon = PLANETARY_BOMB;
+    this->currentWeapon = PLANETARY_BOMB;
 
     this->mainGunLevel = 0;
 
@@ -114,16 +121,33 @@ void Player::Move(const float &dt)
     else if (this->sprite.getPosition().y + this->sprite.getGlobalBounds().height / 2.f > this->windowBounds.y)
         this->sprite.setPosition(this->sprite.getPosition().x, this->windowBounds.y - this->sprite.getGlobalBounds().height / 2.f);
 }
+
+void Player::updateLevelingSystem()
+{
+    if (this->exp >= this->expNext)
+    {
+        this->level++;
+        this->exp -= this->expNext;
+        this->expNext = static_cast<int>((50 / 3) *
+                                         (pow((this->level + 1), 3) -
+                                          6 * pow((this->level + 1), 2) +
+                                          17 * (this->level + 1) - 12));
+        this->hpMax = static_cast<int>(10 * pow(1.1, (this->level + 1)));
+        this->hp = this->hpMax;
+    }
+    
+}
+
 void Player::addWeapon(Texture *weaponTexture, int UpOrDown)
 {
-    if (UpOrDown == 0)
+    if (UpOrDown == WEAPON_UP)
     {
-        sideGunUp = new PeaShooter(weaponTexture, UpOrDown);
+        sideGunUp = new PeaShooter(weaponTexture,this->level, UpOrDown);
         weapons.push_back(sideGunUp);
     }
     else
     {
-        sideGunDown = new PeaShooter(weaponTexture, UpOrDown);
+        sideGunDown = new PeaShooter(weaponTexture, this->level, UpOrDown);
         weapons.push_back(sideGunDown);
     }
 }
@@ -135,69 +159,68 @@ void Player::UpdateAccessories(const float &dt)
 }
 
 template <typename T>
-void Player::setBulletType(Vector2f pos, int level, int bulletType, Vector2f directionUp, Vector2f directionDown,
+void Player::setBulletType(Vector2f pos, int upgrade, int level, Vector2f directionUp, Vector2f directionDown,
                            float initialVelocity, float maxVelocity, float acceleration)
 {
-    switch (level)
+    switch (upgrade)
     {
     case 0:
-        this->bullets.push_back(new T(pos));
+        this->bullets.push_back(new T(pos, this->level));
         break;
 
     case 1:
-        this->bullets.push_back(new T(pos, directionUp, initialVelocity, maxVelocity, acceleration));
-        this->bullets.push_back(new T(pos, directionDown, initialVelocity, maxVelocity, acceleration));
+        this->bullets.push_back(new T(pos, this->level, directionUp, initialVelocity, maxVelocity, acceleration));
+        this->bullets.push_back(new T(pos, this->level, directionDown, initialVelocity, maxVelocity, acceleration));
         break;
     case 2:
-        this->bullets.push_back(new T(pos, directionUp, initialVelocity, maxVelocity, acceleration));
-        this->bullets.push_back(new T(pos));
-        this->bullets.push_back(new T(pos, directionDown, initialVelocity, maxVelocity, acceleration));
+        this->bullets.push_back(new T(pos, this->level, directionUp, initialVelocity, maxVelocity, acceleration));
+        this->bullets.push_back(new T(pos, this->level));
+        this->bullets.push_back(new T(pos, this->level, directionDown, initialVelocity, maxVelocity, acceleration));
         break;
     }
 }
 
-
 void Player::CombatUpdate()
 
 {
-    //change main gun with letter keys
-    if (Keyboard::isKeyPressed(Keyboard::P))
+    // change main gun with letter keys
+    if (Keyboard::isKeyPressed(Keyboard::Num1))
     {
         this->currentWeapon = LASER;
     }
-    else if (Keyboard::isKeyPressed(Keyboard::O))
+    else if (Keyboard::isKeyPressed(Keyboard::Num2))
     {
         this->currentWeapon = LIGHTNING;
     }
-    else if (Keyboard::isKeyPressed(Keyboard::I))
+    else if (Keyboard::isKeyPressed(Keyboard::Num3))
     {
         this->currentWeapon = DARK_MATTER;
     }
-    else if (Keyboard::isKeyPressed(Keyboard::U))
+    else if (Keyboard::isKeyPressed(Keyboard::Num4))
     {
         this->currentWeapon = NUCLIER_MATERIAL;
     }
-    else if (Keyboard::isKeyPressed(Keyboard::Y))
+    else if (Keyboard::isKeyPressed(Keyboard::Num5))
     {
         this->currentWeapon = PLASMA;
     }
-    else if (Keyboard::isKeyPressed(Keyboard::T))
+    else if (Keyboard::isKeyPressed(Keyboard::Num6))
     {
         this->currentWeapon = PLANETARY_BOMB;
     }
-    //change main gun level with number keys
+    // change main gun level with number keys
 
-    if (Keyboard::isKeyPressed(Keyboard::Num1))
+    if (Keyboard::isKeyPressed(Keyboard::P))
     {
-        this->mainGunLevel = 0;
+        this->upgrade = 0;
     }
-    else if (Keyboard::isKeyPressed(Keyboard::Num2))
+    else if (Keyboard::isKeyPressed(Keyboard::O))
     {
-        this->mainGunLevel = 1;
+        this->upgrade = 1;
     }
-    else if (Keyboard::isKeyPressed(Keyboard::Num3))
+    else if (Keyboard::isKeyPressed(Keyboard::I))
     {
-        this->mainGunLevel = 2;
+        this->upgrade = 2;
     }
 
     Vector2f bulletPosition = this->sprite.getPosition() + Vector2f(30.f, 0.f);
@@ -205,22 +228,22 @@ void Player::CombatUpdate()
     switch (this->currentWeapon)
     {
     case LASER:
-        this->setBulletType<LaserBullet>(bulletPosition, this->mainGunLevel, this->currentWeapon);
+        this->setBulletType<LaserBullet>(bulletPosition, this->upgrade, this->level);
         break;
     case LIGHTNING:
-        this->setBulletType<Lightning>(bulletPosition, this->mainGunLevel, this->currentWeapon);
+        this->setBulletType<Lightning>(bulletPosition, this->upgrade, this->level);
         break;
     case DARK_MATTER:
-        this->setBulletType<DarkMatter>(bulletPosition, this->mainGunLevel, this->currentWeapon);
+        this->setBulletType<DarkMatter>(bulletPosition, this->upgrade, this->level);
         break;
     case NUCLIER_MATERIAL:
-        this->setBulletType<NuclierMaterial>(bulletPosition, this->mainGunLevel, this->currentWeapon);
+        this->setBulletType<NuclierMaterial>(bulletPosition, this->upgrade, this->level);
         break;
     case PLASMA:
-        this->setBulletType<Plasma>(bulletPosition, this->mainGunLevel, this->currentWeapon);
+        this->setBulletType<Plasma>(bulletPosition, this->upgrade, this->level);
         break;
     case PLANETARY_BOMB:
-        this->setBulletType<PlanetaryBomb>(bulletPosition, this->mainGunLevel, this->currentWeapon);
+        this->setBulletType<PlanetaryBomb>(bulletPosition, this->upgrade, this->level);
         break;
     }
 

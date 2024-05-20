@@ -1,10 +1,10 @@
 #include "../../include/Bullets/Bullet.hpp"
 #include <iostream>
 
-Bullet::Bullet(Vector2f pos, Vector2f direction,
-            float initialVelocity, float maxVelocity,
+Bullet::Bullet(Vector2f pos, int level, Vector2f direction,
+               float initialVelocity, float maxVelocity,
                float acceleration)
-    :  direction(direction), currentVelocity(initialVelocity * direction),
+    : direction(direction), currentVelocity(initialVelocity * direction), level(level),
       maxVelocity(maxVelocity), acceleration(acceleration)
 {
     this->dtMultiplier = 60.f;
@@ -18,18 +18,21 @@ Bullet::~Bullet()
     delete this->texture;
 }
 
-void Bullet::setTexture(int type)
+void Bullet::setTexture(int type, int level)
 {
-    if (!this->texture->loadFromFile(resourcePathsBullets.at(static_cast<BulletTypes>(type))))
+
+    if (!this->texture->loadFromFile(resourcePathsMaps.at(static_cast<ChangingBullets>(type)).at(static_cast<BulletLevels>((level)))))
     {
-        std::cerr << "Failed to load texture: " << resourcePathsBullets.at(static_cast<BulletTypes>(type)) << std::endl;
+        std::cerr << "Failed to load texture: " << resourcePathsMaps.at(static_cast<ChangingBullets>(type)).at(static_cast<BulletLevels>((level))) << std::endl;
     }
+
     this->sprite.setTexture(*this->texture);
 }
 
-void Bullet::setDamage(int type)
+void Bullet::setDamage(int type, int level)
 {
-    this->damage=resourcePathsBulletsDamage.at(static_cast<BulletTypes>(type));
+
+    this->damage = resourcePathsDamageMaps.at(static_cast<ChangingBullets>(type)).at(static_cast<BulletLevels>(level));
 }
 
 void Bullet::Move(const float &dt)
@@ -44,7 +47,7 @@ void Bullet::Move(const float &dt)
     }
     else
     {
-        this->currentVelocity = Vector2f(this->maxVelocity * this->direction.x * dt * this->dtMultiplier , this->maxVelocity * this->direction.y* dt * this->dtMultiplier);
+        this->currentVelocity = Vector2f(this->maxVelocity * this->direction.x * dt * this->dtMultiplier, this->maxVelocity * this->direction.y * dt * this->dtMultiplier);
     }
 
     this->sprite.move(this->currentVelocity * dt * this->dtMultiplier);

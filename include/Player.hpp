@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <iostream>
 
 #include "./Bullets/Bullet.hpp"
 #include "../include/Weapons/Weapon.hpp"
@@ -43,13 +44,15 @@ private:
     float damageTimer;
     float damageTimerMax;
     int level;
-    int exp;
-    int expNext;
+    float exp;
+    float expNext;
     int hp;
     int hpMax;
     int damage;
     int damageMax;
     int score;
+
+    int upgrade;
 
     // Weapons
     std::vector<Weapon *> weapons;
@@ -76,14 +79,20 @@ public:
     inline const FloatRect getBounds() const { return this->sprite.getGlobalBounds(); }
     inline const bool isDead() const { return this->hp <= 0; }
     inline const int getPlayerNumber() const { return this->playerNumber; }
+    inline const int getLevel() const { return this->level; }
+    inline const int getExp() const { return this->exp; }
+    inline const int getExpNext() const { return this->expNext; }
+    inline void gainExp(float exp){ this->exp += exp; this->updateLevelingSystem(); }
+    
 
     // Templait function adding to bullet vector
 template <typename T>
-    void setBulletType(Vector2f pos, int level, int bulletType,  Vector2f directionUp = Vector2f(1.f, -0.1f), Vector2f directionDown = Vector2f(1.f, 0.1f),
+    void setBulletType(Vector2f pos, int upgrade, int level, Vector2f directionUp = Vector2f(1.f, -0.1f), Vector2f directionDown = Vector2f(1.f, 0.1f),
                           float initialVelocity = 2.f, float maxVelocity = 50.f, float acceleration = 1.f);
     
     // Functionsc
     void Move(const float &dt);
+    void updateLevelingSystem();
     void addWeapon(Texture *weaponTexture, int UpOrDown);
     void CombatUpdate();
     void UpdateAccessories(const float &dt);
