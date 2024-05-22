@@ -41,17 +41,29 @@ private:
     // Player stats
     float fireRate;
     float fireRateMax;
+
     float damageTimer;
     float damageTimerMax;
-    int level;
-    float exp;
-    float expNext;
-    int hp;
-    int hpMax;
     int damage;
     int damageMax;
+
+    int level;
+    int maxLevel;
+    bool isAtMaxLevel = false;
+
+    float exp;
+    float expNext;
+    int statPoints;
+
+    int hp;
+    int hpMax;
+
     int score;
 
+    int endurance;
+    int armor;
+    int strength;
+    int agility;
     int upgrade;
 
     // Weapons
@@ -80,19 +92,28 @@ public:
     inline const bool isDead() const { return this->hp <= 0; }
     inline const int getPlayerNumber() const { return this->playerNumber; }
     inline const int getLevel() const { return this->level; }
+    inline const int getMaxLevel() const { return this->maxLevel; }
+    inline const bool getIsAtMaxLevel() const { return this->isAtMaxLevel; }
     inline const int getExp() const { return this->exp; }
     inline const int getExpNext() const { return this->expNext; }
-    inline void gainExp(float exp){ this->exp += exp; this->updateLevelingSystem(); }
-    
+    inline void gainExp(float exp)
+    {
+        if (!this->isAtMaxLevel)
+        {
+            this->exp += exp;
+            this->updateLevelingSystem();
+        }
+    }
 
     // Templait function adding to bullet vector
-template <typename T>
+    template <typename T>
     void setBulletType(Vector2f pos, int upgrade, int level, Vector2f directionUp = Vector2f(1.f, -0.1f), Vector2f directionDown = Vector2f(1.f, 0.1f),
-                          float initialVelocity = 2.f, float maxVelocity = 50.f, float acceleration = 1.f);
-    
+                       float initialVelocity = 2.f, float maxVelocity = 50.f, float acceleration = 1.f);
+
     // Functionsc
     void Move(const float &dt);
     void updateLevelingSystem();
+    void LevelUp();
     void addWeapon(Texture *weaponTexture, int UpOrDown);
     void CombatUpdate();
     void UpdateAccessories(const float &dt);

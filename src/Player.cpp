@@ -2,9 +2,15 @@
 
 unsigned Player::players = 0;
 
-Player::Player(std::vector<Texture> &textures, Vector2u windowBounds, int UP, int DOWN, int LEFT, int RIGHT, int FIRE)
-    : windowBounds(windowBounds), level(0), exp(0), hp(10), hpMax(10), damage(1), damageMax(2),
-      score(0), maxVelocity(25.f), acceleration(0.8f), drag(0.4f), upgrade(0)
+Player::Player(std::vector<Texture> &textures, Vector2u windowBounds,
+               int UP, int DOWN, int LEFT, int RIGHT, int FIRE)
+    : windowBounds(windowBounds), level(0), maxLevel(4), exp(0),
+      hp(10), hpMax(10),
+      damage(1), damageMax(2),
+      statPoints(0), upgrade(0),
+      endurance(0), armor(0), strength(0), agility(0),
+      maxVelocity(25.f), acceleration(0.8f), drag(0.4f),
+      score(0)
 {
     // Delta time multiplier
     this->dtMultiplier = 60.f;
@@ -121,28 +127,42 @@ void Player::Move(const float &dt)
     else if (this->sprite.getPosition().y + this->sprite.getGlobalBounds().height / 2.f > this->windowBounds.y)
         this->sprite.setPosition(this->sprite.getPosition().x, this->windowBounds.y - this->sprite.getGlobalBounds().height / 2.f);
 }
+void Player::LevelUp()
+{
+    this->statPoints++;
+    this->exp -= this->expNext;
+    this->expNext = static_cast<int>((50 / 3) *
+                                     (pow((this->level + 1), 3) -
+                                      6 * pow((this->level + 1), 2) +
+                                      17 * (this->level + 1) - 12));
+
+    this->hpMax = static_cast<int>(10 * pow(1.1, (this->level + 1)));
+    this->hp = this->hpMax;
+}
 
 void Player::updateLevelingSystem()
 {
     if (this->exp >= this->expNext)
     {
         this->level++;
-        this->exp -= this->expNext;
-        this->expNext = static_cast<int>((50 / 3) *
-                                         (pow((this->level + 1), 3) -
-                                          6 * pow((this->level + 1), 2) +
-                                          17 * (this->level + 1) - 12));
-        this->hpMax = static_cast<int>(10 * pow(1.1, (this->level + 1)));
-        this->hp = this->hpMax;
+        if (this->level < this->maxLevel)
+        {
+            LevelUp();
+        }
+        else
+        {
+            LevelUp();
+            this->exp = this->expNext;
+            this->isAtMaxLevel = true;
+        }
     }
-    
 }
 
 void Player::addWeapon(Texture *weaponTexture, int UpOrDown)
 {
     if (UpOrDown == WEAPON_UP)
     {
-        sideGunUp = new PeaShooter(weaponTexture,this->level, UpOrDown);
+        sideGunUp = new PeaShooter(weaponTexture, this->level, UpOrDown);
         weapons.push_back(sideGunUp);
     }
     else
@@ -183,31 +203,6 @@ void Player::setBulletType(Vector2f pos, int upgrade, int level, Vector2f direct
 void Player::CombatUpdate()
 
 {
-    // change main gun with letter keys
-    if (Keyboard::isKeyPressed(Keyboard::Num1))
-    {
-        this->currentWeapon = LASER;
-    }
-    else if (Keyboard::isKeyPressed(Keyboard::Num2))
-    {
-        this->currentWeapon = LIGHTNING;
-    }
-    else if (Keyboard::isKeyPressed(Keyboard::Num3))
-    {
-        this->currentWeapon = DARK_MATTER;
-    }
-    else if (Keyboard::isKeyPressed(Keyboard::Num4))
-    {
-        this->currentWeapon = NUCLIER_MATERIAL;
-    }
-    else if (Keyboard::isKeyPressed(Keyboard::Num5))
-    {
-        this->currentWeapon = PLASMA;
-    }
-    else if (Keyboard::isKeyPressed(Keyboard::Num6))
-    {
-        this->currentWeapon = PLANETARY_BOMB;
-    }
     // change main gun level with number keys
 
     if (Keyboard::isKeyPressed(Keyboard::P))

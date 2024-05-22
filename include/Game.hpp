@@ -13,15 +13,23 @@ private:
     bool gameOver = false;
 
     // UI
+    // Texts
     Text followPlayerText;
     Text stationaryText;
-
     Text gameOverText;
+    Text playerLevelText;
+
+    std::vector<TextTag> textTags;
+
+    // Fonts
     Font font;
     Font gameOverFont;
 
+    // Barrs
     RectangleShape playerHealthBar;
     RectangleShape playerExpBar;
+    RectangleShape playerExpBarOutline;
+
 
     // Resources
     std::vector<Texture> textures;

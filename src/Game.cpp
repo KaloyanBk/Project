@@ -72,7 +72,7 @@ void Game::InItUi()
     this->stationaryText.setFont(font);
 
     // Follow Player Text
-    this->followPlayerText.setCharacterSize(24);
+    this->followPlayerText.setCharacterSize(22);
     this->followPlayerText.setFillColor(Color::White);
 
     // Stationary Text
@@ -80,9 +80,19 @@ void Game::InItUi()
     this->stationaryText.setFillColor(Color::White);
 
     // Player Exp Bar
-    this->playerExpBar.setSize(Vector2f(110.f, 10.f));
+    this->playerExpBar.setSize(Vector2f(110.f, 12.f));
     this->playerExpBar.setFillColor(Color(0.f, 100.f, 200.f, 200.f));
 
+    // Player Exp Bar Outline
+    this->playerExpBarOutline.setSize(Vector2f(110.f, 12.f));
+    this->playerExpBarOutline.setFillColor(Color::Transparent);
+    this->playerExpBarOutline.setOutlineThickness(1.f);
+    this->playerExpBarOutline.setOutlineColor(Color::White);
+
+    // Player Level Text
+    this->playerLevelText.setFont(font);
+    this->playerLevelText.setCharacterSize(22);
+    this->playerLevelText.setFillColor(Color::White);
 
     // Game Over Text
     if (!this->gameOverFont.loadFromFile(resourcePathsFonts.at(GAME_OVER)))
@@ -118,15 +128,32 @@ void Game::UpdateUI(int index)
         this->followPlayerText.setString(
             "Player: " + std::to_string(players[index]->getPlayerNumber()) + "\n" +
             "HP: " + players[index]->getHpS());
+
+        this->playerLevelText.setPosition(
+            this->players[index]->getPosition().x - this->players[index]->getBounds().width / 2.f + 10.f,
+            this->players[index]->getPosition().y + this->players[index]->getBounds().height / 2.f + 30.f);
+
+        if (!this->players[index]->getIsAtMaxLevel())
+        {
+            this->playerLevelText.setString(
+                "Level: " + std::to_string(players[index]->getLevel() + 1));
+        }
+        else
+        {
+            this->playerLevelText.setString(
+                "Level: MAX");
+        }
+
+        // Exp Bar
+        this->playerExpBar.setPosition(
+            this->players[index]->getPosition().x - this->players[index]->getBounds().width / 2.f + 10.f,
+            this->players[index]->getPosition().y + this->players[index]->getBounds().height / 2.f + 10.f);
+
+        this->playerExpBarOutline.setPosition(this->playerExpBar.getPosition());
+
+        this->playerExpBar.setScale(
+            static_cast<float>(this->players[index]->getExp()) / static_cast<float>(this->players[index]->getExpNext()), 1.f);
     }
-    // Exp Bar
-    this->playerExpBar.setPosition(
-        this->players[index]->getPosition().x - this->players[index]->getBounds().width / 2.f + 10.f,
-        this->players[index]->getPosition().y + this->players[index]->getBounds().height / 2.f + 10.f);
-
-    this->playerExpBar.setScale(
-        static_cast<float>(this->players[index]->getExp()) / static_cast<float>(this->players[index]->getExpNext()), 1.f);
-
 }
 
 void Game::Update(const float &dt)
@@ -143,7 +170,7 @@ void Game::Update(const float &dt)
             enemys.push_back(new Enemy(
                 &this->textures.at(ENEMY), this->window->getSize(),
                 Vector2f(0.f, 0.f), Vector2f(-1.f, 0.f), Vector2f(0.5f, 0.5f),
-                MOVE_LEFT, 2.f, rand() % 3 + 1, 3, 1));
+                MOVE_LEFT, 5.f, rand() % 3 + 1, 3, 1));
             enemySpawnTimer = 0;
         }
 
@@ -171,13 +198,18 @@ void Game::Update(const float &dt)
                     {
                         if (p->getBullets()[i]->getBounds().intersects(enemys[j]->getBounds()))
                         {
-                            enemys[j]->TakeDamage(p->getBullets()[i]->getDamage());
+                            int damage = p->getBullets()[i]->getDamage();
+                            enemys[j]->TakeDamage(damage);
                             delete p->getBullets()[i];
                             p->getBullets().erase(p->getBullets().begin() + i);
                             flag = false;
                             if (enemys[j]->isDead())
                             {
-                                p->gainExp(enemys[j]->getExp());
+                                if (!p->getIsAtMaxLevel())
+                                {
+                                    p->gainExp(enemys[j]->getExp());
+                                }
+
                                 delete enemys[j];
                                 enemys.erase(enemys.begin() + j);
                                 break;
@@ -201,6 +233,7 @@ void Game::Update(const float &dt)
                             p->getWeapons()[k]->getBullets().erase(p->getWeapons()[k]->getBullets().begin() + l);
                             if (enemys[j]->isDead())
                             {
+                                p->gainExp(enemys[j]->getExp());
                                 delete enemys[j];
                                 enemys.erase(enemys.begin() + j);
                                 return;
@@ -229,16 +262,22 @@ void Game::Update(const float &dt)
             {
                 if (enemys[i]->getBounds().intersects(players[j]->getBounds()))
                 {
-                    players[j]->TakeDamage(1);
+                    int damage = enemys[i]->getdamage();
+                    players[j]->TakeDamage(damage);
+
+                    this->textTags.push_back(
+                        TextTag(&this->font, std::to_string(damage),
+                                Vector2f(this->players[j]->getPosition().x + 10.f,
+                                         this->players[j]->getPosition().y - this->players[j]->getBounds().height / 2.f),
+                                20, Color::Red));
+
                     delete enemys[i];
                     enemys.erase(enemys.begin() + i);
-
                     if (players[j]->isDead())
                     {
                         players.erase(players.begin() + j);
                         if (players.size() == 0)
                         {
-                            std::cout << "Game Over" << std::endl;
                             this->gameOver = true;
                             return;
                         }
@@ -247,6 +286,16 @@ void Game::Update(const float &dt)
 
                     break;
                 }
+            }
+        }
+        // TextTag Update
+        for (size_t i = 0; i < textTags.size(); i++)
+        {
+            textTags[i].Update(dt);
+            if (textTags[i].getTimer() <= 0.f)
+            {
+                textTags.erase(textTags.begin() + i);
+                break;
             }
         }
     }
@@ -273,6 +322,14 @@ void Game::RenderUI()
             this->window->draw(this->followPlayerText);
             // this->window->draw(this->stationaryText);
             this->window->draw(this->playerExpBar);
+            this->window->draw(this->playerExpBarOutline);
+            this->window->draw(this->playerLevelText);
+
+            // TextTags
+            for (auto &t : textTags)
+            {
+                t.Render(*this->window);
+            }
         }
     }
     else

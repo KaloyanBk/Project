@@ -61,11 +61,11 @@ const std::unordered_map<BulletLevels, std::string> resourcePathsDarkMatterBulle
 };
 
 const std::unordered_map<BulletLevels, unsigned int> resourcePathsDarkMatterBulletDamage = {
-    {LEVEL1, 1},
-    {LEVEL2, 2},
-    {LEVEL3, 3},
-    {LEVEL4, 4},
-    {LEVEL5, 5}};
+    {LEVEL1, 2},
+    {LEVEL2, 3},
+    {LEVEL3, 4},
+    {LEVEL4, 5},
+    {LEVEL5, 6}};
 
 const std::unordered_map<BulletLevels, std::string> resourcePathsNuclierMaterialBullet = {
     // Player
@@ -77,11 +77,11 @@ const std::unordered_map<BulletLevels, std::string> resourcePathsNuclierMaterial
 };
 
 const std::unordered_map<BulletLevels, unsigned int> resourcePathsNuclierMaterialBulletDamage = {
-    {LEVEL1, 1},
-    {LEVEL2, 2},
-    {LEVEL3, 3},
-    {LEVEL4, 4},
-    {LEVEL5, 5}};
+    {LEVEL1, 3},
+    {LEVEL2, 4},
+    {LEVEL3, 5},
+    {LEVEL4, 6},
+    {LEVEL5, 7}};
 
 const std::unordered_map<BulletLevels, std::string> resourcePathsPlasmaBullets = {
     // Player
@@ -93,11 +93,11 @@ const std::unordered_map<BulletLevels, std::string> resourcePathsPlasmaBullets =
 };
 
 const std::unordered_map<BulletLevels, unsigned int> resourcePathsPlasmaBulletsDamage = {
-    {LEVEL1, 1},
-    {LEVEL2, 2},
-    {LEVEL3, 3},
-    {LEVEL4, 4},
-    {LEVEL5, 5}};
+    {LEVEL1, 4},
+    {LEVEL2, 5},
+    {LEVEL3, 6},
+    {LEVEL4, 7},
+    {LEVEL5, 8}};
 
 const std::unordered_map<BulletLevels, std::string> resourcePathsPlanetaryBombBullets = {
     // Player
@@ -109,11 +109,11 @@ const std::unordered_map<BulletLevels, std::string> resourcePathsPlanetaryBombBu
 };
 
 const std::unordered_map<BulletLevels, unsigned int> resourcePathsPlanetaryBombBulletsDamage = {
-    {LEVEL1, 1},
-    {LEVEL2, 2},
-    {LEVEL3, 3},
-    {LEVEL4, 4},
-    {LEVEL5, 5}};
+    {LEVEL1, 5},
+    {LEVEL2, 6},
+    {LEVEL3, 7},
+    {LEVEL4, 8},
+    {LEVEL5, 9}};
 
 const std::unordered_map<BulletLevels, std::string> resourcePathsPeaShooterBullets = {
     {LEVEL1, "Sprites/LaserBullets/01.png"},
