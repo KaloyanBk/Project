@@ -11,24 +11,28 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
 
+#include "./Resources/DynamicArray.hpp"
+
 using namespace sf;
 
 class TextTag
 {
 private:
-float dtMultiplier;
+    float dtMultiplier;
 
-Font *font;
-Text text;
+    Font *font;
+    Text text;
 
-float speed;
-Vector2f direction;
+    float speed;
+    Vector2f direction;
 
-float timerMax;
-float timer;
+    float timerMax;
+    float timer;
 
 public:
-    TextTag(Font *font, std::string text, Vector2f position, unsigned int size, Color color);
+    TextTag(Font *font, std::string text, Vector2f position, unsigned int size, float timerMax, Color color);
+    TextTag(const TextTag &other);           
+    TextTag &operator=(const TextTag &other); 
     virtual ~TextTag();
 
     // Accessors
@@ -37,4 +41,3 @@ public:
     void Update(const float &dt);
     void Render(RenderTarget &target);
 };
-

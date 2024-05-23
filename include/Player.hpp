@@ -96,13 +96,14 @@ public:
     inline const bool getIsAtMaxLevel() const { return this->isAtMaxLevel; }
     inline const int getExp() const { return this->exp; }
     inline const int getExpNext() const { return this->expNext; }
-    inline void gainExp(float exp)
+    inline bool gainExp(float exp)
     {
         if (!this->isAtMaxLevel)
         {
             this->exp += exp;
-            this->updateLevelingSystem();
+            return this->updateLevelingSystem();
         }
+        return false;
     }
 
     // Templait function adding to bullet vector
@@ -112,7 +113,7 @@ public:
 
     // Functionsc
     void Move(const float &dt);
-    void updateLevelingSystem();
+    bool updateLevelingSystem();
     void LevelUp();
     void addWeapon(Texture *weaponTexture, int UpOrDown);
     void CombatUpdate();

@@ -136,11 +136,11 @@ void Player::LevelUp()
                                       6 * pow((this->level + 1), 2) +
                                       17 * (this->level + 1) - 12));
 
-    this->hpMax = static_cast<int>(10 * pow(1.1, (this->level + 1)));
+    // this->hpMax = static_cast<int>(10 * pow(1.1, (this->level + 1)));
     this->hp = this->hpMax;
 }
 
-void Player::updateLevelingSystem()
+bool Player::updateLevelingSystem()
 {
     if (this->exp >= this->expNext)
     {
@@ -155,7 +155,9 @@ void Player::updateLevelingSystem()
             this->exp = this->expNext;
             this->isAtMaxLevel = true;
         }
+        return true;
     }
+    return false;
 }
 
 void Player::addWeapon(Texture *weaponTexture, int UpOrDown)

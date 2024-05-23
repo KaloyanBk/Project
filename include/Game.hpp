@@ -4,6 +4,7 @@
 #include "./Resources/Fonts.hpp"
 #include "./Resources/Textures.hpp"
 #include "./Enemys/Enemy.hpp"
+#include "TextTag.hpp"
 
 class Game
 {
@@ -12,24 +13,21 @@ private:
     float dtMultiplier;
     bool gameOver = false;
 
-    // UI
-    // Texts
+    // UI elements
     Text followPlayerText;
     Text stationaryText;
     Text gameOverText;
     Text playerLevelText;
-
-    std::vector<TextTag> textTags;
+    DynamicArray<TextTag> textTags;
 
     // Fonts
     Font font;
     Font gameOverFont;
 
-    // Barrs
+    // Bars
     RectangleShape playerHealthBar;
     RectangleShape playerExpBar;
     RectangleShape playerExpBarOutline;
-
 
     // Resources
     std::vector<Texture> textures;
@@ -38,15 +36,19 @@ private:
     std::vector<Player *> players;
 
     // Enemies
-    std::vector<Enemy *> enemys;
+    DynamicArray<Enemy *> enemys;
     float enemySpawnTimer;
     float enemySpawnTimerMax;
 
     // Private member functions
     void loadTextures();
     void createPlayers();
+    void updateBullets(Player *p, const float &dt);
+    void updateSideGunBullets(Player *p, const float &dt);
+    void handleEnemyDeath(Player *p, size_t enemyIndex);
 
 public:
+    // Constructor and Destructor
     Game(RenderWindow *window);
     virtual ~Game();
 
@@ -62,5 +64,3 @@ public:
     void RenderUI();
     void Render();
 };
-
-// Enumerations
