@@ -2,7 +2,7 @@
 
 unsigned Player::players = 0;
 
-Player::Player(std::vector<Texture> &textures, Vector2u windowBounds,
+Player::Player(DynamicArray<Texture> &textures, Vector2u windowBounds,
                int UP, int DOWN, int LEFT, int RIGHT, int FIRE)
     : windowBounds(windowBounds), level(0), maxLevel(4), exp(0),
       hp(10), hpMax(10),
@@ -29,21 +29,22 @@ Player::Player(std::vector<Texture> &textures, Vector2u windowBounds,
 
     this->fireRateMax = 25.f;
     this->fireRate = this->fireRateMax;
-    this->damageTimerMax = 10.f;
-    this->damageTimer = this->damageTimerMax;
+
+    this->damageTimerMax = 5.f; 
+    this->damageTimer = 0.f;
 
     // Weapons
-    // this->currentWeapon = LASER;
+    this->currentWeapon = LASER;
     // this->currentWeapon = LIGHTNING;
     // this->currentWeapon = DARK_MATTER;
     // this->currentWeapon = NUCLIER_MATERIAL;
     // this->currentWeapon = PLASMA;
-    this->currentWeapon = PLANETARY_BOMB;
+    // this->currentWeapon = PLANETARY_BOMB;
 
     this->mainGunLevel = 0;
 
-    this->addWeapon(&textures[SIDE_GUN_UP], WEAPON_UP);
-    this->addWeapon(&textures[SIDE_GUN_DOWN], WEAPON_DOWN);
+    // this->addWeapon(&textures[SIDE_GUN_UP], WEAPON_UP);
+    // this->addWeapon(&textures[SIDE_GUN_DOWN], WEAPON_DOWN);
 
     // Controls
     this->controls[controls::UP] = UP;
@@ -59,8 +60,10 @@ Player::Player(std::vector<Texture> &textures, Vector2u windowBounds,
 
 Player::~Player()
 {
-    for (auto &w : weapons)
-        delete w;
+    for (size_t i = 0; i < weapons.size(); ++i)
+    {
+        delete weapons[i];
+    }
 }
 
 void Player::Move(const float &dt)
@@ -127,6 +130,25 @@ void Player::Move(const float &dt)
     else if (this->sprite.getPosition().y + this->sprite.getGlobalBounds().height / 2.f > this->windowBounds.y)
         this->sprite.setPosition(this->sprite.getPosition().x, this->windowBounds.y - this->sprite.getGlobalBounds().height / 2.f);
 }
+
+Bullet &Player::getBullet(unsigned index)
+{
+    if (index < 0 || index >= this->bullets.size())
+    {
+        throw "OUT OF BOUNDS! PLAYER::GETBULLET!";
+    }
+    return *this->bullets[index];
+}
+
+void Player::removeBullet(unsigned index)
+{
+    if (index < 0 || index >= this->bullets.size())
+    {
+        throw "OUT OF BOUNDS! PLAYER::REMOVEBULLET!";
+    }
+    this->bullets.remove(index);
+}
+
 void Player::LevelUp()
 {
     this->statPoints++;
@@ -165,19 +187,21 @@ void Player::addWeapon(Texture *weaponTexture, int UpOrDown)
     if (UpOrDown == WEAPON_UP)
     {
         sideGunUp = new PeaShooter(weaponTexture, this->level, UpOrDown);
-        weapons.push_back(sideGunUp);
+        weapons.add(sideGunUp);
     }
     else
     {
         sideGunDown = new PeaShooter(weaponTexture, this->level, UpOrDown);
-        weapons.push_back(sideGunDown);
+        weapons.add(sideGunDown);
     }
 }
 
 void Player::UpdateAccessories(const float &dt)
 {
-    for (auto &w : weapons)
-        w->Update(this->sprite.getPosition(), getBounds(), dt);
+    for (size_t i = 0; i < weapons.size(); ++i)
+    {
+        weapons[i]->Update(this->sprite.getPosition(), getBounds(), dt);
+    }
 }
 
 template <typename T>
@@ -187,17 +211,17 @@ void Player::setBulletType(Vector2f pos, int upgrade, int level, Vector2f direct
     switch (upgrade)
     {
     case 0:
-        this->bullets.push_back(new T(pos, this->level));
+        this->bullets.add(new T(pos, this->level));
         break;
 
     case 1:
-        this->bullets.push_back(new T(pos, this->level, directionUp, initialVelocity, maxVelocity, acceleration));
-        this->bullets.push_back(new T(pos, this->level, directionDown, initialVelocity, maxVelocity, acceleration));
+        this->bullets.add(new T(pos, this->level, directionUp, initialVelocity, maxVelocity, acceleration));
+        this->bullets.add(new T(pos, this->level, directionDown, initialVelocity, maxVelocity, acceleration));
         break;
     case 2:
-        this->bullets.push_back(new T(pos, this->level, directionUp, initialVelocity, maxVelocity, acceleration));
-        this->bullets.push_back(new T(pos, this->level));
-        this->bullets.push_back(new T(pos, this->level, directionDown, initialVelocity, maxVelocity, acceleration));
+        this->bullets.add(new T(pos, this->level, directionUp, initialVelocity, maxVelocity, acceleration));
+        this->bullets.add(new T(pos, this->level));
+        this->bullets.add(new T(pos, this->level, directionDown, initialVelocity, maxVelocity, acceleration));
         break;
     }
 }
@@ -247,9 +271,9 @@ void Player::CombatUpdate()
     this->fireRate = 0;
 
     // Fire side guns
-    for (auto &w : weapons)
+    for (size_t i = 0; i < weapons.size(); ++i)
     {
-        w->Fire(w->getPosition(), Vector2f(1.f, 0.f), Vector2f(0.2f, 0.2f));
+        weapons[i]->Fire(weapons[i]->getPosition(), Vector2f(1.f, 0.f), Vector2f(0.2f, 0.2f));
     }
 }
 
@@ -266,29 +290,34 @@ void Player::TakeDamage(int damage)
 
 void Player::Update(Vector2u windowBounds, const float &dt)
 {
-
     // Update fire rate
     if (this->fireRate < this->fireRateMax)
         this->fireRate += 1.f * dt * this->dtMultiplier;
     if (this->damageTimer < this->damageTimerMax)
         this->damageTimer += 1.f * dt * this->dtMultiplier;
 
-    // Update weapons
-    for (auto &w : weapons)
+    // Update weapons and bullets
+    for (size_t i = 0; i < weapons.size(); ++i)
     {
-        for (size_t i = 0; i < w->getBullets().size(); i++)
+        for (size_t j = 0; j < weapons[i]->getBullets().size(); ++j)
         {
-            w->getBullets()[i]->Update(dt);
-            if (w->getBullets()[i]->getPosition().x > windowBounds.x)
+            weapons[i]->getBullets()[j]->Update(dt);
+            // Remove bullets that have gone off-screen
+            if (weapons[i]->getBullets()[j]->getPosition().x > windowBounds.x)
             {
-                delete w->getBullets()[i];
-                w->getBullets().erase(w->getBullets().begin() + i);
-                return;
+                delete weapons[i]->getBullets()[j];
+                weapons[i]->getBullets().erase(weapons[i]->getBullets().begin() + j);
+                // Decrement j to account for the erased element
+                --j;
             }
         }
     }
+
+    // Update player movement and accessories
     this->Move(dt);
     this->UpdateAccessories(dt);
+
+    // Check for firing input and perform combat update
     if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::FIRE])) && this->fireRate >= this->fireRateMax)
     {
         this->CombatUpdate();

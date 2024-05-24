@@ -12,6 +12,9 @@ Enemy::Enemy(Texture *texture, Vector2u windowBounds,
     this->sprite.setTexture(*this->texture);
     this->sprite.setScale(scale);
 
+    this->damageTimerMax = 3.f;
+    this->damageTimer = 0.f;
+
     this->hp = hpMax;
 
     this->sprite.setPosition(windowBounds.x, rand() % (int)(windowBounds.y - this->sprite.getGlobalBounds().height));
@@ -23,9 +26,13 @@ Enemy::~Enemy() {}
 void Enemy::TakeDamage(int damage)
 {
     this->hp -= damage;
+    this->damageTimer = this->damageTimerMax;
+
 
     if (this->hp <= 0)
+    {
         this->hp = 0;
+    }
 }
 
 void Enemy::Move(const float &dt)
@@ -48,8 +55,18 @@ void Enemy::Move(const float &dt)
 void Enemy::Update(const float &dt)
 {
     Move(dt);
+    if (this->damageTimer > 0.f)
+    {
+        this->damageTimer -= 1.f * dt * this->dtMultiplier;
 
-    // enemy Death
+        this->sprite.setColor(Color::Red);
+
+    this->sprite.move(10.f * this->damageTimer * dt * this->dtMultiplier, 0.f);
+
+    }else
+    {
+        this->sprite.setColor(Color::White);
+    }
 }
 
 void Enemy::Render(sf::RenderTarget &target)

@@ -13,6 +13,9 @@ protected:
     Vector2f direction;
     Vector2u windowBounds;
 
+    float damageTimer;
+    float damageTimerMax;
+
     int type;
     int hp;
     int hpMax;

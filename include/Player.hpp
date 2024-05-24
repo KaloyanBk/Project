@@ -28,7 +28,7 @@ private:
     Vector2u windowBounds;
 
     // Bullets
-    std::vector<Bullet *> bullets;
+    DynamicArray<Bullet *> bullets;
 
     // Controls
     int controls[5];
@@ -67,7 +67,7 @@ private:
     int upgrade;
 
     // Weapons
-    std::vector<Weapon *> weapons;
+    DynamicArray<Weapon *> weapons;
     Weapon *sideGunUp;
     Weapon *sideGunDown;
 
@@ -79,14 +79,16 @@ private:
 
 public:
     // Constructor
-    Player(std::vector<Texture> &textures, Vector2u windowBounds,
+    Player(DynamicArray<Texture> &textures, Vector2u windowBounds,
            int UP = 22, int DOWN = 18, int LEFT = 0, int RIGHT = 3, int FIRE = 57);
     ~Player();
 
     // Accessors
-    inline std::vector<Bullet *> &getBullets() { return this->bullets; }
+    Bullet &getBullet(unsigned index);
+    void removeBullet(unsigned index);
+    inline const int getBulletSize(){return this->bullets.size();}
     inline const Vector2f &getPosition() const { return this->sprite.getPosition(); }
-    inline std::vector<Weapon *> &getWeapons() { return this->weapons; };
+    inline DynamicArray<Weapon *> &getWeapons() { return this->weapons; };
     inline const String getHpS() const { return std::to_string(this->hp) + "/" + std::to_string(this->hpMax); }
     inline const FloatRect getBounds() const { return this->sprite.getGlobalBounds(); }
     inline const bool isDead() const { return this->hp <= 0; }

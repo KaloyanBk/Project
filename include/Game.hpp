@@ -30,7 +30,7 @@ private:
     RectangleShape playerExpBarOutline;
 
     // Resources
-    std::vector<Texture> textures;
+    DynamicArray<Texture> textures;
 
     // Players
     std::vector<Player *> players;
@@ -56,7 +56,7 @@ public:
     inline RenderWindow &getWindow() { return *this->window; }
 
     // Functions
-    Player *createPlayer(std::vector<Texture> &textures, Vector2u windowBounds,
+    Player *createPlayer(DynamicArray<Texture> &textures, Vector2u windowBounds,
                          int upKey, int downKey, int leftKey, int rightKey, int fireKey);
     void InItUi();
     void UpdateUI(int index);

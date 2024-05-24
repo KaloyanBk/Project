@@ -47,7 +47,7 @@ void Game::loadTextures()
         {
             std::cerr << "Failed to load texture: " << resourcePaths.at(static_cast<Textures>(i)) << std::endl;
         }
-        this->textures.push_back(texture);
+        this->textures.add(texture);
     }
 }
 
@@ -58,7 +58,7 @@ void Game::createPlayers()
     this->players.push_back(createPlayer(this->textures, this->window->getSize(), Keyboard::Up, Keyboard::Down, Keyboard::Left, Keyboard::Right, Keyboard::RShift));
 }
 
-Player *Game::createPlayer(std::vector<Texture> &textures, Vector2u windowBounds, int upKey, int downKey, int leftKey, int rightKey, int fireKey)
+Player *Game::createPlayer(DynamicArray<Texture> &textures, Vector2u windowBounds, int upKey, int downKey, int leftKey, int rightKey, int fireKey)
 {
     return new Player(textures, windowBounds, upKey, downKey, leftKey, rightKey, fireKey);
 }
@@ -164,7 +164,7 @@ void Game::Update(const float &dt)
         if (enemySpawnTimer >= enemySpawnTimerMax)
         {
             enemys.add(new Enemy(
-                &this->textures.at(ENEMY), this->window->getSize(),
+                &this->textures[ENEMY], this->window->getSize(),
                 Vector2f(0.f, 0.f), Vector2f(-1.f, 0.f), Vector2f(0.5f, 0.5f),
                 MOVE_LEFT, 5.f, rand() % 3 + 1, 3, 1));
             enemySpawnTimer = 0;
@@ -201,7 +201,9 @@ void Game::Update(const float &dt)
                     this->textTags.add(TextTag(&this->font, '-' + std::to_string(damage),
                                                Vector2f(this->players[j]->getPosition().x + 10.f,
                                                         this->players[j]->getPosition().y - this->players[j]->getBounds().height / 2.f - 20.f),
-                                               24, 20.f, Color::Red));
+                                               Vector2f(-1.f, 0.f),
+                                               24, 20.f, true,
+                                               Color::Red));
                     delete enemys[i];
                     enemys.remove(i);
                     if (players[j]->isDead())
@@ -245,34 +247,34 @@ void Game::Update(const float &dt)
 // Update player bullets
 void Game::updateBullets(Player *p, const float &dt)
 {
-    if (p->getBullets().size() > 0)
+    if (p->getBulletSize() > 0)
     {
-        for (size_t i = 0; i < p->getBullets().size(); i++)
+        for (size_t i = 0; i < p->getBulletSize(); i++)
         {
             bool flag = true;
-            p->getBullets()[i]->Update(dt);
+            p->getBullet(i).Update(dt);
 
             // Bullet collision with window bounds
-            if (p->getBullets()[i]->getPosition().x > this->window->getSize().x)
+            if (p->getBullet(i).getPosition().x > this->window->getSize().x)
             {
-                delete p->getBullets()[i];
-                p->getBullets().erase(p->getBullets().begin() + i);
+                p->removeBullet(i);
                 continue;
             }
 
             // Bullet collision with enemies
             for (size_t j = 0; j < enemys.size() && flag; j++)
             {
-                if (p->getBullets()[i]->getBounds().intersects(enemys[j]->getBounds()))
+                if (p->getBullet(i).getBounds().intersects(enemys[j]->getBounds()))
                 {
-                    int damage = p->getBullets()[i]->getDamage();
+                    int damage = p->getBullet(i).getDamage();
                     enemys[j]->TakeDamage(damage);
                     this->textTags.add(TextTag(&this->font, '-' + std::to_string(damage),
                                                Vector2f(this->enemys[j]->getPosition().x + 10.f,
                                                         this->enemys[j]->getPosition().y - this->enemys[j]->getBounds().height / 2.f),
-                                               20.f, 20.f, Color::Red));
-                    delete p->getBullets()[i];
-                    p->getBullets().erase(p->getBullets().begin() + i);
+                                               Vector2f(1.f, 0.f),
+                                               20.f, 30.f, true,
+                                               Color::Red));
+                    p->removeBullet(i);
                     flag = false;
                     if (enemys[j]->isDead())
                     {
@@ -301,7 +303,9 @@ void Game::updateSideGunBullets(Player *p, const float &dt)
                     this->textTags.add(TextTag(&this->font, '-' + std::to_string(damage),
                                                Vector2f(this->enemys[j]->getPosition().x + 10.f,
                                                         this->enemys[j]->getPosition().y - this->enemys[j]->getBounds().height / 2.f),
-                                               20.f, 20.f, Color::Red));
+                                               Vector2f(1.f, 0.f),
+                                               20.f, 20.f, true,
+                                               Color::Red));
                     delete p->getWeapons()[k]->getBullets()[l];
                     p->getWeapons()[k]->getBullets().erase(p->getWeapons()[k]->getBullets().begin() + l);
                     if (enemys[j]->isDead())
@@ -325,16 +329,20 @@ void Game::handleEnemyDeath(Player *p, size_t enemyIndex)
         {
             this->textTags.add(TextTag(&this->font, "Level Up",
                                        Vector2f(p->getPosition().x,
-                                                p->getPosition().y - p->getBounds().height / 2.f - 20.f),
-                                       30.f, 30.f, Color::Green));
+                                                p->getPosition().y - p->getBounds().height / 2.f),
+                                       Vector2f(0.f, 1.f),
+                                       35.f, 30.f, true,
+                                       Color::Green));
         }
         else
         {
 
-            this->textTags.add(TextTag(&this->font, '+' + std::to_string(static_cast<int>(exp)) + " exp",
+            this->textTags.add(TextTag(&this->font, "+" + std::to_string(static_cast<int>(exp)) + " exp",
                                        Vector2f(p->getPosition().x + 10.f,
-                                                p->getPosition().y - p->getBounds().height / 2.f - 20.f),
-                                       20.f, 20.f, Color::Cyan));
+                                                p->getPosition().y - p->getBounds().height / 2.f + 20.f),
+                                       Vector2f(0.f, 1.f),
+                                       20.f, 30.f, true,
+                                       Color::Cyan));
         }
     }
 

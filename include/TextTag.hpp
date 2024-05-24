@@ -29,10 +29,16 @@ private:
     float timerMax;
     float timer;
 
+    bool accelerate;
+
 public:
-    TextTag(Font *font, std::string text, Vector2f position, unsigned int size, float timerMax, Color color);
-    TextTag(const TextTag &other);           
-    TextTag &operator=(const TextTag &other); 
+    TextTag(Font *font, std::string text,
+            Vector2f position,Vector2f direction, unsigned int size,
+            float timerMax, bool accelerate,
+            Color color);
+
+    TextTag(const TextTag &other);
+    TextTag &operator=(const TextTag &other);
     virtual ~TextTag();
 
     // Accessors
