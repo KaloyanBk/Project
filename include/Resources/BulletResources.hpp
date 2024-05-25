@@ -18,11 +18,11 @@ enum BulletLevels
 };
 
 const std::unordered_map<BulletLevels, std::string> resourcePathsLaserBullets = {
-    {LEVEL1, "Sprites/LaserBullets/Bullet.png"},
-    {LEVEL2, "Sprites/LaserBullets/Bullet.png"},
-    {LEVEL3, "Sprites/LaserBullets/Bullet.png"},
-    {LEVEL4, "Sprites/LaserBullets/Bullet.png"},
-    {LEVEL5, "Sprites/LaserBullets/Bullet.png"},
+    {LEVEL1, "include/Resources/Sprites/LaserBullets/Bullet.png"},
+    {LEVEL2, "include/Resources/Sprites/LaserBullets/Bullet.png"},
+    {LEVEL3, "include/Resources/Sprites/LaserBullets/Bullet.png"},
+    {LEVEL4, "include/Resources/Sprites/LaserBullets/Bullet.png"},
+    {LEVEL5, "include/Resources/Sprites/LaserBullets/Bullet.png"},
 };
 const std::unordered_map<BulletLevels, unsigned int> resourcePathsBulletsDamage = {
     {LEVEL1, 1},
@@ -35,11 +35,11 @@ const std::unordered_map<BulletLevels, unsigned int> resourcePathsBulletsDamage 
 
 const std::unordered_map<BulletLevels, std::string> resourcePathsLightningBullets = {
     // Player
-    {LEVEL1, "Sprites/LaserBullets/LightningLevel1.png"},
-    {LEVEL2, "Sprites/LaserBullets/LightningLevel2.png"},
-    {LEVEL3, "Sprites/LaserBullets/LightningLevel3.png"},
-    {LEVEL4, "Sprites/LaserBullets/LightningLevel4.png"},
-    {LEVEL5, "Sprites/LaserBullets/LightningLevel5.png"},
+    {LEVEL1, "Sinclude/Resources/prites/LaserBullets/LightningLevel1.png"},
+    {LEVEL2, "Sinclude/Resources/prites/LaserBullets/LightningLevel2.png"},
+    {LEVEL3, "include/Resources/Sprites/LaserBullets/LightningLevel3.png"},
+    {LEVEL4, "include/Resources/Sprites/LaserBullets/LightningLevel4.png"},
+    {LEVEL5, "include/Resources/Sprites/LaserBullets/LightningLevel5.png"},
 };
 
 // Enum for all bullet damage types
@@ -53,11 +53,11 @@ const std::unordered_map<BulletLevels, unsigned int> resourcePathsLightningBulle
 
 const std::unordered_map<BulletLevels, std::string> resourcePathsDarkMatterBullet = {
     // Player
-    {LEVEL1, "Sprites/LaserBullets/DarkMatterLevel1.png"},
-    {LEVEL2, "Sprites/LaserBullets/DarkMatterLevel2.png"},
-    {LEVEL3, "Sprites/LaserBullets/DarkMatterLevel3.png"},
-    {LEVEL4, "Sprites/LaserBullets/DarkMatterLevel4.png"},
-    {LEVEL5, "Sprites/LaserBullets/DarkMatterLevel5.png"},
+    {LEVEL1, "include/Resources/Sprites/LaserBullets/DarkMatterLevel1.png"},
+    {LEVEL2, "include/Resources/Sprites/LaserBullets/DarkMatterLevel2.png"},
+    {LEVEL3, "include/Resources/Sprites/LaserBullets/DarkMatterLevel3.png"},
+    {LEVEL4, "include/Resources/Sprites/LaserBullets/DarkMatterLevel4.png"},
+    {LEVEL5, "include/Resources/Sprites/LaserBullets/DarkMatterLevel5.png"},
 };
 
 const std::unordered_map<BulletLevels, unsigned int> resourcePathsDarkMatterBulletDamage = {
@@ -69,11 +69,11 @@ const std::unordered_map<BulletLevels, unsigned int> resourcePathsDarkMatterBull
 
 const std::unordered_map<BulletLevels, std::string> resourcePathsNuclierMaterialBullet = {
     // Player
-    {LEVEL1, "Sprites/LaserBullets/NuclierMaterialLevel1.png"},
-    {LEVEL2, "Sprites/LaserBullets/NuclierMaterialLevel2.png"},
-    {LEVEL3, "Sprites/LaserBullets/NuclierMaterialLevel3.png"},
-    {LEVEL4, "Sprites/LaserBullets/NuclierMaterialLevel4.png"},
-    {LEVEL5, "Sprites/LaserBullets/NuclierMaterialLevel5.png"},
+    {LEVEL1, "include/Resources/Sprites/LaserBullets/NuclierMaterialLevel1.png"},
+    {LEVEL2, "include/Resources/Sprites/LaserBullets/NuclierMaterialLevel2.png"},
+    {LEVEL3, "include/Resources/Sprites/LaserBullets/NuclierMaterialLevel3.png"},
+    {LEVEL4, "include/Resources/Sprites/LaserBullets/NuclierMaterialLevel4.png"},
+    {LEVEL5, "include/Resources/Sprites/LaserBullets/NuclierMaterialLevel5.png"},
 };
 
 const std::unordered_map<BulletLevels, unsigned int> resourcePathsNuclierMaterialBulletDamage = {
@@ -85,11 +85,11 @@ const std::unordered_map<BulletLevels, unsigned int> resourcePathsNuclierMateria
 
 const std::unordered_map<BulletLevels, std::string> resourcePathsPlasmaBullets = {
     // Player
-    {LEVEL1, "Sprites/LaserBullets/PlasmaLevel1.png"},
-    {LEVEL2, "Sprites/LaserBullets/PlasmaLevel2.png"},
-    {LEVEL3, "Sprites/LaserBullets/PlasmaLevel3.png"},
-    {LEVEL4, "Sprites/LaserBullets/PlasmaLevel4.png"},
-    {LEVEL5, "Sprites/LaserBullets/PlasmaLevel5.png"},
+    {LEVEL1, "include/Resources/Sprites/LaserBullets/PlasmaLevel1.png"},
+    {LEVEL2, "include/Resources/Sprites/LaserBullets/PlasmaLevel2.png"},
+    {LEVEL3, "include/Resources/Sprites/LaserBullets/PlasmaLevel3.png"},
+    {LEVEL4, "include/Resources/Sprites/LaserBullets/PlasmaLevel4.png"},
+    {LEVEL5, "include/Resources/Sprites/LaserBullets/PlasmaLevel5.png"},
 };
 
 const std::unordered_map<BulletLevels, unsigned int> resourcePathsPlasmaBulletsDamage = {
@@ -101,11 +101,11 @@ const std::unordered_map<BulletLevels, unsigned int> resourcePathsPlasmaBulletsD
 
 const std::unordered_map<BulletLevels, std::string> resourcePathsPlanetaryBombBullets = {
     // Player
-    {LEVEL1, "Sprites/LaserBullets/PlanetaryBombLevel1.png"},
-    {LEVEL2, "Sprites/LaserBullets/PlanetaryBombLevel2.png"},
-    {LEVEL3, "Sprites/LaserBullets/PlanetaryBombLevel3.png"},
-    {LEVEL4, "Sprites/LaserBullets/PlanetaryBombLevel4.png"},
-    {LEVEL5, "Sprites/LaserBullets/PlanetaryBombLevel5.png"},
+    {LEVEL1, "include/Resources/Sprites/LaserBullets/PlanetaryBombLevel1.png"},
+    {LEVEL2, "include/Resources/Sprites/LaserBullets/PlanetaryBombLevel2.png"},
+    {LEVEL3, "include/Resources/Sprites/LaserBullets/PlanetaryBombLevel3.png"},
+    {LEVEL4, "include/Resources/Sprites/LaserBullets/PlanetaryBombLevel4.png"},
+    {LEVEL5, "include/Resources/Sprites/LaserBullets/PlanetaryBombLevel5.png"},
 };
 
 const std::unordered_map<BulletLevels, unsigned int> resourcePathsPlanetaryBombBulletsDamage = {
@@ -116,11 +116,11 @@ const std::unordered_map<BulletLevels, unsigned int> resourcePathsPlanetaryBombB
     {LEVEL5, 9}};
 
 const std::unordered_map<BulletLevels, std::string> resourcePathsPeaShooterBullets = {
-    {LEVEL1, "Sprites/LaserBullets/01.png"},
-    {LEVEL2, "Sprites/LaserBullets/01.png"},
-    {LEVEL3, "Sprites/LaserBullets/01.png"},
-    {LEVEL4, "Sprites/LaserBullets/01.png"},
-    {LEVEL5, "Sprites/LaserBullets/01.png"},
+    {LEVEL1, "include/Resources/Sprites/LaserBullets/01.png"},
+    {LEVEL2, "include/Resources/Sprites/LaserBullets/01.png"},
+    {LEVEL3, "include/Resources/Sprites/LaserBullets/01.png"},
+    {LEVEL4, "include/Resources/Sprites/LaserBullets/01.png"},
+    {LEVEL5, "include/Resources/Sprites/LaserBullets/01.png"},
 };
 const std::unordered_map<BulletLevels, unsigned int> resourcePathsPeaShooterBulletsDamage = {
     {LEVEL1, 1},
@@ -141,7 +141,7 @@ enum ChangingBullets
     PLANETARY_BOMB_BULLET,
 
     // Side Gun
-    PEA_SHOOTER,
+    PEA_SHOOTER_BULLET,
 
     // Total
     NUM_CHANGING_BULLETS
@@ -155,7 +155,7 @@ const std::unordered_map<ChangingBullets, std::unordered_map<BulletLevels, std::
     {NUCLIER_MATERIAL_BULLET, resourcePathsNuclierMaterialBullet},
     {PLASMA_BULLET, resourcePathsPlasmaBullets},
     {PLANETARY_BOMB_BULLET, resourcePathsPlanetaryBombBullets},
-    {PEA_SHOOTER, resourcePathsPeaShooterBullets},
+    {PEA_SHOOTER_BULLET, resourcePathsPeaShooterBullets},
 };
 
 const std::unordered_map<ChangingBullets, std::unordered_map<BulletLevels, unsigned int> > resourcePathsDamageMaps = {
@@ -166,5 +166,5 @@ const std::unordered_map<ChangingBullets, std::unordered_map<BulletLevels, unsig
     {NUCLIER_MATERIAL_BULLET, resourcePathsNuclierMaterialBulletDamage},
     {PLASMA_BULLET, resourcePathsPlasmaBulletsDamage},
     {PLANETARY_BOMB_BULLET, resourcePathsPlanetaryBombBulletsDamage},
-    {PEA_SHOOTER, resourcePathsPeaShooterBulletsDamage},
+    {PEA_SHOOTER_BULLET, resourcePathsPeaShooterBulletsDamage},
 };

@@ -75,7 +75,7 @@ private:
 
     // Upgarde system
     int mainGunLevel;
-    int sideGunLevel;
+    int sideGunLevel = 0;
 
 public:
     // Constructor
@@ -117,7 +117,7 @@ public:
     void Move(const float &dt);
     bool updateLevelingSystem();
     void LevelUp();
-    void addWeapon(Texture *weaponTexture, int UpOrDown);
+    void addWeapon(int type, int UpOrDown, int level);
     void CombatUpdate();
     void UpdateAccessories(const float &dt);
     void TakeDamage(int damage);

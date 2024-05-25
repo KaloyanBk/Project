@@ -3,20 +3,20 @@
 #include "../Bullets/Bullet.hpp"
 #include "../Resources/Fonts.hpp"
 #include "../Resources/Textures.hpp"
+#include "../Player.hpp"
 
 class Enemy
 {
 protected:
     float dtMultiplier;
-    Sprite sprite;
-    Texture *texture;
-    Vector2f direction;
-    Vector2u windowBounds;
+    sf::Sprite sprite;
+    sf::Texture *texture;
+    sf::Vector2f direction;
+    sf::Vector2u windowBounds;
 
     float damageTimer;
     float damageTimerMax;
 
-    int type;
     int hp;
     int hpMax;
     int damageMin;
@@ -24,28 +24,37 @@ protected:
 
     float exp;
 
+    int enemySpawnTimer;
+    int enemySpawnTimerMax;
+
+    int playerToFollow = 0;
+
+    float speedx;
+    float speedy;
+
 public:
-    Enemy(Texture *texture, Vector2u windowBounds,
-          Vector2f position, Vector2f direction,
-          Vector2f scale, int type, float exp,
+    Enemy(sf::Texture *texture, sf::Vector2u windowBounds,
+          sf::Vector2f position, sf::Vector2f direction,
+          sf::Vector2f scale, float exp,
           int hpMax, int damageMax, int damageMin);
     virtual ~Enemy();
 
     // Accessors
-    inline const int getdamage() const { return rand() % this->damageMax + this->damageMin; }
+    inline const int getDamage() const { return rand() % this->damageMax + this->damageMin; }
     inline const int getHp() const { return this->hp; }
     inline const int getHpMax() const { return this->hpMax; }
     inline const float getExp() const { return this->exp; }
     inline const bool isDead() const { return this->hp <= 0; }
 
-    inline const FloatRect getBounds() const { return this->sprite.getGlobalBounds(); }
-    inline const Vector2f &getPosition() const { return this->sprite.getPosition(); }
+    inline const sf::FloatRect getBounds() const { return this->sprite.getGlobalBounds(); }
+    inline const sf::Vector2f &getPosition() const { return this->sprite.getPosition(); }
+    inline const int getPlayerToFollow() const { return this->playerToFollow; }
 
     // Functions
     void TakeDamage(int damage);
-    virtual void Move(const float &dt);
-    virtual void Update(const float &dt);
-    void Render(RenderTarget &target);
+    virtual void Move(float dt, Vector2f playerPosition) = 0;
+    virtual void Update(float dt, Vector2f playerPosition);
+    void Render(sf::RenderTarget &target);
 };
 
 enum enemyTypes

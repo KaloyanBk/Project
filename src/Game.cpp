@@ -15,7 +15,7 @@ Game::Game(RenderWindow *window) : window(window)
     this->createPlayers();
 
     // Initialize enemy spawn timer
-    this->enemySpawnTimerMax = 20;
+    this->enemySpawnTimerMax = 25.f;
     this->enemySpawnTimer = this->enemySpawnTimerMax;
 
     // Initialize UI
@@ -49,13 +49,14 @@ void Game::loadTextures()
         }
         this->textures.add(texture);
     }
+    
 }
 
 // Create players
 void Game::createPlayers()
 {
     this->players.push_back(createPlayer(this->textures, this->window->getSize(), Keyboard::W, Keyboard::S, Keyboard::A, Keyboard::D, Keyboard::Space));
-    this->players.push_back(createPlayer(this->textures, this->window->getSize(), Keyboard::Up, Keyboard::Down, Keyboard::Left, Keyboard::Right, Keyboard::RShift));
+    // this->players.push_back(createPlayer(this->textures, this->window->getSize(), Keyboard::Up, Keyboard::Down, Keyboard::Left, Keyboard::Right, Keyboard::RShift));
 }
 
 Player *Game::createPlayer(DynamicArray<Texture> &textures, Vector2u windowBounds, int upKey, int downKey, int leftKey, int rightKey, int fireKey)
@@ -156,18 +157,62 @@ void Game::Update(const float &dt)
 {
     if (!gameOver)
     {
-        // Update enemy spawn timer
         if (enemySpawnTimer < enemySpawnTimerMax)
             enemySpawnTimer += 1.f * dt * this->dtMultiplier;
 
         // Spawn new enemy
         if (enemySpawnTimer >= enemySpawnTimerMax)
         {
-            enemys.add(new Enemy(
-                &this->textures[ENEMY], this->window->getSize(),
-                Vector2f(0.f, 0.f), Vector2f(-1.f, 0.f), Vector2f(0.5f, 0.5f),
-                MOVE_LEFT, 5.f, rand() % 3 + 1, 3, 1));
+            auto random50_50 = []() -> int
+            {
+                return rand() % 2;
+            };
+            // Random chance to spawn a MoveLeftEnemy
+            if (rand() % 2 == 0) // 50% chance
+            {
+                // Randomize properties for MoveLeftEnemy
+                float spawnX = static_cast<float>(rand() % static_cast<int>(this->window->getSize().x));
+                float spawnY = static_cast<float>(rand() % static_cast<int>(this->window->getSize().y));
+                float directionX = -1.f;
+                float directionY = 0.f;
+                float scale = 0.4f + static_cast<float>((rand() % 20) / 100.0); // Range from 0.5 to 1.0
+                int hpMax = rand() % 3 + 1;
+                int damageMax = rand() % 5 + 1;
+                int damageMin = rand() % 3 + 1;
+                float exp = static_cast<float>(rand() % 10 + 1);
+
+                enemys.add(new MoveLeftEnemy(
+                    &this->textures[ENEMY_MOVE_LEFT], this->window->getSize(),
+                    Vector2f(spawnX, spawnY), Vector2f(directionX, directionY), Vector2f(scale, scale),
+                    exp, hpMax, damageMax, damageMin));
+            }
+
+            // Random chance to spawn a FollowEnemy
+            if (rand() % 2 == 0) // 50% chance
+            {
+                // Randomize properties for FollowEnemy
+                float spawnX = static_cast<float>(rand() % static_cast<int>(this->window->getSize().x));
+                float spawnY = static_cast<float>(rand() % static_cast<int>(this->window->getSize().y));
+                float directionX = -1.f;
+                float directionY = 0.f;
+                float scale = 0.4f + static_cast<float>((rand() % 20) / 100.0); // Range from 0.5 to 1.0
+                int hpMax = rand() % 3 + 1;
+                int damageMax = rand() % 5 + 1;
+                int damageMin = rand() % 3 + 1;
+                float exp = static_cast<float>(rand() % 10 + 1);
+
+                int playerToFollow = random50_50();
+
+                enemys.add(new FollowEnemy(
+                    &this->textures[ENEMY_FOLLOW], this->window->getSize(),
+                    Vector2f(spawnX, spawnY), Vector2f(directionX, directionY), Vector2f(scale, scale),
+                    exp, hpMax, damageMax, damageMin, playerToFollow));
+            }
+
+            // Reset enemy spawn timer
             enemySpawnTimer = 0;
+
+            // Randomize the enemy spawn timer max value to create variable spawn intervals
         }
 
         // Update players
@@ -181,7 +226,16 @@ void Game::Update(const float &dt)
         // Update enemies
         for (size_t i = 0; i < enemys.size(); i++)
         {
-            enemys[i]->Update(dt);
+            int followPlayerIndex = enemys[i]->getPlayerToFollow();
+            if (followPlayerIndex >= 0 && followPlayerIndex < players.size())
+            {
+                enemys[i]->Update(dt, players[followPlayerIndex]->getPosition());
+            }
+            else
+            {
+                // Default behavior if player to follow is invalid
+                enemys[i]->Update(dt, players[0]->getPosition());
+            }
 
             // Remove enemy if out of window bounds
             if (enemys[i]->getPosition().x <= 0 - enemys[i]->getBounds().width)
@@ -196,7 +250,7 @@ void Game::Update(const float &dt)
             {
                 if (enemys[i]->getBounds().intersects(players[j]->getBounds()))
                 {
-                    int damage = enemys[i]->getdamage();
+                    int damage = enemys[i]->getDamage();
                     players[j]->TakeDamage(damage);
                     this->textTags.add(TextTag(&this->font, '-' + std::to_string(damage),
                                                Vector2f(this->players[j]->getPosition().x + 10.f,
@@ -338,10 +392,10 @@ void Game::handleEnemyDeath(Player *p, size_t enemyIndex)
         {
 
             this->textTags.add(TextTag(&this->font, "+" + std::to_string(static_cast<int>(exp)) + " exp",
-                                       Vector2f(p->getPosition().x + 10.f,
-                                                p->getPosition().y - p->getBounds().height / 2.f + 20.f),
+                                       Vector2f(p->getPosition().x,
+                                                p->getPosition().y + p->getBounds().height / 2.f - 30.f),
                                        Vector2f(0.f, 1.f),
-                                       20.f, 30.f, true,
+                                       25.f, 15.f, true,
                                        Color::Cyan));
         }
     }

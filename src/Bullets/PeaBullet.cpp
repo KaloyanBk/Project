@@ -5,8 +5,8 @@ PeaBullet::PeaBullet(  Vector2f pos, int level, Vector2f direction,
                 float acceleration)
     : Bullet(pos, level, direction, initialVelocity, maxVelocity, acceleration)
 {
-    this->setTexture(PEA_SHOOTER, this->level);
-    this->setDamage(PEA_SHOOTER, this->level);
+    this->setTexture(PEA_SHOOTER_BULLET, this->level);
+    this->setDamage(PEA_SHOOTER_BULLET, this->level);
         this->sprite.setOrigin(this->sprite.getGlobalBounds().width / 2, this->sprite.getGlobalBounds().height / 2);
     this->sprite.setScale(Vector2f(0.2f, 0.2f));
 

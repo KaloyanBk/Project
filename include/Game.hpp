@@ -4,6 +4,8 @@
 #include "./Resources/Fonts.hpp"
 #include "./Resources/Textures.hpp"
 #include "./Enemys/Enemy.hpp"
+#include "./Enemys/MoveLeft.hpp"
+#include "./Enemys/Follow.hpp"
 #include "TextTag.hpp"
 
 class Game

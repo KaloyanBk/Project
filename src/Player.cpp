@@ -30,7 +30,7 @@ Player::Player(DynamicArray<Texture> &textures, Vector2u windowBounds,
     this->fireRateMax = 25.f;
     this->fireRate = this->fireRateMax;
 
-    this->damageTimerMax = 5.f; 
+    this->damageTimerMax = 5.f;
     this->damageTimer = 0.f;
 
     // Weapons
@@ -43,8 +43,8 @@ Player::Player(DynamicArray<Texture> &textures, Vector2u windowBounds,
 
     this->mainGunLevel = 0;
 
-    // this->addWeapon(&textures[SIDE_GUN_UP], WEAPON_UP);
-    // this->addWeapon(&textures[SIDE_GUN_DOWN], WEAPON_DOWN);
+    this->addWeapon(PEA_SHOOTER, WEAPON_UP, LEVEL1);
+    this->addWeapon(PEA_SHOOTER, WEAPON_DOWN, LEVEL1);
 
     // Controls
     this->controls[controls::UP] = UP;
@@ -182,17 +182,16 @@ bool Player::updateLevelingSystem()
     return false;
 }
 
-void Player::addWeapon(Texture *weaponTexture, int UpOrDown)
+void Player::addWeapon(int type, int UpOrDown, int level)
 {
-    if (UpOrDown == WEAPON_UP)
+    switch (type)
     {
-        sideGunUp = new PeaShooter(weaponTexture, this->level, UpOrDown);
+    case PEA_SHOOTER:
+
+        sideGunUp = new PeaShooter(level, UpOrDown);
         weapons.add(sideGunUp);
-    }
-    else
-    {
-        sideGunDown = new PeaShooter(weaponTexture, this->level, UpOrDown);
-        weapons.add(sideGunDown);
+
+        break;
     }
 }
 

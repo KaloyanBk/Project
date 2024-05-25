@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Bullets/Bullet.hpp"
+#include "../Resources/Textures.hpp"
 
 class Weapon
 {
@@ -17,11 +18,12 @@ protected:
     int damage;
     int damageMax;
     int UpOrDown;
+    int level;
 
 public:
     // Constructor
     Weapon();
-    Weapon(Texture* weaponTexture, int level, int UpOrDown,int fireRateMax = 25, int damageMax = 1);
+    Weapon(int type, int level, int UpOrDown,int fireRateMax = 25, int damageMax = 1);
     virtual ~Weapon();
 
     // Accessors
