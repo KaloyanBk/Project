@@ -1,5 +1,49 @@
+#include <nlohmann/json.hpp>
+#include <fstream>
 #include "../include/Game.hpp"
 #include <iostream>
+
+using json = nlohmann::json;
+
+void loadSavedData(
+    int &numberOfPlayers,
+    int &player1Level, int &player1Hp, int &player1HpMax, float &player1Exp, float &player1ExpNext, int &player1Score,
+    int &player2Level, int &player2Hp, int &player2HpMax, float &player2Exp, float &player2ExpNext, int &player2Score,
+    bool &upperWeapon, int &upperWeaponLevel,
+    bool &lowerWeapon, int &lowerWeaponLevel)
+{
+    std::ifstream file("data/savedData.json");
+    if (!file.is_open())
+    {
+        std::cerr << "Could not open the file!" << std::endl;
+        return;
+    }
+
+    json savedData;
+    file >> savedData;
+
+    numberOfPlayers = savedData["numberOfPlayers"];
+    
+    player1Level = savedData["player1"]["level"];
+    player1Hp = savedData["player1"]["hp"];
+    player1HpMax = savedData["player1"]["hpMax"];
+    player1Exp = savedData["player1"]["exp"];
+    player1ExpNext = savedData["player1"]["expNext"];
+    player1Score = savedData["player1"]["score"];
+
+    player2Level = savedData["player2"]["level"];
+    player2Hp = savedData["player2"]["hp"];
+    player2HpMax = savedData["player2"]["hpMax"];
+    player2Exp = savedData["player2"]["exp"];
+    player2ExpNext = savedData["player2"]["expNext"];
+    player2Score = savedData["player2"]["score"];
+
+    upperWeapon = savedData["upperWeapon"]["enabled"];
+    upperWeaponLevel = savedData["upperWeapon"]["level"];
+
+    lowerWeapon = savedData["lowerWeapon"]["enabled"];
+    lowerWeaponLevel = savedData["lowerWeapon"]["level"];
+}
 
 int main()
 {
@@ -20,32 +64,41 @@ int main()
     Clock clock;
     float dt = 0.f;
 
-    int numberOfPlayers = 2;
+    int numberOfPlayers;
 
-    int player1Level = 1;
-    int player1Hp = 8;
-    int player1HpMax = 10;
-    float player1Exp = 10.f;
-    float player1ExpNext = 16.f;
-    int player1Score = 0;
+    int player1Level;
+    int player1Hp;
+    int player1HpMax;
+    float player1Exp;
+    float player1ExpNext;
+    int player1Score;
 
-    int player2Level = 2;
-    int player2Hp = 4;
-    int player2HpMax = 16;
-    float player2Exp = 10.f;
-    float player2ExpNext = 16.f;
-    int player2Score = 0;
+    int player2Level;
+    int player2Hp;
+    int player2HpMax;
+    float player2Exp;
+    float player2ExpNext;
+    int player2Score;
 
-    bool uperWeapon = true;
-    int upperWeaponLevel = 2;
+    bool upperWeapon;
+    int upperWeaponLevel;
 
-    bool lowerWeapon = true;
-    int lowerWeaponLevel = 1;
+    bool lowerWeapon;
+    int lowerWeaponLevel;
+
+    // Load saved data
+    loadSavedData(
+        numberOfPlayers,
+        player1Level, player1Hp, player1HpMax, player1Exp, player1ExpNext, player1Score,
+        player2Level, player2Hp, player2HpMax, player2Exp, player2ExpNext, player2Score,
+        upperWeapon, upperWeaponLevel,
+        lowerWeapon, lowerWeaponLevel
+    );
 
     Game game(&window, numberOfPlayers,
               player1Level, player1Hp, player1HpMax, player1Exp, player1ExpNext, player1Score,
               player2Level, player2Hp, player2HpMax, player2Exp, player2ExpNext, player2Score,
-              uperWeapon, upperWeaponLevel,
+              upperWeapon, upperWeaponLevel,
               lowerWeapon, lowerWeaponLevel);
 
     while (window.isOpen())
