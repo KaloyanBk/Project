@@ -74,19 +74,27 @@ private:
     int currentWeapon;
 
     // Upgarde system
-    int mainGunLevel;
     int sideGunLevel = 0;
+
+    bool uperWeapon;
+    bool lowerWeapon;
+    int upperWeaponLevel;
+    int lowerWeaponLevel;
 
 public:
     // Constructor
     Player(DynamicArray<Texture> &textures, Vector2u windowBounds,
-           int UP = 22, int DOWN = 18, int LEFT = 0, int RIGHT = 3, int FIRE = 57);
+           int UP = 22, int DOWN = 18, int LEFT = 0, int RIGHT = 3, int FIRE = 57,
+           int playerLevel = 0, float playerExp = 0, float playerExpNext = 16, int playerHp = 10, int playerHpMax = 10, int playerScore = 0,
+           int upperWeaponLevel = 0, int lowerWeaponLevel = 0,
+           bool uperWeapon = false, bool lowerWeapon = false);
+
     ~Player();
 
     // Accessors
     Bullet &getBullet(unsigned index);
     void removeBullet(unsigned index);
-    inline const int getBulletSize(){return this->bullets.size();}
+    inline const int getBulletSize() { return this->bullets.size(); }
     inline const Vector2f &getPosition() const { return this->sprite.getPosition(); }
     inline DynamicArray<Weapon *> &getWeapons() { return this->weapons; };
     inline const String getHpS() const { return std::to_string(this->hp) + "/" + std::to_string(this->hpMax); }

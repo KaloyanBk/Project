@@ -3,14 +3,19 @@
 unsigned Player::players = 0;
 
 Player::Player(DynamicArray<Texture> &textures, Vector2u windowBounds,
-               int UP, int DOWN, int LEFT, int RIGHT, int FIRE)
-    : windowBounds(windowBounds), level(0), maxLevel(4), exp(0),
-      hp(10), hpMax(10),
+           int UP, int DOWN, int LEFT, int RIGHT, int FIRE,
+           int playerLevel, float playerExp, float playerExpNext, int playerHp, int playerHpMax, int playerScore,
+           int upperWeaponLevel, int lowerWeaponLevel,
+           bool uperWeapon, bool lowerWeapon)
+    : windowBounds(windowBounds), level(playerLevel), maxLevel(4), exp(playerExp),
+      hp(playerHp), hpMax(playerHpMax),
+      upperWeaponLevel(upperWeaponLevel), lowerWeaponLevel(lowerWeaponLevel),
+      uperWeapon(uperWeapon), lowerWeapon(lowerWeapon),
       damage(1), damageMax(2),
       statPoints(0), upgrade(0),
       endurance(0), armor(0), strength(0), agility(0),
       maxVelocity(25.f), acceleration(0.8f), drag(0.4f),
-      score(0)
+      score(playerScore)
 {
     // Delta time multiplier
     this->dtMultiplier = 60.f;
@@ -22,6 +27,7 @@ Player::Player(DynamicArray<Texture> &textures, Vector2u windowBounds,
                                       17 * (this->level + 1) - 11));
 
     // Set up the sprite
+
     this->sprite.setTexture(textures[PLAYER]);
     this->sprite.setOrigin(this->sprite.getGlobalBounds().width / 2, this->sprite.getGlobalBounds().height / 2);
     this->sprite.setScale(0.1f, 0.1f);
@@ -34,18 +40,21 @@ Player::Player(DynamicArray<Texture> &textures, Vector2u windowBounds,
     this->damageTimer = 0.f;
 
     // Weapons
-    this->currentWeapon = LASER;
+    // this->currentWeapon = LASER;
     // this->currentWeapon = LIGHTNING;
     // this->currentWeapon = DARK_MATTER;
     // this->currentWeapon = NUCLIER_MATERIAL;
     // this->currentWeapon = PLASMA;
-    // this->currentWeapon = PLANETARY_BOMB;
-
-    this->mainGunLevel = 0;
-
-    this->addWeapon(PEA_SHOOTER, WEAPON_UP, LEVEL1);
-    this->addWeapon(PEA_SHOOTER, WEAPON_DOWN, LEVEL1);
-
+    this->currentWeapon = PLANETARY_BOMB;
+    if (uperWeapon)
+    {
+    this->addWeapon(PEA_SHOOTER, WEAPON_UP, this->upperWeaponLevel);
+    }
+    if (lowerWeapon)
+    {
+    this->addWeapon(PEA_SHOOTER, WEAPON_DOWN, this->lowerWeaponLevel);
+    }
+    
     // Controls
     this->controls[controls::UP] = UP;
     this->controls[controls::DOWN] = DOWN;

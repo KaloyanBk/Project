@@ -13,6 +13,7 @@ Weapon::Weapon(int type, int level, int UpOrDown, int fireRateMax, int damageMax
 {
     this->dtMultiplier = 60.f;
     weaponTexture = new sf::Texture();
+            std::cerr << type<<":"<<level << std::endl;
 
     switch (UpOrDown)
     {

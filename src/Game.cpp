@@ -3,7 +3,17 @@
 #include <iostream>
 
 // Constructor
-Game::Game(RenderWindow *window) : window(window)
+Game::Game(RenderWindow *window,
+           int numberOfPlayers,
+           int player1Level, int player1Hp, int player1HpMax, float player1Exp, float player1ExpNext, int player1Score,
+           int player2Level, int player2Hp, int player2HpMax, float player2Exp, float player2ExpNext, int player2Score,
+           bool upperWeapon, int upperWeaponLevel,
+           bool lowerWeapon, int lowerWeaponLevel)
+    : window(window), numberOfPlayers(numberOfPlayers),
+      player1Level(player1Level), player2Level(player2Level), upperWeaponLevel(upperWeaponLevel), lowerWeaponLevel(lowerWeaponLevel),
+      upperWeapon(upperWeapon), lowerWeapon(lowerWeapon), player1Exp(player1Exp), player2Exp(player2Exp),
+      player1ExpNext(player1ExpNext), player1Hp(player1Hp), player1HpMax(player1HpMax), player1Score(player1Score),
+      player2ExpNext(player2ExpNext), player2Hp(player2Hp), player2HpMax(player2HpMax), player2Score(player2Score)
 {
     // Window settings
     this->dtMultiplier = 60.f;
@@ -13,6 +23,7 @@ Game::Game(RenderWindow *window) : window(window)
 
     // Create players
     this->createPlayers();
+
 
     // Initialize enemy spawn timer
     this->enemySpawnTimerMax = 25.f;
@@ -43,25 +54,48 @@ void Game::loadTextures()
     for (size_t i = 0; i < NUM_RESOURCES; ++i)
     {
         Texture texture;
+
         if (!texture.loadFromFile(resourcePaths.at(static_cast<Textures>(i))))
         {
             std::cerr << "Failed to load texture: " << resourcePaths.at(static_cast<Textures>(i)) << std::endl;
         }
         this->textures.add(texture);
     }
-    
 }
 
 // Create players
 void Game::createPlayers()
 {
-    this->players.push_back(createPlayer(this->textures, this->window->getSize(), Keyboard::W, Keyboard::S, Keyboard::A, Keyboard::D, Keyboard::Space));
-    // this->players.push_back(createPlayer(this->textures, this->window->getSize(), Keyboard::Up, Keyboard::Down, Keyboard::Left, Keyboard::Right, Keyboard::RShift));
+    switch (numberOfPlayers)
+    {
+    case 1:
+
+        this->players.push_back(createPlayer(this->textures, this->window->getSize(),
+                                             this->player1Level, this->player1Exp, this->player1ExpNext, this->player1Hp,
+                                             this->player1HpMax, this->player1Score,
+                                             Keyboard::W, Keyboard::S, Keyboard::A, Keyboard::D, Keyboard::Space));
+        break;
+    case 2:
+        this->players.push_back(createPlayer(this->textures, this->window->getSize(),
+                                             this->player1Level, this->player1Exp, this->player1ExpNext, this->player1Hp,
+                                             this->player1HpMax, this->player1Score,
+                                             Keyboard::W, Keyboard::S, Keyboard::A, Keyboard::D, Keyboard::Space));
+        this->players.push_back(createPlayer(this->textures, this->window->getSize(),
+                                             this->player2Level, this->player2Exp, this->player2ExpNext, this->player2Hp,
+                                             this->player2HpMax, this->player2Score, Keyboard::Up, Keyboard::Down, Keyboard::Left, Keyboard::Right, Keyboard::RShift));
+        break;
+    default:
+        break;
+    }
 }
 
-Player *Game::createPlayer(DynamicArray<Texture> &textures, Vector2u windowBounds, int upKey, int downKey, int leftKey, int rightKey, int fireKey)
+Player *Game::createPlayer(DynamicArray<Texture> &textures, Vector2u windowBounds,
+                           int level, float playerExp, float playerExpNext, int playerHp, int playerHpMax, int playerScore,
+                           int upKey, int downKey, int leftKey, int rightKey, int fireKey)
 {
-    return new Player(textures, windowBounds, upKey, downKey, leftKey, rightKey, fireKey);
+    return new Player(textures, windowBounds, upKey, downKey, leftKey, rightKey, fireKey,
+                      level, playerExp, playerExpNext, playerHp, playerHpMax, playerScore, this->upperWeaponLevel, this->lowerWeaponLevel, this->upperWeapon,
+                      this->lowerWeapon);
 }
 
 // Initialize UI elements
