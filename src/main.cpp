@@ -1,9 +1,51 @@
 #include <nlohmann/json.hpp>
 #include <fstream>
 #include "../include/Game.hpp"
+#include "../include/Menu.hpp"
 #include <iostream>
 
 using json = nlohmann::json;
+
+void saveData(
+    int numberOfPlayers,
+    int player1Level, int player1Hp, int player1HpMax, float player1Exp, float player1ExpNext, int player1Score,
+    int player2Level, int player2Hp, int player2HpMax, float player2Exp, float player2ExpNext, int player2Score,
+    bool upperWeapon, int upperWeaponLevel,
+    bool lowerWeapon, int lowerWeaponLevel)
+{
+    json savedData;
+
+    savedData["numberOfPlayers"] = numberOfPlayers;
+
+    savedData["player1"]["level"] = player1Level;
+    savedData["player1"]["hp"] = player1Hp;
+    savedData["player1"]["hpMax"] = player1HpMax;
+    savedData["player1"]["exp"] = player1Exp;
+    savedData["player1"]["expNext"] = player1ExpNext;
+    savedData["player1"]["score"] = player1Score;
+
+    savedData["player2"]["level"] = player2Level;
+    savedData["player2"]["hp"] = player2Hp;
+    savedData["player2"]["hpMax"] = player2HpMax;
+    savedData["player2"]["exp"] = player2Exp;
+    savedData["player2"]["expNext"] = player2ExpNext;
+    savedData["player2"]["score"] = player2Score;
+
+    savedData["upperWeapon"]["enabled"] = upperWeapon;
+    savedData["upperWeapon"]["level"] = upperWeaponLevel;
+
+    savedData["lowerWeapon"]["enabled"] = lowerWeapon;
+    savedData["lowerWeapon"]["level"] = lowerWeaponLevel;
+
+    std::ofstream file("data/savedData.json");
+    if (!file.is_open())
+    {
+        std::cerr << "Could not open the file!" << std::endl;
+        return;
+    }
+
+    file << savedData.dump(4);
+}
 
 void loadSavedData(
     int &numberOfPlayers,
@@ -23,7 +65,7 @@ void loadSavedData(
     file >> savedData;
 
     numberOfPlayers = savedData["numberOfPlayers"];
-    
+
     player1Level = savedData["player1"]["level"];
     player1Hp = savedData["player1"]["hp"];
     player1HpMax = savedData["player1"]["hpMax"];
@@ -61,8 +103,8 @@ int main()
         return EXIT_FAILURE;
     }
 
-    Clock clock;
-    float dt = 0.f;
+    sf::Clock clock;
+    bool wasInGame = false; // Track if the game was active in the previous frame
 
     int numberOfPlayers;
 
@@ -92,8 +134,7 @@ int main()
         player1Level, player1Hp, player1HpMax, player1Exp, player1ExpNext, player1Score,
         player2Level, player2Hp, player2HpMax, player2Exp, player2ExpNext, player2Score,
         upperWeapon, upperWeaponLevel,
-        lowerWeapon, lowerWeaponLevel
-    );
+        lowerWeapon, lowerWeaponLevel);
 
     Game game(&window, numberOfPlayers,
               player1Level, player1Hp, player1HpMax, player1Exp, player1ExpNext, player1Score,
@@ -101,29 +142,56 @@ int main()
               upperWeapon, upperWeaponLevel,
               lowerWeapon, lowerWeaponLevel);
 
+    Menu menu(&window, &game);
+
     while (window.isOpen())
     {
         sf::Event event;
         while (window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) && !game.isGameOver())
             {
-                window.close();
-            }
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
-            {
+                // Extract current game state before saving
+                game.getGameState(numberOfPlayers,
+                                  player1Level, player1Hp, player1HpMax, player1Exp, player1ExpNext, player1Score,
+                                  player2Level, player2Hp, player2HpMax, player2Exp, player2ExpNext, player2Score,
+                                  upperWeapon, upperWeaponLevel,
+                                  lowerWeapon, lowerWeaponLevel);
+
+                saveData(
+                    numberOfPlayers,
+                    player1Level, player1Hp, player1HpMax, player1Exp, player1ExpNext, player1Score,
+                    player2Level, player2Hp, player2HpMax, player2Exp, player2ExpNext, player2Score,
+                    upperWeapon, upperWeaponLevel,
+                    lowerWeapon, lowerWeaponLevel);
+
                 window.close();
             }
         }
 
         // Update dt
-        dt = clock.restart().asSeconds();
+        float dt = clock.restart().asSeconds();
 
         // Update
-        game.Update(dt);
+        if (!game.isInGame())
+        {
+            menu.update(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)), event);
+        }
+        else
+        {
+            game.update(dt);
+        }
 
-        // Render
-        game.Render();
+
+        if (!game.isInGame())
+        {
+            menu.render(window);
+        }
+        else
+        {
+            game.render();
+        }
+
     }
 
     return EXIT_SUCCESS;

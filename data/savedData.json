@@ -1,27 +1,27 @@
 {
-    "numberOfPlayers": 2,
+    "lowerWeapon": {
+        "enabled": true,
+        "level": 1
+    },
+    "numberOfPlayers": 1,
     "player1": {
-        "level": 1,
-        "hp": 8,
-        "hpMax": 10,
-        "exp": 10.0,
+        "exp": 0.0,
         "expNext": 16.0,
+        "hp": 10,
+        "hpMax": 10,
+        "level": 0,
         "score": 0
     },
     "player2": {
-        "level": 2,
-        "hp": 4,
-        "hpMax": 16,
-        "exp": 10.0,
-        "expNext": 16.0,
+        "exp": 0.0,
+        "expNext": 0.0,
+        "hp": 10,
+        "hpMax": 0,
+        "level": 0,
         "score": 0
     },
     "upperWeapon": {
         "enabled": true,
-        "level": 2
-    },
-    "lowerWeapon": {
-        "enabled": true,
-        "level": 1
+        "level": 0
     }
 }

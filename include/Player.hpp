@@ -73,6 +73,9 @@ private:
 
     int currentWeapon;
 
+    bool addedUpperWeapon = false;
+    bool addedLowerWeapon = false;
+
     // Upgarde system
     int sideGunLevel = 0;
 
@@ -106,6 +109,10 @@ public:
     inline const bool getIsAtMaxLevel() const { return this->isAtMaxLevel; }
     inline const int getExp() const { return this->exp; }
     inline const int getExpNext() const { return this->expNext; }
+    inline const int getStatPoints() const { return this->statPoints; }
+    inline const int getHp() const { return this->hp; }
+    inline const int getHpMax() const { return this->hpMax; }
+    inline const int getScore() const { return this->score; }
     inline bool gainExp(float exp)
     {
         if (!this->isAtMaxLevel)
@@ -120,6 +127,14 @@ public:
     template <typename T>
     void setBulletType(Vector2f pos, int upgrade, int level, Vector2f directionUp = Vector2f(1.f, -0.1f), Vector2f directionDown = Vector2f(1.f, 0.1f),
                        float initialVelocity = 2.f, float maxVelocity = 50.f, float acceleration = 1.f);
+
+    // Modifiers
+    void setToDefault();
+    void setCurrentWeapon(int weapon) { this->currentWeapon = weapon; }
+    void setUpperWeaponLevel(int level) { this->upperWeaponLevel = level; }
+    void setLowerWeaponLevel(int level) { this->lowerWeaponLevel = level; }
+    void setUperWeapon(bool uperWeapon) { this->uperWeapon = uperWeapon; }
+    void setLowerWeapon(bool lowerWeapon) { this->lowerWeapon = lowerWeapon; }
 
     // Functionsc
     void Move(const float &dt);

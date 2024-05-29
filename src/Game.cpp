@@ -1,7 +1,22 @@
 #include "../include/Game.hpp"
-#include "../include/Weapons/PeaShooter.hpp"
-#include <iostream>
 
+void saveDefaultData()
+{
+    json defaultData = {
+        {"numberOfPlayers", 1},
+        {"player1", {{"level", 0}, {"hp", 10}, {"hpMax", 0}, {"exp", 0.0}, {"expNext", 0.0}, {"score", 0}}},
+        {"player2", {{"level", 0}, {"hp", 10}, {"hpMax", 0}, {"exp", 0.0}, {"expNext", 0.0}, {"score", 0}}},
+        {"upperWeapon", {{"enabled", false}, {"level", 0}}},
+        {"lowerWeapon", {{"enabled", false}, {"level", 0}}}};
+
+    std::ofstream file("data/savedData.json");
+    if (!file.is_open())
+    {
+        std::cerr << "Could not open the file to save default data!" << std::endl;
+        return;
+    }
+    file << defaultData.dump(4);
+}
 // Constructor
 Game::Game(RenderWindow *window,
            int numberOfPlayers,
@@ -24,13 +39,14 @@ Game::Game(RenderWindow *window,
     // Create players
     this->createPlayers();
 
+    // Create buttons
 
     // Initialize enemy spawn timer
     this->enemySpawnTimerMax = 25.f;
     this->enemySpawnTimer = this->enemySpawnTimerMax;
 
     // Initialize UI
-    this->InItUi();
+    this->initUI();
 }
 
 // Destructor
@@ -41,11 +57,12 @@ Game::~Game()
         delete p;
     }
 
-    for (size_t i = 0; i < enemys.size(); ++i)
+    for (size_t i = 0; i < enemies.size(); ++i)
     {
-        delete enemys[i];
+        delete enemies[i];
     }
-    enemys.clear();
+    enemies.clear();
+    players.clear();
 }
 
 // Load textures
@@ -69,7 +86,6 @@ void Game::createPlayers()
     switch (numberOfPlayers)
     {
     case 1:
-
         this->players.push_back(createPlayer(this->textures, this->window->getSize(),
                                              this->player1Level, this->player1Exp, this->player1ExpNext, this->player1Hp,
                                              this->player1HpMax, this->player1Score,
@@ -98,8 +114,41 @@ Player *Game::createPlayer(DynamicArray<Texture> &textures, Vector2u windowBound
                       this->lowerWeapon);
 }
 
+// Get game state
+void Game::getGameState(int &numberOfPlayers,
+                        int &player1Level, int &player1Hp, int &player1HpMax, float &player1Exp, float &player1ExpNext, int &player1Score,
+                        int &player2Level, int &player2Hp, int &player2HpMax, float &player2Exp, float &player2ExpNext, int &player2Score,
+                        bool &upperWeapon, int &upperWeaponLevel,
+                        bool &lowerWeapon, int &lowerWeaponLevel)
+{
+    numberOfPlayers = this->numberOfPlayers;
+
+    player1Level = this->players[0]->getLevel();
+    player1Hp = this->players[0]->getHp();
+    player1HpMax = this->players[0]->getHpMax();
+    player1Exp = this->players[0]->getExp();
+    player1ExpNext = this->players[0]->getExpNext();
+    player1Score = this->players[0]->getScore();
+
+    if (this->numberOfPlayers == 2)
+    {
+        player2Level = this->players[1]->getLevel();
+        player2Hp = this->players[1]->getHp();
+        player2HpMax = this->players[1]->getHpMax();
+        player2Exp = this->players[1]->getExp();
+        player2ExpNext = this->players[1]->getExpNext();
+        player2Score = this->players[1]->getScore();
+    }
+
+    upperWeapon = this->upperWeapon;
+    upperWeaponLevel = this->upperWeaponLevel;
+
+    lowerWeapon = this->lowerWeapon;
+    lowerWeaponLevel = this->lowerWeaponLevel;
+}
+
 // Initialize UI elements
-void Game::InItUi()
+void Game::initUI()
 {
     if (!this->font.loadFromFile(resourcePathsFonts.at(DOSIS_LIGHT)))
     {
@@ -131,6 +180,15 @@ void Game::InItUi()
     this->playerLevelText.setCharacterSize(22);
     this->playerLevelText.setFillColor(Color::White);
 
+    // Buttons
+    this->restartButton = new Button(this->window->getSize().x - 400, 50, 150, 50, this->font, "Restart",
+                                     Color(70, 70, 70, 200), Color(150, 150, 150, 200), Color(20, 20, 20, 200));
+
+    this->exitButton = new Button(this->window->getSize().x - 200, 50, 150, 50, this->font, "Exit",
+                                  Color(70, 70, 70, 200), Color(150, 150, 150, 200), Color(20, 20, 20, 200));
+
+    this->pauseButton = new Button(this->window->getSize().x - 600, 50, 150, 50, this->font, "Pause",
+                                   Color(70, 70, 70, 200), Color(150, 150, 150, 200), Color(20, 20, 20, 200));
     // Game Over Text
     if (!this->gameOverFont.loadFromFile(resourcePathsFonts.at(GAME_OVER)))
     {
@@ -145,8 +203,45 @@ void Game::InItUi()
         this->window->getSize().y / 2.f - this->gameOverText.getGlobalBounds().height / 2.f);
 }
 
+// Restart game
+void Game::restart()
+{
+    for (auto &p : players)
+    {
+        delete p;
+    }
+    players.clear();
+
+    for (size_t i = 0; i < enemies.size(); ++i)
+    {
+        delete enemies[i];
+    }
+    enemies.clear();
+
+    this->gameOver = false;
+    this->gameOverText.setPosition(
+        0.f - this->gameOverText.getGlobalBounds().width,
+        this->window->getSize().y / 2.f - this->gameOverText.getGlobalBounds().height / 2.f);
+
+    Player::players = 0;
+    this->createPlayers();
+    for (auto &p : players)
+    {
+        p->setToDefault();
+    }
+    saveDefaultData();
+    this->setIsGameStarted(false);
+    this->reseted(true);
+}
+
+void Game::exit()
+{
+    this->window->close();
+    saveDefaultData();
+}
+
 // Update UI elements for a specific player
-void Game::UpdateUI(int index)
+void Game::updateUI(int index)
 {
     if (index >= players.size())
     {
@@ -187,149 +282,179 @@ void Game::UpdateUI(int index)
 }
 
 // Update game logic
-void Game::Update(const float &dt)
+void Game::update(const float &dt)
 {
-    if (!gameOver)
+    if (!this->gamePaused)
     {
-        if (enemySpawnTimer < enemySpawnTimerMax)
-            enemySpawnTimer += 1.f * dt * this->dtMultiplier;
-
-        // Spawn new enemy
-        if (enemySpawnTimer >= enemySpawnTimerMax)
-        {
-            auto random50_50 = []() -> int
-            {
-                return rand() % 2;
-            };
-            // Random chance to spawn a MoveLeftEnemy
-            if (rand() % 2 == 0) // 50% chance
-            {
-                // Randomize properties for MoveLeftEnemy
-                float spawnX = static_cast<float>(rand() % static_cast<int>(this->window->getSize().x));
-                float spawnY = static_cast<float>(rand() % static_cast<int>(this->window->getSize().y));
-                float directionX = -1.f;
-                float directionY = 0.f;
-                float scale = 0.4f + static_cast<float>((rand() % 20) / 100.0); // Range from 0.5 to 1.0
-                int hpMax = rand() % 3 + 1;
-                int damageMax = rand() % 5 + 1;
-                int damageMin = rand() % 3 + 1;
-                float exp = static_cast<float>(rand() % 10 + 1);
-
-                enemys.add(new MoveLeftEnemy(
-                    &this->textures[ENEMY_MOVE_LEFT], this->window->getSize(),
-                    Vector2f(spawnX, spawnY), Vector2f(directionX, directionY), Vector2f(scale, scale),
-                    exp, hpMax, damageMax, damageMin));
-            }
-
-            // Random chance to spawn a FollowEnemy
-            if (rand() % 2 == 0) // 50% chance
-            {
-                // Randomize properties for FollowEnemy
-                float spawnX = static_cast<float>(rand() % static_cast<int>(this->window->getSize().x));
-                float spawnY = static_cast<float>(rand() % static_cast<int>(this->window->getSize().y));
-                float directionX = -1.f;
-                float directionY = 0.f;
-                float scale = 0.4f + static_cast<float>((rand() % 20) / 100.0); // Range from 0.5 to 1.0
-                int hpMax = rand() % 3 + 1;
-                int damageMax = rand() % 5 + 1;
-                int damageMin = rand() % 3 + 1;
-                float exp = static_cast<float>(rand() % 10 + 1);
-
-                int playerToFollow = random50_50();
-
-                enemys.add(new FollowEnemy(
-                    &this->textures[ENEMY_FOLLOW], this->window->getSize(),
-                    Vector2f(spawnX, spawnY), Vector2f(directionX, directionY), Vector2f(scale, scale),
-                    exp, hpMax, damageMax, damageMin, playerToFollow));
-            }
-
-            // Reset enemy spawn timer
-            enemySpawnTimer = 0;
-
-            // Randomize the enemy spawn timer max value to create variable spawn intervals
-        }
 
         // Update players
-        for (auto &p : players)
+        if (!gameOver)
         {
-            p->Update(this->window->getSize(), dt);
-            this->updateBullets(p, dt);
-            this->updateSideGunBullets(p, dt);
-        }
+            if (enemySpawnTimer < enemySpawnTimerMax)
+                enemySpawnTimer += 1.f * dt * this->dtMultiplier;
 
-        // Update enemies
-        for (size_t i = 0; i < enemys.size(); i++)
-        {
-            int followPlayerIndex = enemys[i]->getPlayerToFollow();
-            if (followPlayerIndex >= 0 && followPlayerIndex < players.size())
+            // Spawn new enemy
+            if (enemySpawnTimer >= enemySpawnTimerMax)
             {
-                enemys[i]->Update(dt, players[followPlayerIndex]->getPosition());
-            }
-            else
-            {
-                // Default behavior if player to follow is invalid
-                enemys[i]->Update(dt, players[0]->getPosition());
-            }
-
-            // Remove enemy if out of window bounds
-            if (enemys[i]->getPosition().x <= 0 - enemys[i]->getBounds().width)
-            {
-                delete enemys[i];
-                enemys.remove(i);
-                return;
-            }
-
-            // Check enemy collision with players
-            for (size_t j = 0; j < players.size(); j++)
-            {
-                if (enemys[i]->getBounds().intersects(players[j]->getBounds()))
+                auto random50_50 = []() -> int
                 {
-                    int damage = enemys[i]->getDamage();
-                    players[j]->TakeDamage(damage);
-                    this->textTags.add(TextTag(&this->font, '-' + std::to_string(damage),
-                                               Vector2f(this->players[j]->getPosition().x + 10.f,
-                                                        this->players[j]->getPosition().y - this->players[j]->getBounds().height / 2.f - 20.f),
-                                               Vector2f(-1.f, 0.f),
-                                               24, 20.f, true,
-                                               Color::Red));
-                    delete enemys[i];
-                    enemys.remove(i);
-                    if (players[j]->isDead())
+                    return rand() % 2;
+                };
+                // Random chance to spawn a MoveLeftEnemy
+                if (rand() % 2 == 0) // 50% chance
+                {
+                    // Randomize properties for MoveLeftEnemy
+                    float spawnX = static_cast<float>(rand() % static_cast<int>(this->window->getSize().x));
+                    float spawnY = static_cast<float>(rand() % static_cast<int>(this->window->getSize().y));
+                    float directionX = -1.f;
+                    float directionY = 0.f;
+                    float scale = 0.4f + static_cast<float>((rand() % 20) / 100.0); // Range from 0.5 to 1.0
+                    int hpMax = rand() % 3 + 1;
+                    int damageMax = rand() % 5 + 1;
+                    int damageMin = rand() % 3 + 1;
+                    float exp = static_cast<float>(rand() % 10 + 1);
+
+                    enemies.add(new MoveLeftEnemy(
+                        &this->textures[ENEMY_MOVE_LEFT], this->window->getSize(),
+                        Vector2f(spawnX, spawnY), Vector2f(directionX, directionY), Vector2f(scale, scale),
+                        exp, hpMax, damageMax, damageMin));
+                }
+
+                // Random chance to spawn a FollowEnemy
+                if (rand() % 2 == 0) // 50% chance
+                {
+                    // Randomize properties for FollowEnemy
+                    float spawnX = static_cast<float>(rand() % static_cast<int>(this->window->getSize().x));
+                    float spawnY = static_cast<float>(rand() % static_cast<int>(this->window->getSize().y));
+                    float directionX = -1.f;
+                    float directionY = 0.f;
+                    float scale = 0.4f + static_cast<float>((rand() % 20) / 100.0); // Range from 0.5 to 1.0
+                    int hpMax = rand() % 3 + 1;
+                    int damageMax = rand() % 5 + 1;
+                    int damageMin = rand() % 3 + 1;
+                    float exp = static_cast<float>(rand() % 10 + 1);
+
+                    int playerToFollow = random50_50();
+
+                    enemies.add(new FollowEnemy(
+                        &this->textures[ENEMY_FOLLOW], this->window->getSize(),
+                        Vector2f(spawnX, spawnY), Vector2f(directionX, directionY), Vector2f(scale, scale),
+                        exp, hpMax, damageMax, damageMin, playerToFollow));
+                }
+
+                // Reset enemy spawn timer
+                enemySpawnTimer = 0;
+
+                // Randomize the enemy spawn timer max value to create variable spawn intervals
+            }
+
+            // Update players
+            for (auto &p : players)
+            {
+                p->Update(this->window->getSize(), dt);
+                this->updateBullets(p, dt);
+                this->updateSideGunBullets(p, dt);
+            }
+
+            // Update enemies
+            for (size_t i = 0; i < enemies.size(); i++)
+            {
+                int followPlayerIndex = enemies[i]->getPlayerToFollow();
+                if (followPlayerIndex >= 0 && followPlayerIndex < players.size())
+                {
+                    enemies[i]->Update(dt, players[followPlayerIndex]->getPosition());
+                }
+                else
+                {
+                    // Default behavior if player to follow is invalid
+                    enemies[i]->Update(dt, players[0]->getPosition());
+                }
+
+                // Remove enemy if out of window bounds
+                if (enemies[i]->getPosition().x <= 0 - enemies[i]->getBounds().width)
+                {
+                    delete enemies[i];
+                    enemies.remove(i);
+                    return;
+                }
+
+                // Check enemy collision with players
+                for (size_t j = 0; j < players.size(); j++)
+                {
+                    if (enemies[i]->getBounds().intersects(players[j]->getBounds()))
                     {
-                        players.erase(players.begin() + j);
-                        if (players.empty())
+                        int damage = enemies[i]->getDamage();
+                        players[j]->TakeDamage(damage);
+                        this->textTags.add(TextTag(&this->font, '-' + std::to_string(damage),
+                                                   Vector2f(this->players[j]->getPosition().x + 10.f,
+                                                            this->players[j]->getPosition().y - this->players[j]->getBounds().height / 2.f - 20.f),
+                                                   Vector2f(-1.f, 0.f),
+                                                   24, 20.f, true,
+                                                   Color::Red));
+                        delete enemies[i];
+                        enemies.remove(i);
+                        if (players[j]->isDead())
                         {
-                            this->gameOver = true;
+                            players.erase(players.begin() + j);
+                            if (players.empty())
+                            {
+                                this->gameOver = true;
+                                saveDefaultData();
+                                return;
+                            }
                             return;
                         }
-                        return;
+                        break;
                     }
+                }
+            }
+
+            // Update text tags
+            for (size_t i = 0; i < textTags.size(); i++)
+            {
+                textTags[i].Update(dt);
+                if (textTags[i].getTimer() <= 0.f)
+                {
+                    textTags.remove(i);
                     break;
                 }
             }
         }
-
-        // Update text tags
-        for (size_t i = 0; i < textTags.size(); i++)
+        else
         {
-            textTags[i].Update(dt);
-            if (textTags[i].getTimer() <= 0.f)
+            this->gameOverText.move(10.f * dt * dtMultiplier, 0.f);
+            if (this->gameOverText.getPosition().x > this->window->getSize().x)
             {
-                textTags.remove(i);
-                break;
+                this->gameOverText.setPosition(
+                    0.f - this->gameOverText.getGlobalBounds().width,
+                    this->gameOverText.getPosition().y);
             }
         }
     }
-    else
+    // Buttons
+    this->restartButton->update(static_cast<Vector2f>(Mouse::getPosition(*this->window)));
+    this->exitButton->update(static_cast<Vector2f>(Mouse::getPosition(*this->window)));
+    this->pauseButton->update(static_cast<Vector2f>(Mouse::getPosition(*this->window)));
+
+    this->restartButton->setOnClick([this]()
+                                    { this->restart(); });
+
+    this->exitButton->setOnClick([this]()
+                                 { this->exit(); });
+
+    if (pauseButton == nullptr)
     {
-        this->gameOverText.move(10.f * dt * dtMultiplier, 0.f);
-        if (this->gameOverText.getPosition().x > this->window->getSize().x)
-        {
-            this->gameOverText.setPosition(
-                0.f - this->gameOverText.getGlobalBounds().width,
-                this->gameOverText.getPosition().y);
-        }
+        std::cerr << "Error: pauseButton is not initialized!" << std::endl;
+        return;
     }
+    pauseButton->setOnClick([this]()
+                            {
+        std::cout << "Game Paused"<< timesPressed << std::endl;
+    if (this->timesPressed++ % 2 == 0) {
+        this->pause();
+    } else {
+        this->resume();
+    } });
 }
 
 // Update player bullets
@@ -350,21 +475,21 @@ void Game::updateBullets(Player *p, const float &dt)
             }
 
             // Bullet collision with enemies
-            for (size_t j = 0; j < enemys.size() && flag; j++)
+            for (size_t j = 0; j < enemies.size() && flag; j++)
             {
-                if (p->getBullet(i).getBounds().intersects(enemys[j]->getBounds()))
+                if (p->getBullet(i).getBounds().intersects(enemies[j]->getBounds()))
                 {
                     int damage = p->getBullet(i).getDamage();
-                    enemys[j]->TakeDamage(damage);
+                    enemies[j]->TakeDamage(damage);
                     this->textTags.add(TextTag(&this->font, '-' + std::to_string(damage),
-                                               Vector2f(this->enemys[j]->getPosition().x + 10.f,
-                                                        this->enemys[j]->getPosition().y - this->enemys[j]->getBounds().height / 2.f),
+                                               Vector2f(this->enemies[j]->getPosition().x + 10.f,
+                                                        this->enemies[j]->getPosition().y - this->enemies[j]->getBounds().height / 2.f),
                                                Vector2f(1.f, 0.f),
                                                20.f, 30.f, true,
                                                Color::Red));
                     p->removeBullet(i);
                     flag = false;
-                    if (enemys[j]->isDead())
+                    if (enemies[j]->isDead())
                     {
                         handleEnemyDeath(p, j);
                         break;
@@ -378,25 +503,25 @@ void Game::updateBullets(Player *p, const float &dt)
 // Update side gun bullets
 void Game::updateSideGunBullets(Player *p, const float &dt)
 {
-    for (size_t j = 0; j < enemys.size(); j++)
+    for (size_t j = 0; j < enemies.size(); j++)
     {
         for (size_t k = 0; k < p->getWeapons().size(); k++)
         {
             for (size_t l = 0; l < p->getWeapons()[k]->getBullets().size(); l++)
             {
-                if (p->getWeapons()[k]->getBullets()[l]->getBounds().intersects(enemys[j]->getBounds()))
+                if (p->getWeapons()[k]->getBullets()[l]->getBounds().intersects(enemies[j]->getBounds()))
                 {
                     int damage = p->getWeapons()[k]->getBullets()[l]->getDamage();
-                    enemys[j]->TakeDamage(damage);
+                    enemies[j]->TakeDamage(damage);
                     this->textTags.add(TextTag(&this->font, '-' + std::to_string(damage),
-                                               Vector2f(this->enemys[j]->getPosition().x + 10.f,
-                                                        this->enemys[j]->getPosition().y - this->enemys[j]->getBounds().height / 2.f),
+                                               Vector2f(this->enemies[j]->getPosition().x + 10.f,
+                                                        this->enemies[j]->getPosition().y - this->enemies[j]->getBounds().height / 2.f),
                                                Vector2f(1.f, 0.f),
                                                20.f, 20.f, true,
                                                Color::Red));
                     delete p->getWeapons()[k]->getBullets()[l];
                     p->getWeapons()[k]->getBullets().erase(p->getWeapons()[k]->getBullets().begin() + l);
-                    if (enemys[j]->isDead())
+                    if (enemies[j]->isDead())
                     {
                         handleEnemyDeath(p, j);
                         return;
@@ -412,7 +537,7 @@ void Game::handleEnemyDeath(Player *p, size_t enemyIndex)
 {
     if (!p->getIsAtMaxLevel())
     {
-        float exp = enemys[enemyIndex]->getExp();
+        float exp = enemies[enemyIndex]->getExp();
         if (p->gainExp(exp))
         {
             this->textTags.add(TextTag(&this->font, "Level Up",
@@ -434,18 +559,18 @@ void Game::handleEnemyDeath(Player *p, size_t enemyIndex)
         }
     }
 
-    delete enemys[enemyIndex];
-    enemys.remove(enemyIndex);
+    delete enemies[enemyIndex];
+    enemies.remove(enemyIndex);
 }
 
 // Render UI elements
-void Game::RenderUI()
+void Game::renderUI()
 {
     if (!gameOver)
     {
         for (size_t i = 0; i < players.size(); i++)
         {
-            this->UpdateUI(i);
+            this->updateUI(i);
             this->window->draw(this->followPlayerText);
             this->window->draw(this->playerExpBar);
             this->window->draw(this->playerExpBarOutline);
@@ -462,10 +587,13 @@ void Game::RenderUI()
     {
         this->window->draw(this->gameOverText);
     }
+    this->restartButton->render(*this->window);
+    this->exitButton->render(*this->window);
+    this->pauseButton->render(*this->window);
 }
 
 // Render game elements
-void Game::Render()
+void Game::render()
 {
     this->window->clear();
     if (!gameOver)
@@ -476,14 +604,14 @@ void Game::Render()
         }
 
         // Render enemies
-        for (size_t i = 0; i < enemys.size(); ++i)
+        for (size_t i = 0; i < enemies.size(); ++i)
         {
-            enemys[i]->Render(*this->window);
+            enemies[i]->Render(*this->window);
         }
     }
 
     // Render UI
-    this->RenderUI();
+    this->renderUI();
 
     this->window->display();
 }

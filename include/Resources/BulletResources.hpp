@@ -35,8 +35,8 @@ const std::unordered_map<BulletLevels, unsigned int> resourcePathsBulletsDamage 
 
 const std::unordered_map<BulletLevels, std::string> resourcePathsLightningBullets = {
     // Player
-    {LEVEL1, "Sinclude/Resources/prites/LaserBullets/LightningLevel1.png"},
-    {LEVEL2, "Sinclude/Resources/prites/LaserBullets/LightningLevel2.png"},
+    {LEVEL1, "include/Resources/Sprites/LaserBullets/LightningLevel1.png"},
+    {LEVEL2, "include/Resources/Sprites/LaserBullets/LightningLevel2.png"},
     {LEVEL3, "include/Resources/Sprites/LaserBullets/LightningLevel3.png"},
     {LEVEL4, "include/Resources/Sprites/LaserBullets/LightningLevel4.png"},
     {LEVEL5, "include/Resources/Sprites/LaserBullets/LightningLevel5.png"},

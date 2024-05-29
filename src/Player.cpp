@@ -8,7 +8,7 @@ Player::Player(DynamicArray<Texture> &textures, Vector2u windowBounds,
            int upperWeaponLevel, int lowerWeaponLevel,
            bool uperWeapon, bool lowerWeapon)
     : windowBounds(windowBounds), level(playerLevel), maxLevel(4), exp(playerExp),
-      hp(playerHp), hpMax(playerHpMax),
+      hp(playerHp), hpMax(10),
       upperWeaponLevel(upperWeaponLevel), lowerWeaponLevel(lowerWeaponLevel),
       uperWeapon(uperWeapon), lowerWeapon(lowerWeapon),
       damage(1), damageMax(2),
@@ -39,21 +39,6 @@ Player::Player(DynamicArray<Texture> &textures, Vector2u windowBounds,
     this->damageTimerMax = 5.f;
     this->damageTimer = 0.f;
 
-    // Weapons
-    // this->currentWeapon = LASER;
-    // this->currentWeapon = LIGHTNING;
-    // this->currentWeapon = DARK_MATTER;
-    // this->currentWeapon = NUCLIER_MATERIAL;
-    // this->currentWeapon = PLASMA;
-    this->currentWeapon = PLANETARY_BOMB;
-    if (uperWeapon)
-    {
-    this->addWeapon(PEA_SHOOTER, WEAPON_UP, this->upperWeaponLevel);
-    }
-    if (lowerWeapon)
-    {
-    this->addWeapon(PEA_SHOOTER, WEAPON_DOWN, this->lowerWeaponLevel);
-    }
     
     // Controls
     this->controls[controls::UP] = UP;
@@ -65,7 +50,9 @@ Player::Player(DynamicArray<Texture> &textures, Vector2u windowBounds,
     // Player number
     Player::players++;
     this->playerNumber = Player::players;
+
 }
+
 
 Player::~Player()
 {
@@ -73,6 +60,38 @@ Player::~Player()
     {
         delete weapons[i];
     }
+}
+
+void Player::setToDefault(){
+    this->hp = this->hpMax;
+    this->exp = 0;
+    this->score = 0;
+    this->statPoints = 0;
+    this->upgrade = 0;
+    this->endurance = 0;
+    this->armor = 0;
+    this->strength = 0;
+    this->agility = 0;
+    this->fireRate = this->fireRateMax;
+    this->damageTimerMax = 5.f;
+    this->damageTimer = 0.f;
+    this->weapons.clear();
+    this->bullets.clear();
+    this->level = 0;
+    this->maxLevel = 4;
+    this->hpMax = 10;
+    this->upperWeaponLevel = 0;
+    this->lowerWeaponLevel = 0;
+    this->expNext = static_cast<int>((50 / 3) *
+                                     (pow((this->level + 1), 3) -
+                                      6 * pow((this->level + 1), 2) +
+                                      17 * (this->level + 1) - 11));
+    this->uperWeapon = false;
+    this->lowerWeapon = false;
+    this->sprite.setColor(Color(255, 255, 255, 255));
+    this->exp = 0;
+    this->score = 0;
+    this->players = 0;
 }
 
 void Player::Move(const float &dt)
@@ -237,6 +256,7 @@ void Player::setBulletType(Vector2f pos, int upgrade, int level, Vector2f direct
 void Player::CombatUpdate()
 
 {
+
     // change main gun level with number keys
 
     if (Keyboard::isKeyPressed(Keyboard::P))
@@ -254,6 +274,7 @@ void Player::CombatUpdate()
 
     Vector2f bulletPosition = this->sprite.getPosition() + Vector2f(30.f, 0.f);
     // Fire main gun
+
     switch (this->currentWeapon)
     {
     case LASER:
@@ -298,6 +319,19 @@ void Player::TakeDamage(int damage)
 
 void Player::Update(Vector2u windowBounds, const float &dt)
 {
+
+    if (uperWeapon && !this->addedUpperWeapon)
+    {
+        std::cout << "Adding upper weapon" << std::endl;
+    this->addWeapon(PEA_SHOOTER, WEAPON_UP, this->upperWeaponLevel);
+    this->addedUpperWeapon = true;
+    }
+    if (lowerWeapon && !this->addedLowerWeapon)
+    {
+        std::cout << "Adding lower weapon" << std::endl;
+    this->addWeapon(PEA_SHOOTER, WEAPON_DOWN, this->lowerWeaponLevel);
+    this->addedLowerWeapon = true;
+    }
     // Update fire rate
     if (this->fireRate < this->fireRateMax)
         this->fireRate += 1.f * dt * this->dtMultiplier;
