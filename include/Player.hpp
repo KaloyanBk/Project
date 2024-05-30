@@ -86,7 +86,7 @@ private:
 
 public:
     // Constructor
-    Player(DynamicArray<Texture> &textures, Vector2u windowBounds,
+    Player(DynamicArray<Texture> &textures, Vector2u windowBounds, int typeOfBullet,
            int UP = 22, int DOWN = 18, int LEFT = 0, int RIGHT = 3, int FIRE = 57,
            int playerLevel = 0, float playerExp = 0, float playerExpNext = 16, int playerHp = 10, int playerHpMax = 10, int playerScore = 0,
            int upperWeaponLevel = 0, int lowerWeaponLevel = 0,
@@ -113,6 +113,7 @@ public:
     inline const int getHp() const { return this->hp; }
     inline const int getHpMax() const { return this->hpMax; }
     inline const int getScore() const { return this->score; }
+    inline const int getCurrentWeapon() const { return this->currentWeapon; }
     inline bool gainExp(float exp)
     {
         if (!this->isAtMaxLevel)
@@ -135,6 +136,14 @@ public:
     void setLowerWeaponLevel(int level) { this->lowerWeaponLevel = level; }
     void setUperWeapon(bool uperWeapon) { this->uperWeapon = uperWeapon; }
     void setLowerWeapon(bool lowerWeapon) { this->lowerWeapon = lowerWeapon; }
+
+    void setLevel(int level) { this->level = level; }
+    void setExp(float exp) { this->exp = exp; }
+    void setExpNext(float expNext) { this->expNext = expNext; }
+    void setStatPoints(int statPoints) { this->statPoints = statPoints; }
+    void setHp(int hp) { this->hp = hp; }
+    void setHpMax(int hpMax) { this->hpMax = hpMax; }
+    void setScore(int score) { this->score = score; }
 
     // Functionsc
     void Move(const float &dt);

@@ -13,10 +13,7 @@ public:
     ~Button();
 
     void setOnClick(std::function<void()> func);
-    inline bool isClicked(const sf::Vector2f &mousePos) const
-    {
-        return shape.getGlobalBounds().contains(mousePos) && sf::Mouse::isButtonPressed(sf::Mouse::Left);
-    }
+    inline bool isClicked(const sf::Vector2f &mousePos) const{ return shape.getGlobalBounds().contains(mousePos); };
     inline const std::string getText() const { return text.getString(); }
     void update(const sf::Vector2f &mousePos);
     void render(sf::RenderTarget &target);
@@ -26,6 +23,7 @@ public:
         this->hoverColor = hoverColor;
         this->activeColor = activeColor;
     };
+    int timesPressed = 0;
 
 private:
     sf::RectangleShape shape;

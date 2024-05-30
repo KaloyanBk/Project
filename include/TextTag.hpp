@@ -12,6 +12,7 @@
 #include <SFML/Network.hpp>
 
 #include "./Resources/DynamicArray.hpp"
+#include "./Resources/SaveData.hpp"
 
 using namespace sf;
 

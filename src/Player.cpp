@@ -2,7 +2,7 @@
 
 unsigned Player::players = 0;
 
-Player::Player(DynamicArray<Texture> &textures, Vector2u windowBounds,
+Player::Player(DynamicArray<Texture> &textures, Vector2u windowBounds, int typeOfBullet,
            int UP, int DOWN, int LEFT, int RIGHT, int FIRE,
            int playerLevel, float playerExp, float playerExpNext, int playerHp, int playerHpMax, int playerScore,
            int upperWeaponLevel, int lowerWeaponLevel,
@@ -15,7 +15,7 @@ Player::Player(DynamicArray<Texture> &textures, Vector2u windowBounds,
       statPoints(0), upgrade(0),
       endurance(0), armor(0), strength(0), agility(0),
       maxVelocity(25.f), acceleration(0.8f), drag(0.4f),
-      score(playerScore)
+      score(playerScore), currentWeapon(typeOfBullet)
 {
     // Delta time multiplier
     this->dtMultiplier = 60.f;
@@ -322,13 +322,11 @@ void Player::Update(Vector2u windowBounds, const float &dt)
 
     if (uperWeapon && !this->addedUpperWeapon)
     {
-        std::cout << "Adding upper weapon" << std::endl;
     this->addWeapon(PEA_SHOOTER, WEAPON_UP, this->upperWeaponLevel);
     this->addedUpperWeapon = true;
     }
     if (lowerWeapon && !this->addedLowerWeapon)
     {
-        std::cout << "Adding lower weapon" << std::endl;
     this->addWeapon(PEA_SHOOTER, WEAPON_DOWN, this->lowerWeaponLevel);
     this->addedLowerWeapon = true;
     }

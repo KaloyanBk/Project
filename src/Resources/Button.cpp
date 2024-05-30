@@ -55,6 +55,11 @@ void Button::update(const sf::Vector2f &mousePos)
                 this->onClick();
                 wasPressed = true;
             }
+            if (wasActive && !wasPressed)
+            {
+                this->timesPressed++;
+                wasPressed = true;
+            }
         }
     }
     else

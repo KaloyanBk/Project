@@ -1,34 +1,19 @@
 #include "../include/Game.hpp"
 
-void saveDefaultData()
-{
-    json defaultData = {
-        {"numberOfPlayers", 1},
-        {"player1", {{"level", 0}, {"hp", 10}, {"hpMax", 0}, {"exp", 0.0}, {"expNext", 0.0}, {"score", 0}}},
-        {"player2", {{"level", 0}, {"hp", 10}, {"hpMax", 0}, {"exp", 0.0}, {"expNext", 0.0}, {"score", 0}}},
-        {"upperWeapon", {{"enabled", false}, {"level", 0}}},
-        {"lowerWeapon", {{"enabled", false}, {"level", 0}}}};
-
-    std::ofstream file("data/savedData.json");
-    if (!file.is_open())
-    {
-        std::cerr << "Could not open the file to save default data!" << std::endl;
-        return;
-    }
-    file << defaultData.dump(4);
-}
 // Constructor
 Game::Game(RenderWindow *window,
            int numberOfPlayers,
            int player1Level, int player1Hp, int player1HpMax, float player1Exp, float player1ExpNext, int player1Score,
            int player2Level, int player2Hp, int player2HpMax, float player2Exp, float player2ExpNext, int player2Score,
            bool upperWeapon, int upperWeaponLevel,
-           bool lowerWeapon, int lowerWeaponLevel)
+           bool lowerWeapon, int lowerWeaponLevel,
+           int typeOfBullet)
     : window(window), numberOfPlayers(numberOfPlayers),
       player1Level(player1Level), player2Level(player2Level), upperWeaponLevel(upperWeaponLevel), lowerWeaponLevel(lowerWeaponLevel),
       upperWeapon(upperWeapon), lowerWeapon(lowerWeapon), player1Exp(player1Exp), player2Exp(player2Exp),
       player1ExpNext(player1ExpNext), player1Hp(player1Hp), player1HpMax(player1HpMax), player1Score(player1Score),
-      player2ExpNext(player2ExpNext), player2Hp(player2Hp), player2HpMax(player2HpMax), player2Score(player2Score)
+      player2ExpNext(player2ExpNext), player2Hp(player2Hp), player2HpMax(player2HpMax), player2Score(player2Score),
+      typeOfBullet(typeOfBullet)
 {
     // Window settings
     this->dtMultiplier = 60.f;
@@ -47,6 +32,8 @@ Game::Game(RenderWindow *window,
 
     // Initialize UI
     this->initUI();
+
+    // saveDefaultData();
 }
 
 // Destructor
@@ -83,22 +70,28 @@ void Game::loadTextures()
 // Create players
 void Game::createPlayers()
 {
+    loadSavedData(this->numberOfPlayers,
+                  this->player1Level, this->player1Hp, this->player1HpMax, this->player1Exp, this->player1ExpNext, this->player1Score,
+                  this->player2Level, this->player2Hp, this->player2HpMax, this->player2Exp, this->player2ExpNext, this->player2Score,
+                  this->upperWeapon, this->upperWeaponLevel,
+                  this->lowerWeapon, this->lowerWeaponLevel,
+                  this->typeOfBullet);
     switch (numberOfPlayers)
     {
     case 1:
         this->players.push_back(createPlayer(this->textures, this->window->getSize(),
                                              this->player1Level, this->player1Exp, this->player1ExpNext, this->player1Hp,
                                              this->player1HpMax, this->player1Score,
-                                             Keyboard::W, Keyboard::S, Keyboard::A, Keyboard::D, Keyboard::Space));
+                                             Keyboard::W, Keyboard::S, Keyboard::A, Keyboard::D, Keyboard::Space, this->typeOfBullet));
         break;
     case 2:
         this->players.push_back(createPlayer(this->textures, this->window->getSize(),
                                              this->player1Level, this->player1Exp, this->player1ExpNext, this->player1Hp,
                                              this->player1HpMax, this->player1Score,
-                                             Keyboard::W, Keyboard::S, Keyboard::A, Keyboard::D, Keyboard::Space));
+                                             Keyboard::W, Keyboard::S, Keyboard::A, Keyboard::D, Keyboard::Space, this->typeOfBullet));
         this->players.push_back(createPlayer(this->textures, this->window->getSize(),
                                              this->player2Level, this->player2Exp, this->player2ExpNext, this->player2Hp,
-                                             this->player2HpMax, this->player2Score, Keyboard::Up, Keyboard::Down, Keyboard::Left, Keyboard::Right, Keyboard::RShift));
+                                             this->player2HpMax, this->player2Score, Keyboard::Up, Keyboard::Down, Keyboard::Left, Keyboard::Right, Keyboard::RShift, this->typeOfBullet));
         break;
     default:
         break;
@@ -107,9 +100,9 @@ void Game::createPlayers()
 
 Player *Game::createPlayer(DynamicArray<Texture> &textures, Vector2u windowBounds,
                            int level, float playerExp, float playerExpNext, int playerHp, int playerHpMax, int playerScore,
-                           int upKey, int downKey, int leftKey, int rightKey, int fireKey)
+                           int upKey, int downKey, int leftKey, int rightKey, int fireKey, int typeOfBullet)
 {
-    return new Player(textures, windowBounds, upKey, downKey, leftKey, rightKey, fireKey,
+    return new Player(textures, windowBounds, typeOfBullet, upKey, downKey, leftKey, rightKey, fireKey,
                       level, playerExp, playerExpNext, playerHp, playerHpMax, playerScore, this->upperWeaponLevel, this->lowerWeaponLevel, this->upperWeapon,
                       this->lowerWeapon);
 }
@@ -223,21 +216,45 @@ void Game::restart()
         0.f - this->gameOverText.getGlobalBounds().width,
         this->window->getSize().y / 2.f - this->gameOverText.getGlobalBounds().height / 2.f);
 
+    saveDefaultData();
+    loadSavedData(this->numberOfPlayers,
+                  this->player1Level, this->player1Hp, this->player1HpMax, this->player1Exp, this->player1ExpNext, this->player1Score,
+                  this->player2Level, this->player2Hp, this->player2HpMax, this->player2Exp, this->player2ExpNext, this->player2Score,
+                  this->upperWeapon, this->upperWeaponLevel,
+                  this->lowerWeapon, this->lowerWeaponLevel,
+                  this->typeOfBullet);
+
     Player::players = 0;
     this->createPlayers();
-    for (auto &p : players)
-    {
-        p->setToDefault();
-    }
-    saveDefaultData();
-    this->setIsGameStarted(false);
+
+    this->times--;
+    this->setIsGameStarted(true);
     this->reseted(true);
 }
 
 void Game::exit()
 {
     this->window->close();
-    saveDefaultData();
+    if (this->numberOfPlayers == 1)
+    {
+        saveData(
+            this->numberOfPlayers,
+            this->players[0]->getLevel(), this->players[0]->getHp(), this->players[0]->getHpMax(), this->players[0]->getExp(), this->players[0]->getExpNext(), this->players[0]->getScore(),
+            0, 10, 0, 0.0, 0.0, 0,
+            this->upperWeapon, this->upperWeaponLevel,
+            this->lowerWeapon, this->lowerWeaponLevel,
+            this->typeOfBullet);
+    }
+    else if (this->numberOfPlayers == 2)
+    {
+        saveData(
+            this->numberOfPlayers,
+            this->players[0]->getLevel(), this->players[0]->getHp(), this->players[0]->getHpMax(), this->players[0]->getExp(), this->players[0]->getExpNext(), this->players[0]->getScore(),
+            this->players[1]->getLevel(), this->players[1]->getHp(), this->players[1]->getHpMax(), this->players[1]->getExp(), this->players[1]->getExpNext(), this->players[1]->getScore(),
+            this->upperWeapon, this->upperWeaponLevel,
+            this->lowerWeapon, this->lowerWeaponLevel,
+            this->typeOfBullet);
+    }
 }
 
 // Update UI elements for a specific player
@@ -284,9 +301,27 @@ void Game::updateUI(int index)
 // Update game logic
 void Game::update(const float &dt)
 {
-    if (!this->gamePaused)
+    if (timesPlayers++ < 1)
     {
 
+        loadSavedData(this->numberOfPlayers,
+                      this->player1Level, this->player1Hp, this->player1HpMax, this->player1Exp, this->player1ExpNext, this->player1Score,
+                      this->player2Level, this->player2Hp, this->player2HpMax, this->player2Exp, this->player2ExpNext, this->player2Score,
+                      this->upperWeapon, this->upperWeaponLevel,
+                      this->lowerWeapon, this->lowerWeaponLevel,
+                      this->typeOfBullet);
+
+        for(auto &p : players)
+        {
+            delete p;
+        }
+        players.clear();
+        Player::players = 0;
+        this->createPlayers();
+    }
+
+    if (!this->gamePaused)
+    {
         // Update players
         if (!gameOver)
         {
