@@ -1,3 +1,13 @@
+/**
+ * @file Button.hpp
+ * @author Klaoyan
+ * @brief This is the header file for the Button class, which is used to create buttons for the game.
+ * @version 0.1
+ * @date 2024-05-30
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #pragma once
 
 #include <SFML/Graphics.hpp>
@@ -8,12 +18,12 @@
 class Button
 {
 public:
-    Button(float x, float y, float width, float height, sf::Font &font, const std::string &text,
+    Button(float x, float y, float width, float height, float radius, sf::Font &font, const std::string &text,
            const sf::Color &idleColor, const sf::Color &hoverColor, const sf::Color &activeColor);
     ~Button();
 
     void setOnClick(std::function<void()> func);
-    inline bool isClicked(const sf::Vector2f &mousePos) const{ return shape.getGlobalBounds().contains(mousePos); };
+    inline bool isClicked(const sf::Vector2f &mousePos) const { return shape.getGlobalBounds().contains(mousePos); };
     inline const std::string getText() const { return text.getString(); }
     void update(const sf::Vector2f &mousePos);
     void render(sf::RenderTarget &target);
@@ -26,7 +36,7 @@ public:
     int timesPressed = 0;
 
 private:
-    sf::RectangleShape shape;
+    sf::ConvexShape shape;
     sf::Font &font;
     sf::Text text;
     sf::Color idleColor;
@@ -46,4 +56,5 @@ private:
     bool wasPressed = false;
 
     void updateColor();
+    void setRoundedRectangle(sf::ConvexShape &shape, float width, float height, float radius);
 };

@@ -1,12 +1,45 @@
+/**
+ * @file Player.cpp
+ * @brief Implementation file for the Player class.
+ * @author Kaloyan
+ * @version 0.1
+ * @date 2024-05-30
+ *
+ * This file defines the member functions of the Player class, which is used to create player objects.
+ *
+ * @copyright Copyright (c) 2024
+ *
+ */
 #include "../include/Player.hpp"
 
 unsigned Player::players = 0;
-
+/**
+ * @brief Constructs a Player object.
+ *
+ * @param textures Reference to a DynamicArray of textures.
+ * @param windowBounds The bounds of the game window.
+ * @param typeOfBullet The type of bullet the player uses.
+ * @param UP The keycode for moving up.
+ * @param DOWN The keycode for moving down.
+ * @param LEFT The keycode for moving left.
+ * @param RIGHT The keycode for moving right.
+ * @param FIRE The keycode for firing.
+ * @param playerLevel The player's level.
+ * @param playerExp The player's experience points.
+ * @param playerExpNext The experience points needed for the next level.
+ * @param playerHp The player's health points.
+ * @param playerHpMax The maximum health points of the player.
+ * @param playerScore The player's score.
+ * @param upperWeaponLevel The level of the upper weapon.
+ * @param lowerWeaponLevel The level of the lower weapon.
+ * @param upperWeapon Flag indicating whether the upper weapon is equipped.
+ * @param lowerWeapon Flag indicating whether the lower weapon is equipped.
+ */
 Player::Player(DynamicArray<Texture> &textures, Vector2u windowBounds, int typeOfBullet,
-           int UP, int DOWN, int LEFT, int RIGHT, int FIRE,
-           int playerLevel, float playerExp, float playerExpNext, int playerHp, int playerHpMax, int playerScore,
-           int upperWeaponLevel, int lowerWeaponLevel,
-           bool uperWeapon, bool lowerWeapon)
+               int UP, int DOWN, int LEFT, int RIGHT, int FIRE,
+               int playerLevel, float playerExp, float playerExpNext, int playerHp, int playerHpMax, int playerScore,
+               int upperWeaponLevel, int lowerWeaponLevel,
+               bool uperWeapon, bool lowerWeapon)
     : windowBounds(windowBounds), level(playerLevel), maxLevel(4), exp(playerExp),
       hp(playerHp), hpMax(10),
       upperWeaponLevel(upperWeaponLevel), lowerWeaponLevel(lowerWeaponLevel),
@@ -17,16 +50,16 @@ Player::Player(DynamicArray<Texture> &textures, Vector2u windowBounds, int typeO
       maxVelocity(25.f), acceleration(0.8f), drag(0.4f),
       score(playerScore), currentWeapon(typeOfBullet)
 {
-    // Delta time multiplier
+    /// Delta time multiplier
     this->dtMultiplier = 60.f;
 
-    // Stats
+    /// Stats
     this->expNext = static_cast<int>((50 / 3) *
                                      (pow((this->level + 1), 3) -
                                       6 * pow((this->level + 1), 2) +
                                       17 * (this->level + 1) - 11));
 
-    // Set up the sprite
+    /// Set up the sprite
 
     this->sprite.setTexture(textures[PLAYER]);
     this->sprite.setOrigin(this->sprite.getGlobalBounds().width / 2, this->sprite.getGlobalBounds().height / 2);
@@ -39,21 +72,21 @@ Player::Player(DynamicArray<Texture> &textures, Vector2u windowBounds, int typeO
     this->damageTimerMax = 5.f;
     this->damageTimer = 0.f;
 
-    
-    // Controls
+    /// Controls
     this->controls[controls::UP] = UP;
     this->controls[controls::DOWN] = DOWN;
     this->controls[controls::LEFT] = LEFT;
     this->controls[controls::RIGHT] = RIGHT;
     this->controls[controls::FIRE] = FIRE;
 
-    // Player number
+    /// Player number
     Player::players++;
     this->playerNumber = Player::players;
-
 }
 
-
+/**
+ * @brief Destructor for Player.
+ */
 Player::~Player()
 {
     for (size_t i = 0; i < weapons.size(); ++i)
@@ -62,41 +95,46 @@ Player::~Player()
     }
 }
 
-void Player::setToDefault(){
-    this->hp = this->hpMax;
-    this->exp = 0;
-    this->score = 0;
-    this->statPoints = 0;
-    this->upgrade = 0;
-    this->endurance = 0;
-    this->armor = 0;
-    this->strength = 0;
-    this->agility = 0;
-    this->fireRate = this->fireRateMax;
-    this->damageTimerMax = 5.f;
-    this->damageTimer = 0.f;
-    this->weapons.clear();
-    this->bullets.clear();
-    this->level = 0;
-    this->maxLevel = 4;
-    this->hpMax = 10;
-    this->upperWeaponLevel = 0;
-    this->lowerWeaponLevel = 0;
-    this->expNext = static_cast<int>((50 / 3) *
-                                     (pow((this->level + 1), 3) -
-                                      6 * pow((this->level + 1), 2) +
-                                      17 * (this->level + 1) - 11));
-    this->uperWeapon = false;
-    this->lowerWeapon = false;
-    this->sprite.setColor(Color(255, 255, 255, 255));
-    this->exp = 0;
-    this->score = 0;
-    this->players = 0;
-}
+//  void Player::setToDefault(){
+//      this->hp = this->hpMax;
+//      this->exp = 0;
+//      this->score = 0;
+//      this->statPoints = 0;
+//      this->upgrade = 0;
+//      this->endurance = 0;
+//      this->armor = 0;
+//      this->strength = 0;
+//      this->agility = 0;
+//      this->fireRate = this->fireRateMax;
+//      this->damageTimerMax = 5.f;
+//      this->damageTimer = 0.f;
+//      this->weapons.clear();
+//      this->bullets.clear();
+//      this->level = 0;
+//      this->maxLevel = 4;
+//      this->hpMax = 10;
+//      this->upperWeaponLevel = 0;
+//      this->lowerWeaponLevel = 0;
+//      this->expNext = static_cast<int>((50 / 3) *
+//                                       (pow((this->level + 1), 3) -
+//                                        6 * pow((this->level + 1), 2) +
+//                                        17 * (this->level + 1) - 11));
+//      this->uperWeapon = false;
+//      this->lowerWeapon = false;
+//      this->sprite.setColor(Color(255, 255, 255, 255));
+//      this->exp = 0;
+//      this->score = 0;
+//      this->players = 0;
+//  }
 
+/**
+ * @brief Moves the player based on input and physics.
+ *
+ * @param dt The change in time since the last update.
+ */
 void Player::Move(const float &dt)
 {
-    // Update velocity
+    /// Update velocity
     if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::UP])))
     {
         this->direction = Vector2f(0.f, -1.f);
@@ -121,7 +159,7 @@ void Player::Move(const float &dt)
         if (this->currentVelocity.x < this->maxVelocity && this->direction.x > 0)
             this->currentVelocity.x += this->direction.x * this->acceleration * dt * this->dtMultiplier;
     }
-    // Drag
+    /// Drag
     if (this->currentVelocity.x > 0)
     {
         this->currentVelocity.x -= this->drag * dt * this->dtMultiplier;
@@ -148,7 +186,7 @@ void Player::Move(const float &dt)
     }
     this->sprite.move(this->currentVelocity.x * dt * this->dtMultiplier, this->currentVelocity.y * dt * this->dtMultiplier);
 
-    // Wall collision
+    /// Wall collision
     if (this->sprite.getPosition().x - this->sprite.getGlobalBounds().width / 2.f < 0)
         this->sprite.setPosition(this->sprite.getGlobalBounds().width / 2.f, this->sprite.getPosition().y);
     else if (this->sprite.getPosition().x + this->sprite.getGlobalBounds().width / 2.f > this->windowBounds.x)
@@ -159,6 +197,13 @@ void Player::Move(const float &dt)
         this->sprite.setPosition(this->sprite.getPosition().x, this->windowBounds.y - this->sprite.getGlobalBounds().height / 2.f);
 }
 
+/**
+ * @brief Retrieves a bullet by index.
+ *
+ * @param index The index of the bullet.
+ * @return Reference to the bullet.
+ * @throws An exception if index is out of bounds.
+ */
 Bullet &Player::getBullet(unsigned index)
 {
     if (index < 0 || index >= this->bullets.size())
@@ -168,6 +213,12 @@ Bullet &Player::getBullet(unsigned index)
     return *this->bullets[index];
 }
 
+/**
+ * @brief Removes a bullet from the player's inventory.
+ *
+ * @param index The index of the bullet to remove.
+ * @throws An exception if index is out of bounds.
+ */
 void Player::removeBullet(unsigned index)
 {
     if (index < 0 || index >= this->bullets.size())
@@ -177,6 +228,9 @@ void Player::removeBullet(unsigned index)
     this->bullets.remove(index);
 }
 
+/**
+ * @brief Levels up the player.
+ */
 void Player::LevelUp()
 {
     this->statPoints++;
@@ -186,10 +240,15 @@ void Player::LevelUp()
                                       6 * pow((this->level + 1), 2) +
                                       17 * (this->level + 1) - 12));
 
-    // this->hpMax = static_cast<int>(10 * pow(1.1, (this->level + 1)));
+    /// this->hpMax = static_cast<int>(10 * pow(1.1, (this->level + 1)));
     this->hp = this->hpMax;
 }
 
+/**
+ * @brief Updates the player's leveling system.
+ *
+ * @return True if player leveled up, false otherwise.
+ */
 bool Player::updateLevelingSystem()
 {
     if (this->exp >= this->expNext)
@@ -210,6 +269,13 @@ bool Player::updateLevelingSystem()
     return false;
 }
 
+/**
+ * @brief Adds a weapon to the player's inventory.
+ *
+ * @param type The type of weapon to add.
+ * @param UpOrDown Specifies upper or lower weapon.
+ * @param level The level of the weapon.
+ */
 void Player::addWeapon(int type, int UpOrDown, int level)
 {
     switch (type)
@@ -223,6 +289,11 @@ void Player::addWeapon(int type, int UpOrDown, int level)
     }
 }
 
+/**
+ * @brief Updates the accessories (weapons) of the player.
+ *
+ * @param dt The change in time since the last update.
+ */
 void Player::UpdateAccessories(const float &dt)
 {
     for (size_t i = 0; i < weapons.size(); ++i)
@@ -231,6 +302,19 @@ void Player::UpdateAccessories(const float &dt)
     }
 }
 
+/**
+ * @brief Sets the type of bullet fired by the player.
+ *
+ * @tparam T The type of bullet.
+ * @param pos The position from which the bullet is fired.
+ * @param upgrade The upgrade level of the bullet.
+ * @param level The level of the player.
+ * @param directionUp The direction vector for upper bullet.
+ * @param directionDown The direction vector for lower bullet.
+ * @param initialVelocity The initial velocity of the bullet.
+ * @param maxVelocity The maximum velocity of the bullet.
+ * @param acceleration The acceleration of the bullet.
+ */
 template <typename T>
 void Player::setBulletType(Vector2f pos, int upgrade, int level, Vector2f directionUp, Vector2f directionDown,
                            float initialVelocity, float maxVelocity, float acceleration)
@@ -253,11 +337,14 @@ void Player::setBulletType(Vector2f pos, int upgrade, int level, Vector2f direct
     }
 }
 
+/**
+ * @brief Updates combat-related actions of the player.
+ */
 void Player::CombatUpdate()
 
 {
 
-    // change main gun level with number keys
+    /// change main gun level with number keys
 
     if (Keyboard::isKeyPressed(Keyboard::P))
     {
@@ -273,7 +360,7 @@ void Player::CombatUpdate()
     }
 
     Vector2f bulletPosition = this->sprite.getPosition() + Vector2f(30.f, 0.f);
-    // Fire main gun
+    /// Fire main gun
 
     switch (this->currentWeapon)
     {
@@ -299,13 +386,18 @@ void Player::CombatUpdate()
 
     this->fireRate = 0;
 
-    // Fire side guns
+    /// Fire side guns
     for (size_t i = 0; i < weapons.size(); ++i)
     {
         weapons[i]->Fire(weapons[i]->getPosition(), Vector2f(1.f, 0.f), Vector2f(0.2f, 0.2f));
     }
 }
 
+/**
+ * @brief Inflicts damage on the player.
+ *
+ * @param damage The amount of damage to inflict.
+ */
 void Player::TakeDamage(int damage)
 {
     if (this->damageTimer >= this->damageTimerMax)
@@ -317,63 +409,74 @@ void Player::TakeDamage(int damage)
         this->hp = 0;
 }
 
+/**
+ * @brief Updates the player's state.
+ *
+ * @param windowBounds The bounds of the game window.
+ * @param dt The change in time since the last update.
+ */
 void Player::Update(Vector2u windowBounds, const float &dt)
 {
 
     if (uperWeapon && !this->addedUpperWeapon)
     {
-    this->addWeapon(PEA_SHOOTER, WEAPON_UP, this->upperWeaponLevel);
-    this->addedUpperWeapon = true;
+        this->addWeapon(PEA_SHOOTER, WEAPON_UP, this->upperWeaponLevel);
+        this->addedUpperWeapon = true;
     }
     if (lowerWeapon && !this->addedLowerWeapon)
     {
-    this->addWeapon(PEA_SHOOTER, WEAPON_DOWN, this->lowerWeaponLevel);
-    this->addedLowerWeapon = true;
+        this->addWeapon(PEA_SHOOTER, WEAPON_DOWN, this->lowerWeaponLevel);
+        this->addedLowerWeapon = true;
     }
-    // Update fire rate
+    /// Update fire rate
     if (this->fireRate < this->fireRateMax)
         this->fireRate += 1.f * dt * this->dtMultiplier;
     if (this->damageTimer < this->damageTimerMax)
         this->damageTimer += 1.f * dt * this->dtMultiplier;
 
-    // Update weapons and bullets
+    /// Update weapons and bullets
     for (size_t i = 0; i < weapons.size(); ++i)
     {
         for (size_t j = 0; j < weapons[i]->getBullets().size(); ++j)
         {
             weapons[i]->getBullets()[j]->Update(dt);
-            // Remove bullets that have gone off-screen
+            /// Remove bullets that have gone off-screen
             if (weapons[i]->getBullets()[j]->getPosition().x > windowBounds.x)
             {
                 delete weapons[i]->getBullets()[j];
                 weapons[i]->getBullets().erase(weapons[i]->getBullets().begin() + j);
-                // Decrement j to account for the erased element
+                /// Decrement j to account for the erased element
                 --j;
             }
         }
     }
 
-    // Update player movement and accessories
+    /// Update player movement and accessories
     this->Move(dt);
     this->UpdateAccessories(dt);
 
-    // Check for firing input and perform combat update
+    /// Check for firing input and perform combat update
     if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::FIRE])) && this->fireRate >= this->fireRateMax)
     {
         this->CombatUpdate();
     }
 }
 
+/**
+ * @brief Renders the player and associated elements.
+ *
+ * @param target The render target.
+ */
 void Player::Render(RenderTarget &target)
 {
-    // Render bullets
+    /// Render bullets
     for (size_t i = 0; i < this->bullets.size(); i++)
         this->bullets[i]->Render(target);
 
-    // Render weapons
+    /// Render weapons
     for (size_t i = 0; i < this->weapons.size(); i++)
         this->weapons[i]->Render(target);
 
-    // Render the player
+    /// Render the player
     target.draw(this->sprite);
 }

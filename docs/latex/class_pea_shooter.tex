@@ -1,0 +1,168 @@
+\doxysection{Pea\+Shooter Class Reference}
+\hypertarget{class_pea_shooter}{}\label{class_pea_shooter}\index{PeaShooter@{PeaShooter}}
+Inheritance diagram for Pea\+Shooter\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_pea_shooter}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_pea_shooter_a1698738fc6ef650423a724852f04c2cf}\label{class_pea_shooter_a1698738fc6ef650423a724852f04c2cf} 
+{\bfseries Pea\+Shooter} ()
+\begin{DoxyCompactList}\small\item\em Default constructor for the \doxylink{class_pea_shooter}{Pea\+Shooter} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_pea_shooter_a98626a8ee31a1a83072654efc31a3e3b}{Pea\+Shooter}} (int level, int Up\+Or\+Down)
+\begin{DoxyCompactList}\small\item\em Parameterized constructor for the \doxylink{class_pea_shooter}{Pea\+Shooter} class. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_pea_shooter_a4b16a88491f6e60024dccd945bc62d53}{\texorpdfstring{$\sim$}{\string~}\+Pea\+Shooter}} ()
+\begin{DoxyCompactList}\small\item\em Destructor for the \doxylink{class_pea_shooter}{Pea\+Shooter} class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_pea_shooter_ae42f3fcbb5f0f8fb3568ef0845ed6daf}{Update}} (Vector2f target\+Position, Float\+Rect bounds, const float \&dt) override
+\begin{DoxyCompactList}\small\item\em Update method for the \doxylink{class_pea_shooter}{Pea\+Shooter} class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_pea_shooter_a0c2645e0393774e9b00be17e72fbf103}{Fire}} (const Vector2f \&position, const Vector2f \&direction, const Vector2f \&scale) override
+\begin{DoxyCompactList}\small\item\em Fire method for the \doxylink{class_pea_shooter}{Pea\+Shooter} class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_pea_shooter_ad240d94b9a9f6af2dc47680ac4a6ffcd}{Upgrade}} () override
+\begin{DoxyCompactList}\small\item\em Upgrade method for the \doxylink{class_pea_shooter}{Pea\+Shooter} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_weapon}{Weapon}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Weapon} ()
+\begin{DoxyCompactList}\small\item\em Default constructor for the \doxylink{class_weapon}{Weapon} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_weapon_a09dda677ff53b6fae099537a67ed1d71}{Weapon}} (int type, int level, int Up\+Or\+Down, int fire\+Rate\+Max=25, int damage\+Max=1)
+\begin{DoxyCompactList}\small\item\em Parameterized constructor for the \doxylink{class_weapon}{Weapon} class. \end{DoxyCompactList}\item 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Weapon} ()
+\begin{DoxyCompactList}\small\item\em Destructor for the \doxylink{class_weapon}{Weapon} class. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{class_bullet}{Bullet}} \texorpdfstring{$\ast$}{*} $>$ \& {\bfseries get\+Bullets} ()
+\item 
+const Vector2f \& {\bfseries get\+Position} () const
+\item 
+const Float\+Rect {\bfseries get\+Bounds} () const
+\item 
+void {\bfseries set\+Position} (const Vector2f \&position)
+\item 
+void \mbox{\hyperlink{class_weapon_ab34f600ed2d4dbb0d3c9f7038d7319e0}{Render}} (Render\+Target \&target)
+\begin{DoxyCompactList}\small\item\em Render method for the \doxylink{class_weapon}{Weapon} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_weapon}{Weapon}}}
+\begin{DoxyCompactItemize}
+\item 
+float {\bfseries dt\+Multiplier}
+\item 
+int {\bfseries fire\+Rate}
+\item 
+int {\bfseries fire\+Rate\+Max}
+\item 
+Sprite {\bfseries sprite}
+\item 
+Texture \texorpdfstring{$\ast$}{*} {\bfseries weapon\+Texture}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_bullet}{Bullet}} \texorpdfstring{$\ast$}{*} $>$ {\bfseries bullets}
+\item 
+int {\bfseries bullet\+Level}
+\item 
+int {\bfseries damage}
+\item 
+int {\bfseries damage\+Max}
+\item 
+int {\bfseries Up\+Or\+Down}
+\item 
+int {\bfseries level}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_pea_shooter_a98626a8ee31a1a83072654efc31a3e3b}\index{PeaShooter@{PeaShooter}!PeaShooter@{PeaShooter}}
+\index{PeaShooter@{PeaShooter}!PeaShooter@{PeaShooter}}
+\doxysubsubsection{\texorpdfstring{PeaShooter()}{PeaShooter()}}
+{\footnotesize\ttfamily \label{class_pea_shooter_a98626a8ee31a1a83072654efc31a3e3b} 
+Pea\+Shooter\+::\+Pea\+Shooter (\begin{DoxyParamCaption}\item[{int}]{level}{, }\item[{int}]{Up\+Or\+Down}{}\end{DoxyParamCaption})}
+
+
+
+Parameterized constructor for the \doxylink{class_pea_shooter}{Pea\+Shooter} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em level} & The level of the pea shooter. \\
+\hline
+{\em Up\+Or\+Down} & Whether the pea shooter is positioned up or down. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_pea_shooter_a4b16a88491f6e60024dccd945bc62d53}\index{PeaShooter@{PeaShooter}!````~PeaShooter@{\texorpdfstring{$\sim$}{\string~}PeaShooter}}
+\index{````~PeaShooter@{\texorpdfstring{$\sim$}{\string~}PeaShooter}!PeaShooter@{PeaShooter}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}PeaShooter()}{\string~PeaShooter()}}
+{\footnotesize\ttfamily \label{class_pea_shooter_a4b16a88491f6e60024dccd945bc62d53} 
+Pea\+Shooter\+::\texorpdfstring{$\sim$}{\string~}\+Pea\+Shooter (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor for the \doxylink{class_pea_shooter}{Pea\+Shooter} class. 
+
+Destructor implementation, if needed
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_pea_shooter_a0c2645e0393774e9b00be17e72fbf103}\index{PeaShooter@{PeaShooter}!Fire@{Fire}}
+\index{Fire@{Fire}!PeaShooter@{PeaShooter}}
+\doxysubsubsection{\texorpdfstring{Fire()}{Fire()}}
+{\footnotesize\ttfamily \label{class_pea_shooter_a0c2645e0393774e9b00be17e72fbf103} 
+void Pea\+Shooter\+::\+Fire (\begin{DoxyParamCaption}\item[{const Vector2f \&}]{position}{, }\item[{const Vector2f \&}]{direction}{, }\item[{const Vector2f \&}]{scale}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Fire method for the \doxylink{class_pea_shooter}{Pea\+Shooter} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The position to fire from. \\
+\hline
+{\em direction} & The firing direction. \\
+\hline
+{\em scale} & The scale of the fired object. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_weapon_ab2cb13eccba20ed1fabe4454ee1248f6}{Weapon}}.
+
+\Hypertarget{class_pea_shooter_ae42f3fcbb5f0f8fb3568ef0845ed6daf}\index{PeaShooter@{PeaShooter}!Update@{Update}}
+\index{Update@{Update}!PeaShooter@{PeaShooter}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_pea_shooter_ae42f3fcbb5f0f8fb3568ef0845ed6daf} 
+void Pea\+Shooter\+::\+Update (\begin{DoxyParamCaption}\item[{Vector2f}]{target\+Position}{, }\item[{Float\+Rect}]{bounds}{, }\item[{const float \&}]{dt}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Update method for the \doxylink{class_pea_shooter}{Pea\+Shooter} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target\+Position} & The position of the target. \\
+\hline
+{\em bounds} & The bounds of the pea shooter. \\
+\hline
+{\em dt} & The delta time for updating. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_weapon_ae51cc4f2369dd08808d035c99772e9f4}{Weapon}}.
+
+\Hypertarget{class_pea_shooter_ad240d94b9a9f6af2dc47680ac4a6ffcd}\index{PeaShooter@{PeaShooter}!Upgrade@{Upgrade}}
+\index{Upgrade@{Upgrade}!PeaShooter@{PeaShooter}}
+\doxysubsubsection{\texorpdfstring{Upgrade()}{Upgrade()}}
+{\footnotesize\ttfamily \label{class_pea_shooter_ad240d94b9a9f6af2dc47680ac4a6ffcd} 
+void Pea\+Shooter\+::\+Upgrade (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Upgrade method for the \doxylink{class_pea_shooter}{Pea\+Shooter} class. 
+
+Increases the damage and reduces the fire rate. 
+
+Reimplemented from \mbox{\hyperlink{class_weapon_a0b599385c909713ad4d3f1ab86757cab}{Weapon}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/kaloyanbakardzhiev/\+Documents/\+Uni/\+OOP/\+Project/sfml/\+Space\+Shooter/include/\+Weapons/\mbox{\hyperlink{_pea_shooter_8hpp}{Pea\+Shooter.\+hpp}}\item 
+/\+Users/kaloyanbakardzhiev/\+Documents/\+Uni/\+OOP/\+Project/sfml/\+Space\+Shooter/src/\+Weapons/\mbox{\hyperlink{_pea_shooter_8cpp}{Pea\+Shooter.\+cpp}}\end{DoxyCompactItemize}

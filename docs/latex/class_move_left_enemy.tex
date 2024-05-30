@@ -1,0 +1,149 @@
+\doxysection{Move\+Left\+Enemy Class Reference}
+\hypertarget{class_move_left_enemy}{}\label{class_move_left_enemy}\index{MoveLeftEnemy@{MoveLeftEnemy}}
+Inheritance diagram for Move\+Left\+Enemy\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_move_left_enemy}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_move_left_enemy_ab4a2e90fc3bb5663e07f7f62d6f0a2ad}{Move\+Left\+Enemy}} (Texture \texorpdfstring{$\ast$}{*}texture, Vector2u window\+Bounds, Vector2f position, Vector2f direction, Vector2f scale, float exp, int hp\+Max, int damage\+Max, int damage\+Min)
+\begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{class_move_left_enemy}{Move\+Left\+Enemy} object. \end{DoxyCompactList}\item 
+\Hypertarget{class_move_left_enemy_a88882019f089bb2553278aa88cd2c3db}\label{class_move_left_enemy_a88882019f089bb2553278aa88cd2c3db} 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Move\+Left\+Enemy} ()
+\begin{DoxyCompactList}\small\item\em Destroys the \doxylink{class_move_left_enemy}{Move\+Left\+Enemy} object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_move_left_enemy_a229d35fded3969dae4cd0050e8c57110}{Move}} (float dt, Vector2f player\+Position) override
+\begin{DoxyCompactList}\small\item\em Moves the \doxylink{class_move_left_enemy}{Move\+Left\+Enemy}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_enemy}{Enemy}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_enemy_abce35d33e2e3736c0b0ba4cda54686de}{Enemy}} (sf\+::\+Texture \texorpdfstring{$\ast$}{*}texture, sf\+::\+Vector2u window\+Bounds, sf\+::\+Vector2f position, sf\+::\+Vector2f direction, sf\+::\+Vector2f scale, float exp, int hp\+Max, int damage\+Max, int damage\+Min)
+\begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{class_enemy}{Enemy} object. \end{DoxyCompactList}\item 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Enemy} ()
+\begin{DoxyCompactList}\small\item\em Destroys the \doxylink{class_enemy}{Enemy} object. \end{DoxyCompactList}\item 
+const int {\bfseries get\+Damage} () const
+\item 
+const int {\bfseries get\+Hp} () const
+\item 
+const int {\bfseries get\+Hp\+Max} () const
+\item 
+const float {\bfseries get\+Exp} () const
+\item 
+const bool {\bfseries is\+Dead} () const
+\item 
+const sf\+::\+Float\+Rect {\bfseries get\+Bounds} () const
+\item 
+const sf\+::\+Vector2f \& {\bfseries get\+Position} () const
+\item 
+const int {\bfseries get\+Player\+To\+Follow} () const
+\item 
+void \mbox{\hyperlink{class_enemy_a4fb5a83b05dd44adaf61a8abfd3f2a4e}{Take\+Damage}} (int damage)
+\begin{DoxyCompactList}\small\item\em Inflicts damage on the enemy. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_enemy_a664e3f382bb87208d6cb1e0618c5daad}{Update}} (float dt, Vector2f player\+Position)
+\begin{DoxyCompactList}\small\item\em Updates the state of the enemy. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_enemy_a7c1558990e6ea280021f3f38e1d3fc62}{Render}} (sf\+::\+Render\+Target \&target)
+\begin{DoxyCompactList}\small\item\em Renders the enemy on the screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_enemy}{Enemy}}}
+\begin{DoxyCompactItemize}
+\item 
+float {\bfseries dt\+Multiplier}
+\item 
+sf\+::\+Sprite {\bfseries sprite}
+\item 
+sf\+::\+Texture \texorpdfstring{$\ast$}{*} {\bfseries texture}
+\item 
+sf\+::\+Vector2f {\bfseries direction}
+\item 
+sf\+::\+Vector2u {\bfseries window\+Bounds}
+\item 
+float {\bfseries damage\+Timer}
+\item 
+float {\bfseries damage\+Timer\+Max}
+\item 
+int {\bfseries hp}
+\item 
+int {\bfseries hp\+Max}
+\item 
+int {\bfseries damage\+Min}
+\item 
+int {\bfseries damage\+Max}
+\item 
+float {\bfseries exp}
+\item 
+int {\bfseries enemy\+Spawn\+Timer}
+\item 
+int {\bfseries enemy\+Spawn\+Timer\+Max}
+\item 
+int {\bfseries player\+To\+Follow} = 0
+\item 
+float {\bfseries speedx}
+\item 
+float {\bfseries speedy}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_move_left_enemy_ab4a2e90fc3bb5663e07f7f62d6f0a2ad}\index{MoveLeftEnemy@{MoveLeftEnemy}!MoveLeftEnemy@{MoveLeftEnemy}}
+\index{MoveLeftEnemy@{MoveLeftEnemy}!MoveLeftEnemy@{MoveLeftEnemy}}
+\doxysubsubsection{\texorpdfstring{MoveLeftEnemy()}{MoveLeftEnemy()}}
+{\footnotesize\ttfamily \label{class_move_left_enemy_ab4a2e90fc3bb5663e07f7f62d6f0a2ad} 
+Move\+Left\+Enemy\+::\+Move\+Left\+Enemy (\begin{DoxyParamCaption}\item[{Texture \texorpdfstring{$\ast$}{*}}]{texture}{, }\item[{Vector2u}]{window\+Bounds}{, }\item[{Vector2f}]{position}{, }\item[{Vector2f}]{direction}{, }\item[{Vector2f}]{scale}{, }\item[{float}]{exp}{, }\item[{int}]{hp\+Max}{, }\item[{int}]{damage\+Max}{, }\item[{int}]{damage\+Min}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a new \doxylink{class_move_left_enemy}{Move\+Left\+Enemy} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em texture} & Pointer to the texture for the enemy. \\
+\hline
+{\em window\+Bounds} & The bounds of the game window. \\
+\hline
+{\em position} & Initial position of the enemy. \\
+\hline
+{\em direction} & Initial movement direction of the enemy. \\
+\hline
+{\em scale} & Scale factor for the enemy sprite. \\
+\hline
+{\em exp} & Experience points gained when defeating the enemy. \\
+\hline
+{\em hp\+Max} & Maximum hit points of the enemy. \\
+\hline
+{\em damage\+Max} & Maximum damage inflicted by the enemy. \\
+\hline
+{\em damage\+Min} & Minimum damage inflicted by the enemy. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_move_left_enemy_a229d35fded3969dae4cd0050e8c57110}\index{MoveLeftEnemy@{MoveLeftEnemy}!Move@{Move}}
+\index{Move@{Move}!MoveLeftEnemy@{MoveLeftEnemy}}
+\doxysubsubsection{\texorpdfstring{Move()}{Move()}}
+{\footnotesize\ttfamily \label{class_move_left_enemy_a229d35fded3969dae4cd0050e8c57110} 
+void Move\+Left\+Enemy\+::\+Move (\begin{DoxyParamCaption}\item[{float}]{dt}{, }\item[{Vector2f}]{player\+Position}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Moves the \doxylink{class_move_left_enemy}{Move\+Left\+Enemy}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dt} & Time elapsed since the last update. \\
+\hline
+{\em player\+Position} & Position of the player. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_enemy}{Enemy}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/kaloyanbakardzhiev/\+Documents/\+Uni/\+OOP/\+Project/sfml/\+Space\+Shooter/include/\+Enemys/\mbox{\hyperlink{_move_left_8hpp}{Move\+Left.\+hpp}}\item 
+/\+Users/kaloyanbakardzhiev/\+Documents/\+Uni/\+OOP/\+Project/sfml/\+Space\+Shooter/src/\+Enemys/\mbox{\hyperlink{_move_left_8cpp}{Move\+Left.\+cpp}}\end{DoxyCompactItemize}

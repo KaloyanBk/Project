@@ -1,3 +1,13 @@
+/**
+ * @file Player.hpp
+ * @author Kaloyan
+ * @brief This is the header file for the Player class, which is used to create the player object.
+ * @version 0.1
+ * @date 2024-05-30
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #pragma once
 #include <vector>
 #include <iostream>

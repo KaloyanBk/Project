@@ -1,3 +1,13 @@
+/**
+ * @file DynamicArray.hpp
+ * @author Kaloyan
+ * @brief This is the header file for the DynamicArray class, which is used to create a dynamic array of elements of any type.
+ * @version 0.1
+ * @date 2024-05-30
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #include <stdexcept>
 #include <vector>
 

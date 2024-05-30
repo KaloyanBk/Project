@@ -1,0 +1,50 @@
+\doxysection{Bullet.\+hpp}
+\hypertarget{_bullet_8hpp_source}{}\label{_bullet_8hpp_source}\index{/Users/kaloyanbakardzhiev/Documents/Uni/OOP/Project/sfml/SpaceShooter/include/Bullets/Bullet.hpp@{/Users/kaloyanbakardzhiev/Documents/Uni/OOP/Project/sfml/SpaceShooter/include/Bullets/Bullet.hpp}}
+\mbox{\hyperlink{_bullet_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_bullet_resources_8hpp}{../Resources/BulletResources.hpp}}"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_text_tag_8hpp}{../TextTag.hpp}}"{}}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_bullet}{Bullet}}}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{float}\ dtMultiplier;}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ Sprite\ sprite;}
+\DoxyCodeLine{00022\ \ \ \ \ Texture\ *texture;}
+\DoxyCodeLine{00023\ \ \ \ \ Vector2f\ currentVelocity;}
+\DoxyCodeLine{00024\ \ \ \ \ Vector2f\ direction;}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{float}\ maxVelocity;}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{float}\ acceleration;}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{int}\ damage;}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{int}\ damageMax;}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{int}\ level;}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{class_bullet_a52afadd16e72cc4657ca9597223d9b49}{Bullet}}(Vector2f\ pos,\ \textcolor{keywordtype}{int}\ level,Vector2f\ direction\ =\ Vector2f(1.f,\ 0.f),}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ initialVelocity\ =\ 2.f,\ \textcolor{keywordtype}{float}\ maxVelocity\ =\ 50.f,}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ acceleration\ =\ 1.f);}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_bullet_aaeb5cb41d7db89f49007b08b41f1bfcf}{\string~Bullet}}();}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{comment}{//\ Accessors}}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{const}\ FloatRect\ getBounds()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ this-\/>sprite.getGlobalBounds();\ \}}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{const}\ Vector2f\ \&getPosition()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ this-\/>sprite.getPosition();\ \}}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&getDamage()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ this-\/>damage;\ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{comment}{//\ Setters}}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bullet_a7eb35dd47e88c719817eb73988a16914}{setTexture}}(\textcolor{keywordtype}{int}\ type,\ \textcolor{keywordtype}{int}\ level);}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bullet_a8796cb4bf3754659c218ee6fe9fa322e}{setDamage}}(\textcolor{keywordtype}{int}\ damage,\ \textcolor{keywordtype}{int}\ level);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{comment}{//\ Functions}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bullet_a62b81c40626e465d7a82b3606d9109b2}{Move}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&dt);}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bullet_a7201b09644ef8aab96f32ac6a7d9bba2}{Update}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&dt);}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bullet_a1b7b227c6a3c9ed92a3bb257b6ec9e0e}{Render}}(RenderTarget\ \&target);}
+\DoxyCodeLine{00053\ \};}
+
+\end{DoxyCode}

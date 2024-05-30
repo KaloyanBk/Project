@@ -1,0 +1,500 @@
+\doxysection{/\+Users/kaloyanbakardzhiev/\+Documents/\+Uni/\+OOP/\+Project/sfml/\+Space\+Shooter/include/\+Resources/\+Save\+Data.hpp File Reference}
+\hypertarget{_save_data_8hpp}{}\label{_save_data_8hpp}\index{/Users/kaloyanbakardzhiev/Documents/Uni/OOP/Project/sfml/SpaceShooter/include/Resources/SaveData.hpp@{/Users/kaloyanbakardzhiev/Documents/Uni/OOP/Project/sfml/SpaceShooter/include/Resources/SaveData.hpp}}
+
+
+This is the header file for the Save\+Data class, which is used to save and load data from the game.  
+
+
+{\ttfamily \#include $<$nlohmann/json.\+hpp$>$}\newline
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{_save_data_8hpp_ab701e3ac61a85b337ec5c1abaad6742d}\label{_save_data_8hpp_ab701e3ac61a85b337ec5c1abaad6742d} 
+using {\bfseries json} = nlohmann\+::json
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_save_data_8hpp_a360ec20bf6288a2f4709be0a43526792}{save\+Data}} (int number\+Of\+Players, int player1\+Level, int player1\+Hp, int player1\+Hp\+Max, float player1\+Exp, float player1\+Exp\+Next, int player1\+Score, int player2\+Level, int player2\+Hp, int player2\+Hp\+Max, float player2\+Exp, float player2\+Exp\+Next, int player2\+Score, bool upper\+Weapon, int upper\+Weapon\+Level, bool lower\+Weapon, int lower\+Weapon\+Level, int type\+Of\+Bullet)
+\begin{DoxyCompactList}\small\item\em Saves game data to a JSON file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_save_data_8hpp_aed5b0bce69a48697ade2253b93b98886}{load\+Saved\+Data}} (int \&number\+Of\+Players, int \&player1\+Level, int \&player1\+Hp, int \&player1\+Hp\+Max, float \&player1\+Exp, float \&player1\+Exp\+Next, int \&player1\+Score, int \&player2\+Level, int \&player2\+Hp, int \&player2\+Hp\+Max, float \&player2\+Exp, float \&player2\+Exp\+Next, int \&player2\+Score, bool \&upper\+Weapon, int \&upper\+Weapon\+Level, bool \&lower\+Weapon, int \&lower\+Weapon\+Level, int \&type\+Of\+Bullet)
+\begin{DoxyCompactList}\small\item\em Loads game data from a JSON file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_save_data_8hpp_af438d39164d62677a6fca47d4cb41317}{save\+Default\+Data}} ()
+\begin{DoxyCompactList}\small\item\em Saves default game data to a JSON file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_save_data_8hpp_ae6c9d9a4af571cda77df8820bdbbe951}{erace\+Saved\+Data}} ()
+\begin{DoxyCompactList}\small\item\em Erases saved game data by replacing it with default data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_save_data_8hpp_adad014559aeca149c6a913756f088036}{set\+Number\+Of\+Players}} (int number\+Of\+Players)
+\begin{DoxyCompactList}\small\item\em Sets the number of players in the saved game data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_save_data_8hpp_a34cedd63769cb04e354624fb4eff8900}{set\+Player1\+Level}} (int player1\+Level)
+\begin{DoxyCompactList}\small\item\em Sets the level of player 1 in the saved game data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_save_data_8hpp_a090e54b94dfbf8fedc1006cceed9ac7f}{set\+Player1\+Hp}} (int player1\+Hp)
+\begin{DoxyCompactList}\small\item\em Sets the HP of player 1 in the saved game data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_save_data_8hpp_a8e09e1d7d9255542f0e4cbbf5c594863}{set\+Player1\+Hp\+Max}} (int player1\+Hp\+Max)
+\begin{DoxyCompactList}\small\item\em Sets the maximum HP of player 1 in the saved game data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_save_data_8hpp_a3281bef45d02d104a94653b35da2d365}{set\+Player1\+Exp}} (float player1\+Exp)
+\begin{DoxyCompactList}\small\item\em Sets the experience points of player 1 in the saved game data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_save_data_8hpp_af1802b10ea047e50a85679b56a95c64a}{set\+Player1\+Exp\+Next}} (float player1\+Exp\+Next)
+\begin{DoxyCompactList}\small\item\em Sets the next level experience points of player 1 in the saved game data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_save_data_8hpp_a662495520b8a52c8b900044c997688bd}{set\+Player1\+Score}} (int player1\+Score)
+\begin{DoxyCompactList}\small\item\em Sets the score of player 1 in the saved game data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_save_data_8hpp_af433092d2830ad17c97733c699f7357b}{set\+Player2\+Level}} (int player2\+Level)
+\begin{DoxyCompactList}\small\item\em Sets the level of player 2 in the saved game data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_save_data_8hpp_a1bcbc55923f62f7f32666ac9b2de5416}{set\+Player2\+Hp}} (int player2\+Hp)
+\begin{DoxyCompactList}\small\item\em Sets the HP of player 2 in the saved game data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_save_data_8hpp_acf74efe184443eac8b9cf3c13de710f8}{set\+Player2\+Hp\+Max}} (int player2\+Hp\+Max)
+\begin{DoxyCompactList}\small\item\em Sets the maximum HP of player 2 in the saved game data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_save_data_8hpp_ac980f0df6e5092db25a7680f98e5df95}{set\+Player2\+Exp}} (float player2\+Exp)
+\begin{DoxyCompactList}\small\item\em Sets the experience points of player 2 in the saved game data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_save_data_8hpp_affc5fded2abad2852a83499405e39307}{set\+Player2\+Exp\+Next}} (float player2\+Exp\+Next)
+\begin{DoxyCompactList}\small\item\em Sets the next level experience points of player 2 in the saved game data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_save_data_8hpp_a19827456d0ca9c3b587155bc2de523df}{set\+Player2\+Score}} (int player2\+Score)
+\begin{DoxyCompactList}\small\item\em Sets the score of player 2 in the saved game data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_save_data_8hpp_a864ad71a4c5a0e1405fb100bf6728c2d}{set\+Upper\+Weapon}} (bool upper\+Weapon)
+\begin{DoxyCompactList}\small\item\em Sets whether the upper weapon is enabled in the saved game data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_save_data_8hpp_add6c2e01859139694444353006e585e6}{set\+Upper\+Weapon\+Level}} (int upper\+Weapon\+Level)
+\begin{DoxyCompactList}\small\item\em Sets the level of the upper weapon in the saved game data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_save_data_8hpp_ac9f9466080d9eea07609856630d69a7e}{set\+Lower\+Weapon}} (bool lower\+Weapon)
+\begin{DoxyCompactList}\small\item\em Sets whether the lower weapon is enabled in the saved game data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_save_data_8hpp_a09e810812be0e18104f29bb6f4925a3a}{set\+Lower\+Weapon\+Level}} (int lower\+Weapon\+Level)
+\begin{DoxyCompactList}\small\item\em Sets the level of the lower weapon in the saved game data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_save_data_8hpp_af4589794140531c179dbbdf00cf22e1e}{set\+Type\+Of\+Bullet}} (int type\+Of\+Bullet)
+\begin{DoxyCompactList}\small\item\em Sets the type of bullet in the saved game data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_save_data_8hpp_a3f99c11fc2cfb9cb3ad5284411f67415}{set\+Continue\+Game}} (bool continue\+Game)
+\begin{DoxyCompactList}\small\item\em Sets whether the game continues from the saved state in the saved game data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This is the header file for the Save\+Data class, which is used to save and load data from the game. 
+
+\begin{DoxyAuthor}{Author}
+Kaloyan 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2024-\/05-\/30
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2024 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_save_data_8hpp_ae6c9d9a4af571cda77df8820bdbbe951}\index{SaveData.hpp@{SaveData.hpp}!eraceSavedData@{eraceSavedData}}
+\index{eraceSavedData@{eraceSavedData}!SaveData.hpp@{SaveData.hpp}}
+\doxysubsubsection{\texorpdfstring{eraceSavedData()}{eraceSavedData()}}
+{\footnotesize\ttfamily \label{_save_data_8hpp_ae6c9d9a4af571cda77df8820bdbbe951} 
+void erace\+Saved\+Data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Erases saved game data by replacing it with default data. 
+
+Create default data
+
+Open file to save default data
+
+Write default data to file\Hypertarget{_save_data_8hpp_aed5b0bce69a48697ade2253b93b98886}\index{SaveData.hpp@{SaveData.hpp}!loadSavedData@{loadSavedData}}
+\index{loadSavedData@{loadSavedData}!SaveData.hpp@{SaveData.hpp}}
+\doxysubsubsection{\texorpdfstring{loadSavedData()}{loadSavedData()}}
+{\footnotesize\ttfamily \label{_save_data_8hpp_aed5b0bce69a48697ade2253b93b98886} 
+void load\+Saved\+Data (\begin{DoxyParamCaption}\item[{int \&}]{number\+Of\+Players}{, }\item[{int \&}]{player1\+Level}{, }\item[{int \&}]{player1\+Hp}{, }\item[{int \&}]{player1\+Hp\+Max}{, }\item[{float \&}]{player1\+Exp}{, }\item[{float \&}]{player1\+Exp\+Next}{, }\item[{int \&}]{player1\+Score}{, }\item[{int \&}]{player2\+Level}{, }\item[{int \&}]{player2\+Hp}{, }\item[{int \&}]{player2\+Hp\+Max}{, }\item[{float \&}]{player2\+Exp}{, }\item[{float \&}]{player2\+Exp\+Next}{, }\item[{int \&}]{player2\+Score}{, }\item[{bool \&}]{upper\+Weapon}{, }\item[{int \&}]{upper\+Weapon\+Level}{, }\item[{bool \&}]{lower\+Weapon}{, }\item[{int \&}]{lower\+Weapon\+Level}{, }\item[{int \&}]{type\+Of\+Bullet}{}\end{DoxyParamCaption})}
+
+
+
+Loads game data from a JSON file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em number\+Of\+Players} & The number of players. \\
+\hline
+{\em player1\+Level} & \doxylink{class_player}{Player} 1\textquotesingle{}s level. \\
+\hline
+{\em player1\+Hp} & \doxylink{class_player}{Player} 1\textquotesingle{}s health points. \\
+\hline
+{\em player1\+Hp\+Max} & \doxylink{class_player}{Player} 1\textquotesingle{}s maximum health points. \\
+\hline
+{\em player1\+Exp} & \doxylink{class_player}{Player} 1\textquotesingle{}s experience. \\
+\hline
+{\em player1\+Exp\+Next} & \doxylink{class_player}{Player} 1\textquotesingle{}s experience required for next level. \\
+\hline
+{\em player1\+Score} & \doxylink{class_player}{Player} 1\textquotesingle{}s score. \\
+\hline
+{\em player2\+Level} & \doxylink{class_player}{Player} 2\textquotesingle{}s level. \\
+\hline
+{\em player2\+Hp} & \doxylink{class_player}{Player} 2\textquotesingle{}s health points. \\
+\hline
+{\em player2\+Hp\+Max} & \doxylink{class_player}{Player} 2\textquotesingle{}s maximum health points. \\
+\hline
+{\em player2\+Exp} & \doxylink{class_player}{Player} 2\textquotesingle{}s experience. \\
+\hline
+{\em player2\+Exp\+Next} & \doxylink{class_player}{Player} 2\textquotesingle{}s experience required for next level. \\
+\hline
+{\em player2\+Score} & \doxylink{class_player}{Player} 2\textquotesingle{}s score. \\
+\hline
+{\em upper\+Weapon} & Whether the upper weapon is enabled. \\
+\hline
+{\em upper\+Weapon\+Level} & The level of the upper weapon. \\
+\hline
+{\em lower\+Weapon} & Whether the lower weapon is enabled. \\
+\hline
+{\em lower\+Weapon\+Level} & The level of the lower weapon. \\
+\hline
+{\em type\+Of\+Bullet} & The type of bullet. \\
+\hline
+\end{DoxyParams}
+Open file to load data
+
+Read data from file
+
+Extract game data\Hypertarget{_save_data_8hpp_a360ec20bf6288a2f4709be0a43526792}\index{SaveData.hpp@{SaveData.hpp}!saveData@{saveData}}
+\index{saveData@{saveData}!SaveData.hpp@{SaveData.hpp}}
+\doxysubsubsection{\texorpdfstring{saveData()}{saveData()}}
+{\footnotesize\ttfamily \label{_save_data_8hpp_a360ec20bf6288a2f4709be0a43526792} 
+void save\+Data (\begin{DoxyParamCaption}\item[{int}]{number\+Of\+Players}{, }\item[{int}]{player1\+Level}{, }\item[{int}]{player1\+Hp}{, }\item[{int}]{player1\+Hp\+Max}{, }\item[{float}]{player1\+Exp}{, }\item[{float}]{player1\+Exp\+Next}{, }\item[{int}]{player1\+Score}{, }\item[{int}]{player2\+Level}{, }\item[{int}]{player2\+Hp}{, }\item[{int}]{player2\+Hp\+Max}{, }\item[{float}]{player2\+Exp}{, }\item[{float}]{player2\+Exp\+Next}{, }\item[{int}]{player2\+Score}{, }\item[{bool}]{upper\+Weapon}{, }\item[{int}]{upper\+Weapon\+Level}{, }\item[{bool}]{lower\+Weapon}{, }\item[{int}]{lower\+Weapon\+Level}{, }\item[{int}]{type\+Of\+Bullet}{}\end{DoxyParamCaption})}
+
+
+
+Saves game data to a JSON file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em number\+Of\+Players} & The number of players. \\
+\hline
+{\em player1\+Level} & \doxylink{class_player}{Player} 1\textquotesingle{}s level. \\
+\hline
+{\em player1\+Hp} & \doxylink{class_player}{Player} 1\textquotesingle{}s health points. \\
+\hline
+{\em player1\+Hp\+Max} & \doxylink{class_player}{Player} 1\textquotesingle{}s maximum health points. \\
+\hline
+{\em player1\+Exp} & \doxylink{class_player}{Player} 1\textquotesingle{}s experience. \\
+\hline
+{\em player1\+Exp\+Next} & \doxylink{class_player}{Player} 1\textquotesingle{}s experience required for next level. \\
+\hline
+{\em player1\+Score} & \doxylink{class_player}{Player} 1\textquotesingle{}s score. \\
+\hline
+{\em player2\+Level} & \doxylink{class_player}{Player} 2\textquotesingle{}s level. \\
+\hline
+{\em player2\+Hp} & \doxylink{class_player}{Player} 2\textquotesingle{}s health points. \\
+\hline
+{\em player2\+Hp\+Max} & \doxylink{class_player}{Player} 2\textquotesingle{}s maximum health points. \\
+\hline
+{\em player2\+Exp} & \doxylink{class_player}{Player} 2\textquotesingle{}s experience. \\
+\hline
+{\em player2\+Exp\+Next} & \doxylink{class_player}{Player} 2\textquotesingle{}s experience required for next level. \\
+\hline
+{\em player2\+Score} & \doxylink{class_player}{Player} 2\textquotesingle{}s score. \\
+\hline
+{\em upper\+Weapon} & Whether the upper weapon is enabled. \\
+\hline
+{\em upper\+Weapon\+Level} & The level of the upper weapon. \\
+\hline
+{\em lower\+Weapon} & Whether the lower weapon is enabled. \\
+\hline
+{\em lower\+Weapon\+Level} & The level of the lower weapon. \\
+\hline
+{\em type\+Of\+Bullet} & The type of bullet. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_save_data_8hpp_af438d39164d62677a6fca47d4cb41317}\index{SaveData.hpp@{SaveData.hpp}!saveDefaultData@{saveDefaultData}}
+\index{saveDefaultData@{saveDefaultData}!SaveData.hpp@{SaveData.hpp}}
+\doxysubsubsection{\texorpdfstring{saveDefaultData()}{saveDefaultData()}}
+{\footnotesize\ttfamily \label{_save_data_8hpp_af438d39164d62677a6fca47d4cb41317} 
+void save\+Default\+Data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Saves default game data to a JSON file. 
+
+Open file to load data
+
+Read data from file
+
+Update default data
+
+Save default data\Hypertarget{_save_data_8hpp_a3f99c11fc2cfb9cb3ad5284411f67415}\index{SaveData.hpp@{SaveData.hpp}!setContinueGame@{setContinueGame}}
+\index{setContinueGame@{setContinueGame}!SaveData.hpp@{SaveData.hpp}}
+\doxysubsubsection{\texorpdfstring{setContinueGame()}{setContinueGame()}}
+{\footnotesize\ttfamily \label{_save_data_8hpp_a3f99c11fc2cfb9cb3ad5284411f67415} 
+void set\+Continue\+Game (\begin{DoxyParamCaption}\item[{bool}]{continue\+Game}{}\end{DoxyParamCaption})}
+
+
+
+Sets whether the game continues from the saved state in the saved game data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em continue\+Game} & Whether the game continues. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_save_data_8hpp_ac9f9466080d9eea07609856630d69a7e}\index{SaveData.hpp@{SaveData.hpp}!setLowerWeapon@{setLowerWeapon}}
+\index{setLowerWeapon@{setLowerWeapon}!SaveData.hpp@{SaveData.hpp}}
+\doxysubsubsection{\texorpdfstring{setLowerWeapon()}{setLowerWeapon()}}
+{\footnotesize\ttfamily \label{_save_data_8hpp_ac9f9466080d9eea07609856630d69a7e} 
+void set\+Lower\+Weapon (\begin{DoxyParamCaption}\item[{bool}]{lower\+Weapon}{}\end{DoxyParamCaption})}
+
+
+
+Sets whether the lower weapon is enabled in the saved game data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em lower\+Weapon} & Whether the lower weapon is enabled. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_save_data_8hpp_a09e810812be0e18104f29bb6f4925a3a}\index{SaveData.hpp@{SaveData.hpp}!setLowerWeaponLevel@{setLowerWeaponLevel}}
+\index{setLowerWeaponLevel@{setLowerWeaponLevel}!SaveData.hpp@{SaveData.hpp}}
+\doxysubsubsection{\texorpdfstring{setLowerWeaponLevel()}{setLowerWeaponLevel()}}
+{\footnotesize\ttfamily \label{_save_data_8hpp_a09e810812be0e18104f29bb6f4925a3a} 
+void set\+Lower\+Weapon\+Level (\begin{DoxyParamCaption}\item[{int}]{lower\+Weapon\+Level}{}\end{DoxyParamCaption})}
+
+
+
+Sets the level of the lower weapon in the saved game data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em lower\+Weapon\+Level} & The level of the lower weapon. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_save_data_8hpp_adad014559aeca149c6a913756f088036}\index{SaveData.hpp@{SaveData.hpp}!setNumberOfPlayers@{setNumberOfPlayers}}
+\index{setNumberOfPlayers@{setNumberOfPlayers}!SaveData.hpp@{SaveData.hpp}}
+\doxysubsubsection{\texorpdfstring{setNumberOfPlayers()}{setNumberOfPlayers()}}
+{\footnotesize\ttfamily \label{_save_data_8hpp_adad014559aeca149c6a913756f088036} 
+void set\+Number\+Of\+Players (\begin{DoxyParamCaption}\item[{int}]{number\+Of\+Players}{}\end{DoxyParamCaption})}
+
+
+
+Sets the number of players in the saved game data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em number\+Of\+Players} & The number of players. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_save_data_8hpp_a3281bef45d02d104a94653b35da2d365}\index{SaveData.hpp@{SaveData.hpp}!setPlayer1Exp@{setPlayer1Exp}}
+\index{setPlayer1Exp@{setPlayer1Exp}!SaveData.hpp@{SaveData.hpp}}
+\doxysubsubsection{\texorpdfstring{setPlayer1Exp()}{setPlayer1Exp()}}
+{\footnotesize\ttfamily \label{_save_data_8hpp_a3281bef45d02d104a94653b35da2d365} 
+void set\+Player1\+Exp (\begin{DoxyParamCaption}\item[{float}]{player1\+Exp}{}\end{DoxyParamCaption})}
+
+
+
+Sets the experience points of player 1 in the saved game data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player1\+Exp} & The experience points of player 1. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_save_data_8hpp_af1802b10ea047e50a85679b56a95c64a}\index{SaveData.hpp@{SaveData.hpp}!setPlayer1ExpNext@{setPlayer1ExpNext}}
+\index{setPlayer1ExpNext@{setPlayer1ExpNext}!SaveData.hpp@{SaveData.hpp}}
+\doxysubsubsection{\texorpdfstring{setPlayer1ExpNext()}{setPlayer1ExpNext()}}
+{\footnotesize\ttfamily \label{_save_data_8hpp_af1802b10ea047e50a85679b56a95c64a} 
+void set\+Player1\+Exp\+Next (\begin{DoxyParamCaption}\item[{float}]{player1\+Exp\+Next}{}\end{DoxyParamCaption})}
+
+
+
+Sets the next level experience points of player 1 in the saved game data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player1\+Exp\+Next} & The next level experience points of player 1. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_save_data_8hpp_a090e54b94dfbf8fedc1006cceed9ac7f}\index{SaveData.hpp@{SaveData.hpp}!setPlayer1Hp@{setPlayer1Hp}}
+\index{setPlayer1Hp@{setPlayer1Hp}!SaveData.hpp@{SaveData.hpp}}
+\doxysubsubsection{\texorpdfstring{setPlayer1Hp()}{setPlayer1Hp()}}
+{\footnotesize\ttfamily \label{_save_data_8hpp_a090e54b94dfbf8fedc1006cceed9ac7f} 
+void set\+Player1\+Hp (\begin{DoxyParamCaption}\item[{int}]{player1\+Hp}{}\end{DoxyParamCaption})}
+
+
+
+Sets the HP of player 1 in the saved game data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player1\+Hp} & The HP of player 1. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_save_data_8hpp_a8e09e1d7d9255542f0e4cbbf5c594863}\index{SaveData.hpp@{SaveData.hpp}!setPlayer1HpMax@{setPlayer1HpMax}}
+\index{setPlayer1HpMax@{setPlayer1HpMax}!SaveData.hpp@{SaveData.hpp}}
+\doxysubsubsection{\texorpdfstring{setPlayer1HpMax()}{setPlayer1HpMax()}}
+{\footnotesize\ttfamily \label{_save_data_8hpp_a8e09e1d7d9255542f0e4cbbf5c594863} 
+void set\+Player1\+Hp\+Max (\begin{DoxyParamCaption}\item[{int}]{player1\+Hp\+Max}{}\end{DoxyParamCaption})}
+
+
+
+Sets the maximum HP of player 1 in the saved game data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player1\+Hp\+Max} & The maximum HP of player 1. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_save_data_8hpp_a34cedd63769cb04e354624fb4eff8900}\index{SaveData.hpp@{SaveData.hpp}!setPlayer1Level@{setPlayer1Level}}
+\index{setPlayer1Level@{setPlayer1Level}!SaveData.hpp@{SaveData.hpp}}
+\doxysubsubsection{\texorpdfstring{setPlayer1Level()}{setPlayer1Level()}}
+{\footnotesize\ttfamily \label{_save_data_8hpp_a34cedd63769cb04e354624fb4eff8900} 
+void set\+Player1\+Level (\begin{DoxyParamCaption}\item[{int}]{player1\+Level}{}\end{DoxyParamCaption})}
+
+
+
+Sets the level of player 1 in the saved game data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player1\+Level} & The level of player 1. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_save_data_8hpp_a662495520b8a52c8b900044c997688bd}\index{SaveData.hpp@{SaveData.hpp}!setPlayer1Score@{setPlayer1Score}}
+\index{setPlayer1Score@{setPlayer1Score}!SaveData.hpp@{SaveData.hpp}}
+\doxysubsubsection{\texorpdfstring{setPlayer1Score()}{setPlayer1Score()}}
+{\footnotesize\ttfamily \label{_save_data_8hpp_a662495520b8a52c8b900044c997688bd} 
+void set\+Player1\+Score (\begin{DoxyParamCaption}\item[{int}]{player1\+Score}{}\end{DoxyParamCaption})}
+
+
+
+Sets the score of player 1 in the saved game data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player1\+Score} & The score of player 1. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_save_data_8hpp_ac980f0df6e5092db25a7680f98e5df95}\index{SaveData.hpp@{SaveData.hpp}!setPlayer2Exp@{setPlayer2Exp}}
+\index{setPlayer2Exp@{setPlayer2Exp}!SaveData.hpp@{SaveData.hpp}}
+\doxysubsubsection{\texorpdfstring{setPlayer2Exp()}{setPlayer2Exp()}}
+{\footnotesize\ttfamily \label{_save_data_8hpp_ac980f0df6e5092db25a7680f98e5df95} 
+void set\+Player2\+Exp (\begin{DoxyParamCaption}\item[{float}]{player2\+Exp}{}\end{DoxyParamCaption})}
+
+
+
+Sets the experience points of player 2 in the saved game data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player2\+Exp} & The experience points of player 2. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_save_data_8hpp_affc5fded2abad2852a83499405e39307}\index{SaveData.hpp@{SaveData.hpp}!setPlayer2ExpNext@{setPlayer2ExpNext}}
+\index{setPlayer2ExpNext@{setPlayer2ExpNext}!SaveData.hpp@{SaveData.hpp}}
+\doxysubsubsection{\texorpdfstring{setPlayer2ExpNext()}{setPlayer2ExpNext()}}
+{\footnotesize\ttfamily \label{_save_data_8hpp_affc5fded2abad2852a83499405e39307} 
+void set\+Player2\+Exp\+Next (\begin{DoxyParamCaption}\item[{float}]{player2\+Exp\+Next}{}\end{DoxyParamCaption})}
+
+
+
+Sets the next level experience points of player 2 in the saved game data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player2\+Exp\+Next} & The next level experience points of player 2. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_save_data_8hpp_a1bcbc55923f62f7f32666ac9b2de5416}\index{SaveData.hpp@{SaveData.hpp}!setPlayer2Hp@{setPlayer2Hp}}
+\index{setPlayer2Hp@{setPlayer2Hp}!SaveData.hpp@{SaveData.hpp}}
+\doxysubsubsection{\texorpdfstring{setPlayer2Hp()}{setPlayer2Hp()}}
+{\footnotesize\ttfamily \label{_save_data_8hpp_a1bcbc55923f62f7f32666ac9b2de5416} 
+void set\+Player2\+Hp (\begin{DoxyParamCaption}\item[{int}]{player2\+Hp}{}\end{DoxyParamCaption})}
+
+
+
+Sets the HP of player 2 in the saved game data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player2\+Hp} & The HP of player 2. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_save_data_8hpp_acf74efe184443eac8b9cf3c13de710f8}\index{SaveData.hpp@{SaveData.hpp}!setPlayer2HpMax@{setPlayer2HpMax}}
+\index{setPlayer2HpMax@{setPlayer2HpMax}!SaveData.hpp@{SaveData.hpp}}
+\doxysubsubsection{\texorpdfstring{setPlayer2HpMax()}{setPlayer2HpMax()}}
+{\footnotesize\ttfamily \label{_save_data_8hpp_acf74efe184443eac8b9cf3c13de710f8} 
+void set\+Player2\+Hp\+Max (\begin{DoxyParamCaption}\item[{int}]{player2\+Hp\+Max}{}\end{DoxyParamCaption})}
+
+
+
+Sets the maximum HP of player 2 in the saved game data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player2\+Hp\+Max} & The maximum HP of player 2. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_save_data_8hpp_af433092d2830ad17c97733c699f7357b}\index{SaveData.hpp@{SaveData.hpp}!setPlayer2Level@{setPlayer2Level}}
+\index{setPlayer2Level@{setPlayer2Level}!SaveData.hpp@{SaveData.hpp}}
+\doxysubsubsection{\texorpdfstring{setPlayer2Level()}{setPlayer2Level()}}
+{\footnotesize\ttfamily \label{_save_data_8hpp_af433092d2830ad17c97733c699f7357b} 
+void set\+Player2\+Level (\begin{DoxyParamCaption}\item[{int}]{player2\+Level}{}\end{DoxyParamCaption})}
+
+
+
+Sets the level of player 2 in the saved game data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player2\+Level} & The level of player 2. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_save_data_8hpp_a19827456d0ca9c3b587155bc2de523df}\index{SaveData.hpp@{SaveData.hpp}!setPlayer2Score@{setPlayer2Score}}
+\index{setPlayer2Score@{setPlayer2Score}!SaveData.hpp@{SaveData.hpp}}
+\doxysubsubsection{\texorpdfstring{setPlayer2Score()}{setPlayer2Score()}}
+{\footnotesize\ttfamily \label{_save_data_8hpp_a19827456d0ca9c3b587155bc2de523df} 
+void set\+Player2\+Score (\begin{DoxyParamCaption}\item[{int}]{player2\+Score}{}\end{DoxyParamCaption})}
+
+
+
+Sets the score of player 2 in the saved game data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player2\+Score} & The score of player 2. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_save_data_8hpp_af4589794140531c179dbbdf00cf22e1e}\index{SaveData.hpp@{SaveData.hpp}!setTypeOfBullet@{setTypeOfBullet}}
+\index{setTypeOfBullet@{setTypeOfBullet}!SaveData.hpp@{SaveData.hpp}}
+\doxysubsubsection{\texorpdfstring{setTypeOfBullet()}{setTypeOfBullet()}}
+{\footnotesize\ttfamily \label{_save_data_8hpp_af4589794140531c179dbbdf00cf22e1e} 
+void set\+Type\+Of\+Bullet (\begin{DoxyParamCaption}\item[{int}]{type\+Of\+Bullet}{}\end{DoxyParamCaption})}
+
+
+
+Sets the type of bullet in the saved game data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type\+Of\+Bullet} & The type of bullet. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_save_data_8hpp_a864ad71a4c5a0e1405fb100bf6728c2d}\index{SaveData.hpp@{SaveData.hpp}!setUpperWeapon@{setUpperWeapon}}
+\index{setUpperWeapon@{setUpperWeapon}!SaveData.hpp@{SaveData.hpp}}
+\doxysubsubsection{\texorpdfstring{setUpperWeapon()}{setUpperWeapon()}}
+{\footnotesize\ttfamily \label{_save_data_8hpp_a864ad71a4c5a0e1405fb100bf6728c2d} 
+void set\+Upper\+Weapon (\begin{DoxyParamCaption}\item[{bool}]{upper\+Weapon}{}\end{DoxyParamCaption})}
+
+
+
+Sets whether the upper weapon is enabled in the saved game data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em upper\+Weapon} & Whether the upper weapon is enabled. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_save_data_8hpp_add6c2e01859139694444353006e585e6}\index{SaveData.hpp@{SaveData.hpp}!setUpperWeaponLevel@{setUpperWeaponLevel}}
+\index{setUpperWeaponLevel@{setUpperWeaponLevel}!SaveData.hpp@{SaveData.hpp}}
+\doxysubsubsection{\texorpdfstring{setUpperWeaponLevel()}{setUpperWeaponLevel()}}
+{\footnotesize\ttfamily \label{_save_data_8hpp_add6c2e01859139694444353006e585e6} 
+void set\+Upper\+Weapon\+Level (\begin{DoxyParamCaption}\item[{int}]{upper\+Weapon\+Level}{}\end{DoxyParamCaption})}
+
+
+
+Sets the level of the upper weapon in the saved game data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em upper\+Weapon\+Level} & The level of the upper weapon. \\
+\hline
+\end{DoxyParams}

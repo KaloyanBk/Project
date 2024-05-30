@@ -1,0 +1,138 @@
+\doxysection{Button Class Reference}
+\hypertarget{class_button}{}\label{class_button}\index{Button@{Button}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_button_a2ecb667a749682b0c00e718f6944293b}{Button}} (float x, float y, float width, float height, float radius, sf\+::\+Font \&font, const std\+::string \&text, const sf\+::\+Color \&idle\+Color, const sf\+::\+Color \&hover\+Color, const sf\+::\+Color \&active\+Color)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{class_button}{Button} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_button_a2a001eb9c3cc8ae54768a850dd345002}{\texorpdfstring{$\sim$}{\string~}\+Button}} ()
+\begin{DoxyCompactList}\small\item\em Destroys the \doxylink{class_button}{Button} object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_button_aaed5e5efc38c4c360307f6ff1494aa4c}{set\+On\+Click}} (std\+::function$<$ void()$>$ func)
+\begin{DoxyCompactList}\small\item\em Sets the function to execute when the button is clicked. \end{DoxyCompactList}\item 
+\Hypertarget{class_button_a794d589a78859fefdbfc195b699944e4}\label{class_button_a794d589a78859fefdbfc195b699944e4} 
+bool {\bfseries is\+Clicked} (const sf\+::\+Vector2f \&mouse\+Pos) const
+\item 
+\Hypertarget{class_button_a8fda3e3769b0eff6c309d537edfa5e5a}\label{class_button_a8fda3e3769b0eff6c309d537edfa5e5a} 
+const std\+::string {\bfseries get\+Text} () const
+\item 
+void \mbox{\hyperlink{class_button_a19d9bd9b85d997709ee94f77f44d81a5}{update}} (const sf\+::\+Vector2f \&mouse\+Pos)
+\begin{DoxyCompactList}\small\item\em Updates the state of the button. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_button_af3343ed0ef673b808415ebcbe7a244dc}{render}} (sf\+::\+Render\+Target \&target)
+\begin{DoxyCompactList}\small\item\em Renders the button. \end{DoxyCompactList}\item 
+\Hypertarget{class_button_a188a10c78ff8cd18fa02fc178fae4ed8}\label{class_button_a188a10c78ff8cd18fa02fc178fae4ed8} 
+void {\bfseries change\+Color} (const sf\+::\+Color \&idle\+Color, const sf\+::\+Color \&hover\+Color, const sf\+::\+Color \&active\+Color)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_button_a8a4259a4c312e4ab8ffbeb613f2bd119}\label{class_button_a8a4259a4c312e4ab8ffbeb613f2bd119} 
+int {\bfseries times\+Pressed} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_button_a2ecb667a749682b0c00e718f6944293b}\index{Button@{Button}!Button@{Button}}
+\index{Button@{Button}!Button@{Button}}
+\doxysubsubsection{\texorpdfstring{Button()}{Button()}}
+{\footnotesize\ttfamily \label{class_button_a2ecb667a749682b0c00e718f6944293b} 
+Button\+::\+Button (\begin{DoxyParamCaption}\item[{float}]{x}{, }\item[{float}]{y}{, }\item[{float}]{width}{, }\item[{float}]{height}{, }\item[{float}]{radius}{, }\item[{sf\+::\+Font \&}]{font}{, }\item[{const std\+::string \&}]{text}{, }\item[{const sf\+::\+Color \&}]{idle\+Color}{, }\item[{const sf\+::\+Color \&}]{hover\+Color}{, }\item[{const sf\+::\+Color \&}]{active\+Color}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{class_button}{Button} object. 
+
+Initializes the \doxylink{class_button}{Button} object with specified parameters.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The x-\/coordinate of the button position. \\
+\hline
+{\em y} & The y-\/coordinate of the button position. \\
+\hline
+{\em width} & The width of the button. \\
+\hline
+{\em height} & The height of the button. \\
+\hline
+{\em radius} & The corner radius of the button. \\
+\hline
+{\em font} & Reference to the font used for the button text. \\
+\hline
+{\em text} & The text displayed on the button. \\
+\hline
+{\em idle\+Color} & The color of the button in idle state. \\
+\hline
+{\em hover\+Color} & The color of the button when hovered over. \\
+\hline
+{\em active\+Color} & The color of the button when clicked. \\
+\hline
+\end{DoxyParams}
+Adjust the vertical offset by changing the Y position of the text
+
+Adjust this value as needed\Hypertarget{class_button_a2a001eb9c3cc8ae54768a850dd345002}\index{Button@{Button}!````~Button@{\texorpdfstring{$\sim$}{\string~}Button}}
+\index{````~Button@{\texorpdfstring{$\sim$}{\string~}Button}!Button@{Button}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Button()}{\string~Button()}}
+{\footnotesize\ttfamily \label{class_button_a2a001eb9c3cc8ae54768a850dd345002} 
+Button\+::\texorpdfstring{$\sim$}{\string~}\+Button (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destroys the \doxylink{class_button}{Button} object. 
+
+Does not perform any specific actions. Provided for completeness. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_button_af3343ed0ef673b808415ebcbe7a244dc}\index{Button@{Button}!render@{render}}
+\index{render@{render}!Button@{Button}}
+\doxysubsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily \label{class_button_af3343ed0ef673b808415ebcbe7a244dc} 
+void Button\+::render (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Target \&}]{target}{}\end{DoxyParamCaption})}
+
+
+
+Renders the button. 
+
+Draws the button shape and text to the specified render target.
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & The render target to draw the button on. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_button_aaed5e5efc38c4c360307f6ff1494aa4c}\index{Button@{Button}!setOnClick@{setOnClick}}
+\index{setOnClick@{setOnClick}!Button@{Button}}
+\doxysubsubsection{\texorpdfstring{setOnClick()}{setOnClick()}}
+{\footnotesize\ttfamily \label{class_button_aaed5e5efc38c4c360307f6ff1494aa4c} 
+void Button\+::set\+On\+Click (\begin{DoxyParamCaption}\item[{std\+::function$<$ void()$>$}]{func}{}\end{DoxyParamCaption})}
+
+
+
+Sets the function to execute when the button is clicked. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em func} & The function to execute when the button is clicked. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_button_a19d9bd9b85d997709ee94f77f44d81a5}\index{Button@{Button}!update@{update}}
+\index{update@{update}!Button@{Button}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \label{class_button_a19d9bd9b85d997709ee94f77f44d81a5} 
+void Button\+::update (\begin{DoxyParamCaption}\item[{const sf\+::\+Vector2f \&}]{mouse\+Pos}{}\end{DoxyParamCaption})}
+
+
+
+Updates the state of the button. 
+
+Checks if the button is hovered over or clicked, and updates its state accordingly.
+
+
+\begin{DoxyParams}{Parameters}
+{\em mouse\+Pos} & The position of the mouse cursor. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/kaloyanbakardzhiev/\+Documents/\+Uni/\+OOP/\+Project/sfml/\+Space\+Shooter/include/\+Resources/\mbox{\hyperlink{_button_8hpp}{Button.\+hpp}}\item 
+/\+Users/kaloyanbakardzhiev/\+Documents/\+Uni/\+OOP/\+Project/sfml/\+Space\+Shooter/src/\+Resources/\mbox{\hyperlink{_button_8cpp}{Button.\+cpp}}\end{DoxyCompactItemize}

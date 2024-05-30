@@ -1,0 +1,177 @@
+\doxysection{Bullet\+Resources.\+hpp}
+\hypertarget{_bullet_resources_8hpp_source}{}\label{_bullet_resources_8hpp_source}\index{/Users/kaloyanbakardzhiev/Documents/Uni/OOP/Project/sfml/SpaceShooter/include/Resources/BulletResources.hpp@{/Users/kaloyanbakardzhiev/Documents/Uni/OOP/Project/sfml/SpaceShooter/include/Resources/BulletResources.hpp}}
+\mbox{\hyperlink{_bullet_resources_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{enum}\ BulletLevels}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{comment}{//\ Bullets}}
+\DoxyCodeLine{00019\ \ \ \ \ LEVEL1\ =\ 0,}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ LEVEL2,}
+\DoxyCodeLine{00022\ \ \ \ \ LEVEL3,}
+\DoxyCodeLine{00023\ \ \ \ \ LEVEL4,}
+\DoxyCodeLine{00024\ \ \ \ \ LEVEL5,}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{comment}{//\ Total}}
+\DoxyCodeLine{00027\ \ \ \ \ NUM\_BULLET\_LEVELS}
+\DoxyCodeLine{00028\ \};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{const}\ std::unordered\_map<BulletLevels,\ std::string>\ resourcePathsLaserBullets\ =\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \{LEVEL1,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/Bullet.png"{}}\},}
+\DoxyCodeLine{00032\ \ \ \ \ \{LEVEL2,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/Bullet.png"{}}\},}
+\DoxyCodeLine{00033\ \ \ \ \ \{LEVEL3,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/Bullet.png"{}}\},}
+\DoxyCodeLine{00034\ \ \ \ \ \{LEVEL4,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/Bullet.png"{}}\},}
+\DoxyCodeLine{00035\ \ \ \ \ \{LEVEL5,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/Bullet.png"{}}\},}
+\DoxyCodeLine{00036\ \};}
+\DoxyCodeLine{00037\ \textcolor{keyword}{const}\ std::unordered\_map<BulletLevels,\ unsigned\ int>\ resourcePathsBulletsDamage\ =\ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \{LEVEL1,\ 1\},}
+\DoxyCodeLine{00039\ \ \ \ \ \{LEVEL2,\ 1\},}
+\DoxyCodeLine{00040\ \ \ \ \ \{LEVEL3,\ 1\},}
+\DoxyCodeLine{00041\ \ \ \ \ \{LEVEL4,\ 1\},}
+\DoxyCodeLine{00042\ \ \ \ \ \{LEVEL5,\ 1\},}
+\DoxyCodeLine{00043\ \};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{keyword}{const}\ std::unordered\_map<BulletLevels,\ std::string>\ resourcePathsLightningBullets\ =\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{comment}{//\ Player}}
+\DoxyCodeLine{00048\ \ \ \ \ \{LEVEL1,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/LightningLevel1.png"{}}\},}
+\DoxyCodeLine{00049\ \ \ \ \ \{LEVEL2,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/LightningLevel2.png"{}}\},}
+\DoxyCodeLine{00050\ \ \ \ \ \{LEVEL3,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/LightningLevel3.png"{}}\},}
+\DoxyCodeLine{00051\ \ \ \ \ \{LEVEL4,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/LightningLevel4.png"{}}\},}
+\DoxyCodeLine{00052\ \ \ \ \ \{LEVEL5,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/LightningLevel5.png"{}}\},}
+\DoxyCodeLine{00053\ \};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{comment}{//\ Enum\ for\ all\ bullet\ damage\ types}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{keyword}{const}\ std::unordered\_map<BulletLevels,\ unsigned\ int>\ resourcePathsLightningBulletsDamage\ =\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \{LEVEL1,\ 1\},}
+\DoxyCodeLine{00059\ \ \ \ \ \{LEVEL2,\ 2\},}
+\DoxyCodeLine{00060\ \ \ \ \ \{LEVEL3,\ 3\},}
+\DoxyCodeLine{00061\ \ \ \ \ \{LEVEL4,\ 4\},}
+\DoxyCodeLine{00062\ \ \ \ \ \{LEVEL5,\ 5\}\};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \textcolor{keyword}{const}\ std::unordered\_map<BulletLevels,\ std::string>\ resourcePathsDarkMatterBullet\ =\ \{}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{comment}{//\ Player}}
+\DoxyCodeLine{00066\ \ \ \ \ \{LEVEL1,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/DarkMatterLevel1.png"{}}\},}
+\DoxyCodeLine{00067\ \ \ \ \ \{LEVEL2,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/DarkMatterLevel2.png"{}}\},}
+\DoxyCodeLine{00068\ \ \ \ \ \{LEVEL3,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/DarkMatterLevel3.png"{}}\},}
+\DoxyCodeLine{00069\ \ \ \ \ \{LEVEL4,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/DarkMatterLevel4.png"{}}\},}
+\DoxyCodeLine{00070\ \ \ \ \ \{LEVEL5,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/DarkMatterLevel5.png"{}}\},}
+\DoxyCodeLine{00071\ \};}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \textcolor{keyword}{const}\ std::unordered\_map<BulletLevels,\ unsigned\ int>\ resourcePathsDarkMatterBulletDamage\ =\ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \{LEVEL1,\ 2\},}
+\DoxyCodeLine{00075\ \ \ \ \ \{LEVEL2,\ 3\},}
+\DoxyCodeLine{00076\ \ \ \ \ \{LEVEL3,\ 4\},}
+\DoxyCodeLine{00077\ \ \ \ \ \{LEVEL4,\ 5\},}
+\DoxyCodeLine{00078\ \ \ \ \ \{LEVEL5,\ 6\}\};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \textcolor{keyword}{const}\ std::unordered\_map<BulletLevels,\ std::string>\ resourcePathsNuclierMaterialBullet\ =\ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{comment}{//\ Player}}
+\DoxyCodeLine{00082\ \ \ \ \ \{LEVEL1,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/NuclierMaterialLevel1.png"{}}\},}
+\DoxyCodeLine{00083\ \ \ \ \ \{LEVEL2,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/NuclierMaterialLevel2.png"{}}\},}
+\DoxyCodeLine{00084\ \ \ \ \ \{LEVEL3,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/NuclierMaterialLevel3.png"{}}\},}
+\DoxyCodeLine{00085\ \ \ \ \ \{LEVEL4,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/NuclierMaterialLevel4.png"{}}\},}
+\DoxyCodeLine{00086\ \ \ \ \ \{LEVEL5,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/NuclierMaterialLevel5.png"{}}\},}
+\DoxyCodeLine{00087\ \};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \textcolor{keyword}{const}\ std::unordered\_map<BulletLevels,\ unsigned\ int>\ resourcePathsNuclierMaterialBulletDamage\ =\ \{}
+\DoxyCodeLine{00090\ \ \ \ \ \{LEVEL1,\ 3\},}
+\DoxyCodeLine{00091\ \ \ \ \ \{LEVEL2,\ 4\},}
+\DoxyCodeLine{00092\ \ \ \ \ \{LEVEL3,\ 5\},}
+\DoxyCodeLine{00093\ \ \ \ \ \{LEVEL4,\ 6\},}
+\DoxyCodeLine{00094\ \ \ \ \ \{LEVEL5,\ 7\}\};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \textcolor{keyword}{const}\ std::unordered\_map<BulletLevels,\ std::string>\ resourcePathsPlasmaBullets\ =\ \{}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{comment}{//\ Player}}
+\DoxyCodeLine{00098\ \ \ \ \ \{LEVEL1,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/PlasmaLevel1.png"{}}\},}
+\DoxyCodeLine{00099\ \ \ \ \ \{LEVEL2,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/PlasmaLevel2.png"{}}\},}
+\DoxyCodeLine{00100\ \ \ \ \ \{LEVEL3,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/PlasmaLevel3.png"{}}\},}
+\DoxyCodeLine{00101\ \ \ \ \ \{LEVEL4,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/PlasmaLevel4.png"{}}\},}
+\DoxyCodeLine{00102\ \ \ \ \ \{LEVEL5,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/PlasmaLevel5.png"{}}\},}
+\DoxyCodeLine{00103\ \};}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \textcolor{keyword}{const}\ std::unordered\_map<BulletLevels,\ unsigned\ int>\ resourcePathsPlasmaBulletsDamage\ =\ \{}
+\DoxyCodeLine{00106\ \ \ \ \ \{LEVEL1,\ 4\},}
+\DoxyCodeLine{00107\ \ \ \ \ \{LEVEL2,\ 5\},}
+\DoxyCodeLine{00108\ \ \ \ \ \{LEVEL3,\ 6\},}
+\DoxyCodeLine{00109\ \ \ \ \ \{LEVEL4,\ 7\},}
+\DoxyCodeLine{00110\ \ \ \ \ \{LEVEL5,\ 8\}\};}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \textcolor{keyword}{const}\ std::unordered\_map<BulletLevels,\ std::string>\ resourcePathsPlanetaryBombBullets\ =\ \{}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{comment}{//\ Player}}
+\DoxyCodeLine{00114\ \ \ \ \ \{LEVEL1,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/PlanetaryBombLevel1.png"{}}\},}
+\DoxyCodeLine{00115\ \ \ \ \ \{LEVEL2,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/PlanetaryBombLevel2.png"{}}\},}
+\DoxyCodeLine{00116\ \ \ \ \ \{LEVEL3,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/PlanetaryBombLevel3.png"{}}\},}
+\DoxyCodeLine{00117\ \ \ \ \ \{LEVEL4,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/PlanetaryBombLevel4.png"{}}\},}
+\DoxyCodeLine{00118\ \ \ \ \ \{LEVEL5,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/PlanetaryBombLevel5.png"{}}\},}
+\DoxyCodeLine{00119\ \};}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \textcolor{keyword}{const}\ std::unordered\_map<BulletLevels,\ unsigned\ int>\ resourcePathsPlanetaryBombBulletsDamage\ =\ \{}
+\DoxyCodeLine{00122\ \ \ \ \ \{LEVEL1,\ 5\},}
+\DoxyCodeLine{00123\ \ \ \ \ \{LEVEL2,\ 6\},}
+\DoxyCodeLine{00124\ \ \ \ \ \{LEVEL3,\ 7\},}
+\DoxyCodeLine{00125\ \ \ \ \ \{LEVEL4,\ 8\},}
+\DoxyCodeLine{00126\ \ \ \ \ \{LEVEL5,\ 9\}\};}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \textcolor{keyword}{const}\ std::unordered\_map<BulletLevels,\ std::string>\ resourcePathsPeaShooterBullets\ =\ \{}
+\DoxyCodeLine{00129\ \ \ \ \ \{LEVEL1,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/01.png"{}}\},}
+\DoxyCodeLine{00130\ \ \ \ \ \{LEVEL2,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/01.png"{}}\},}
+\DoxyCodeLine{00131\ \ \ \ \ \{LEVEL3,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/01.png"{}}\},}
+\DoxyCodeLine{00132\ \ \ \ \ \{LEVEL4,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/01.png"{}}\},}
+\DoxyCodeLine{00133\ \ \ \ \ \{LEVEL5,\ \textcolor{stringliteral}{"{}include/Resources/Sprites/LaserBullets/01.png"{}}\},}
+\DoxyCodeLine{00134\ \};}
+\DoxyCodeLine{00135\ \textcolor{keyword}{const}\ std::unordered\_map<BulletLevels,\ unsigned\ int>\ resourcePathsPeaShooterBulletsDamage\ =\ \{}
+\DoxyCodeLine{00136\ \ \ \ \ \{LEVEL1,\ 1\},}
+\DoxyCodeLine{00137\ \ \ \ \ \{LEVEL2,\ 1\},}
+\DoxyCodeLine{00138\ \ \ \ \ \{LEVEL3,\ 1\},}
+\DoxyCodeLine{00139\ \ \ \ \ \{LEVEL4,\ 1\},}
+\DoxyCodeLine{00140\ \ \ \ \ \{LEVEL5,\ 1\},}
+\DoxyCodeLine{00141\ \};}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \textcolor{keyword}{enum}\ ChangingBullets}
+\DoxyCodeLine{00144\ \{}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{comment}{//\ Bullets}}
+\DoxyCodeLine{00146\ \ \ \ \ LASER\_BULLET\ =\ 0,}
+\DoxyCodeLine{00147\ \ \ \ \ LIGHTNING\_BULLET,}
+\DoxyCodeLine{00148\ \ \ \ \ DARK\_MATTER\_BULLET,}
+\DoxyCodeLine{00149\ \ \ \ \ NUCLIER\_MATERIAL\_BULLET,}
+\DoxyCodeLine{00150\ \ \ \ \ PLASMA\_BULLET,}
+\DoxyCodeLine{00151\ \ \ \ \ PLANETARY\_BOMB\_BULLET,}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{comment}{//\ Side\ Gun}}
+\DoxyCodeLine{00154\ \ \ \ \ PEA\_SHOOTER\_BULLET,}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{comment}{//\ Total}}
+\DoxyCodeLine{00157\ \ \ \ \ NUM\_CHANGING\_BULLETS}
+\DoxyCodeLine{00158\ \};}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \textcolor{keyword}{const}\ std::unordered\_map<ChangingBullets,\ std::unordered\_map<BulletLevels,\ std::string>\ >\ resourcePathsMaps\ =\ \{}
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{comment}{//\ Player}}
+\DoxyCodeLine{00162\ \ \ \ \ \{LASER\_BULLET,\ resourcePathsLaserBullets\},}
+\DoxyCodeLine{00163\ \ \ \ \ \{LIGHTNING\_BULLET,\ resourcePathsLightningBullets\},}
+\DoxyCodeLine{00164\ \ \ \ \ \{DARK\_MATTER\_BULLET,\ resourcePathsDarkMatterBullet\},}
+\DoxyCodeLine{00165\ \ \ \ \ \{NUCLIER\_MATERIAL\_BULLET,\ resourcePathsNuclierMaterialBullet\},}
+\DoxyCodeLine{00166\ \ \ \ \ \{PLASMA\_BULLET,\ resourcePathsPlasmaBullets\},}
+\DoxyCodeLine{00167\ \ \ \ \ \{PLANETARY\_BOMB\_BULLET,\ resourcePathsPlanetaryBombBullets\},}
+\DoxyCodeLine{00168\ \ \ \ \ \{PEA\_SHOOTER\_BULLET,\ resourcePathsPeaShooterBullets\},}
+\DoxyCodeLine{00169\ \};}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00171\ \textcolor{keyword}{const}\ std::unordered\_map<ChangingBullets,\ std::unordered\_map<BulletLevels,\ unsigned\ int>\ >\ resourcePathsDamageMaps\ =\ \{}
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{comment}{//\ Player}}
+\DoxyCodeLine{00173\ \ \ \ \ \{LASER\_BULLET,\ resourcePathsBulletsDamage\},}
+\DoxyCodeLine{00174\ \ \ \ \ \{LIGHTNING\_BULLET,\ resourcePathsLightningBulletsDamage\},}
+\DoxyCodeLine{00175\ \ \ \ \ \{DARK\_MATTER\_BULLET,\ resourcePathsDarkMatterBulletDamage\},}
+\DoxyCodeLine{00176\ \ \ \ \ \{NUCLIER\_MATERIAL\_BULLET,\ resourcePathsNuclierMaterialBulletDamage\},}
+\DoxyCodeLine{00177\ \ \ \ \ \{PLASMA\_BULLET,\ resourcePathsPlasmaBulletsDamage\},}
+\DoxyCodeLine{00178\ \ \ \ \ \{PLANETARY\_BOMB\_BULLET,\ resourcePathsPlanetaryBombBulletsDamage\},}
+\DoxyCodeLine{00179\ \ \ \ \ \{PEA\_SHOOTER\_BULLET,\ resourcePathsPeaShooterBulletsDamage\},}
+\DoxyCodeLine{00180\ \};}
+
+\end{DoxyCode}

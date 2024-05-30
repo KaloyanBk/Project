@@ -1,53 +1,84 @@
+/**
+ * @file Menu.cpp
+ * @author Kaloyan
+ * @brief This is the implementation file for the Menu class, which is used to create and manage the game menu.
+ * @version 0.1
+ * @date 2024-05-30
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #include "../include/Menu.hpp"
 #include <iostream>
 #include <fstream>
 
-// Constructor
+/**
+ * @brief Construct a new Menu::Menu object
+ * 
+ * @param window Pointer to the SFML RenderWindow
+ * @param game Pointer to the Game object
+ */
 Menu::Menu(sf::RenderWindow *window, Game *game)
     : window(window), game(game), active(true), newGame(false), beginMenu(true)
 {
-
+    /// Load font for menu text
     if (!font.loadFromFile("Fonts/Dosis-Light.ttf"))
     {
         std::cerr << "Failed to load font" << std::endl;
     }
 
+    /// Set up title text for the menu
     title.setFont(font);
     title.setString("Main Menu");
     title.setCharacterSize(48);
     title.setFillColor(sf::Color::White);
     title.setPosition(window->getSize().x / 2.f - title.getGlobalBounds().width / 2.f, 50.f);
 
-    // Add buttons to begin menu
-    addButtonToBeginMenu(window->getSize().x / 2.f - 100.f, window->getSize().y / 2.f + 50.f, 150.f, 50.f, font, "Continue");
-    addButtonToBeginMenu(window->getSize().x / 2.f + 100.f, window->getSize().y / 2.f + 50.f, 150.f, 50.f, font, "New Game");
+    float cornerRadius = 10.0f;
 
-    // Add buttons to main menu
-    addButton(100.f, 200.f, 150.f, 50.f, font, "Start");
-    addButton(300.f, 200.f, 150.f, 50.f, font, "Laser");
-    addButton(500.f, 200.f, 150.f, 50.f, font, "Lightning");
-    addButton(700.f, 200.f, 150.f, 50.f, font, "Dark Matter");
-    addButton(300.f, 300.f, 150.f, 50.f, font, "Nuclier Material");
-    addButton(500.f, 300.f, 150.f, 50.f, font, "Plasma");
-    addButton(700.f, 300.f, 150.f, 50.f, font, "Planetary Bomb");
-    addButton(300.f, 400.f, 150.f, 50.f, font, "Upper Weapon");
-    addButton(500.f, 400.f, 150.f, 50.f, font, "Level 1");
-    addButton(700.f, 400.f, 150.f, 50.f, font, "Level 2");
-    addButton(900.f, 400.f, 150.f, 50.f, font, "Level 3");
-    addButton(300.f, 500.f, 150.f, 50.f, font, "Lower Weapon");
-    addButton(500.f, 500.f, 150.f, 50.f, font, "Level 1 ");
-    addButton(700.f, 500.f, 150.f, 50.f, font, "Level 2 ");
-    addButton(900.f, 500.f, 150.f, 50.f, font, "Level 3 ");
+    /// Add buttons to the beginning menu
+    addButtonToBeginMenu(window->getSize().x / 2.f - 100.f, window->getSize().y / 2.f + 50.f, 150.f, 50.f, cornerRadius, font, "Continue");
+    addButtonToBeginMenu(window->getSize().x / 2.f + 100.f, window->getSize().y / 2.f + 50.f, 150.f, 50.f, cornerRadius, font, "New Game");
 
-    addButton(100.f, 600.f, 150.f, 50.f, font, "2 Players");
+    /// Add buttons to the main menu
+    addButton(100.f, 200.f, 150.f, 50.f, cornerRadius, font, "Start");
+    addButton(300.f, 200.f, 150.f, 50.f, cornerRadius, font, "Laser");
+    addButton(500.f, 200.f, 150.f, 50.f, cornerRadius, font, "Lightning");
+    addButton(700.f, 200.f, 150.f, 50.f, cornerRadius, font, "Dark Matter");
+    addButton(300.f, 300.f, 150.f, 50.f, cornerRadius, font, "Nuclier Material");
+    addButton(500.f, 300.f, 150.f, 50.f, cornerRadius, font, "Plasma");
+    addButton(700.f, 300.f, 150.f, 50.f, cornerRadius, font, "Planetary Bomb");
+    addButton(300.f, 400.f, 150.f, 50.f, cornerRadius, font, "Upper Weapon");
+    addButton(500.f, 400.f, 150.f, 50.f, cornerRadius, font, "Level 1");
+    addButton(700.f, 400.f, 150.f, 50.f, cornerRadius, font, "Level 2");
+    addButton(900.f, 400.f, 150.f, 50.f, cornerRadius, font, "Level 3");
+    addButton(300.f, 500.f, 150.f, 50.f, cornerRadius, font, "Lower Weapon");
+    addButton(500.f, 500.f, 150.f, 50.f, cornerRadius, font, "Level 1 ");
+    addButton(700.f, 500.f, 150.f, 50.f, cornerRadius, font, "Level 2 ");
+    addButton(900.f, 500.f, 150.f, 50.f, cornerRadius, font, "Level 3 ");
 
+    addButton(100.f, 600.f, 150.f, 50.f, cornerRadius, font, "2 Players");
 }
 
+/**
+ * @brief Render the menu on the given render target
+ * 
+ * @param target Render target to draw on
+ */
 void Menu::render(sf::RenderTarget &target)
 {
+    /// Clear the window
+    if (window == nullptr)
+    {
+        std::cerr << "Error: Window pointer is null!" << std::endl;
+        return;
+    }
     window->clear();
+
+    /// Render the appropriate menu based on the state
     if (beginMenu)
     {
+        /// Render buttons for the beginning menu
         for (auto &button : beginMenuButtons)
         {
             button.render(target);
@@ -55,25 +86,36 @@ void Menu::render(sf::RenderTarget &target)
     }
     else
     {
+        /// Render title and buttons for the main menu
         target.draw(title);
         for (auto &button : buttons)
         {
             button.render(target);
         }
     }
+
+    /// Display the window
     window->display();
 }
 
+/**
+ * @brief Reset color for all buttons
+ */
 void Menu::resetAllColor()
 {
+    /// Reset color for all buttons
     for (auto &button : buttons)
     {
         button.changeColor(sf::Color(70, 70, 70, 200), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 200));
     }
 }
 
+/**
+ * @brief Reset color for specific buttons related to weapon types
+ */
 void Menu::resetColor()
 {
+    /// Reset color for specific buttons
     for (auto &button : buttons)
     {
         if (button.getText() == "Laser" || button.getText() == "Lightning" || button.getText() == "Dark Matter" ||
@@ -84,8 +126,12 @@ void Menu::resetColor()
     }
 }
 
+/**
+ * @brief Reset color for upper level buttons
+ */
 void Menu::resetUpperLevelColor()
 {
+    /// Reset color for upper level buttons
     for (auto &button : buttons)
     {
         if (button.getText() == "Level 1" || button.getText() == "Level 2" || button.getText() == "Level 3")
@@ -95,8 +141,12 @@ void Menu::resetUpperLevelColor()
     }
 }
 
+/**
+ * @brief Reset color for lower level buttons
+ */
 void Menu::resetLowerLevelColor()
 {
+    /// Reset color for lower level buttons
     for (auto &button : buttons)
     {
         if (button.getText() == "Level 1 " || button.getText() == "Level 2 " || button.getText() == "Level 3 ")
@@ -106,6 +156,12 @@ void Menu::resetLowerLevelColor()
     }
 }
 
+/**
+ * @brief Update the menu based on mouse position and events
+ * 
+ * @param mousePos Position of the mouse cursor
+ * @param event SFML event to process
+ */
 void Menu::update(const sf::Vector2f &mousePos, sf::Event &event)
 {
     if (game->hasBeenReset())
@@ -262,22 +318,50 @@ void Menu::update(const sf::Vector2f &mousePos, sf::Event &event)
     }
 }
 
-void Menu::addButton(float x, float y, float width, float height, sf::Font &font, const std::string &text)
+/**
+ * @brief Add a button to the main menu
+ * 
+ * @param x X position of the button
+ * @param y Y position of the button
+ * @param width Width of the button
+ * @param height Height of the button
+ * @param cornerRadius Corner radius of the button
+ * @param font Font used for the button text
+ * @param text Text displayed on the button
+ */
+void Menu::addButton(float x, float y, float width, float height, float cornerRadius, sf::Font &font, const std::string &text)
 {
-    buttons.emplace_back(x, y, width, height, font, text,
-                         sf::Color(70, 70, 70, 200),
-                         sf::Color(150, 150, 150, 200),
-                         sf::Color(20, 20, 20, 200));
+    buttons.emplace_back(x, y, width, height, cornerRadius, font, text,
+                                sf::Color(70, 70, 70, 200), 
+                                sf::Color(150, 150, 150, 200),
+                                sf::Color(20, 20, 20, 200));
 }
 
-void Menu::addButtonToBeginMenu(float x, float y, float width, float height, sf::Font &font, const std::string &text)
+/**
+ * @brief Add a button to the beginning menu
+ * 
+ * @param x X position of the button
+ * @param y Y position of the button
+ * @param width Width of the button
+ * @param height Height of the button
+ * @param cornerRadius Corner radius of the button
+ * @param font Font used for the button text
+ * @param text Text displayed on the button
+ */
+void Menu::addButtonToBeginMenu(float x, float y, float width, float height, float cornerRadius, sf::Font &font, const std::string &text)
 {
-    beginMenuButtons.emplace_back(x, y, width, height, font, text,
+    beginMenuButtons.emplace_back(x, y, width, height, cornerRadius, font, text,
                                   sf::Color(70, 70, 70, 200),
                                   sf::Color(150, 150, 150, 200),
                                   sf::Color(20, 20, 20, 200));
 }
 
+/**
+ * @brief Check if a button at the given index is pressed
+ * 
+ * @param index Index of the button
+ * @return true if the button is pressed, false otherwise
+ */
 bool Menu::isButtonPressed(int index) const
 {
     if (index >= 0 && index < buttons.size())

@@ -1,0 +1,431 @@
+\doxysection{Player Class Reference}
+\hypertarget{class_player}{}\label{class_player}\index{Player@{Player}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_player_a1e5bd2f918bcebc2cdb9b182f2dcd35e}{Player}} (\mbox{\hyperlink{class_dynamic_array}{Dynamic\+Array}}$<$ Texture $>$ \&textures, Vector2u window\+Bounds, int type\+Of\+Bullet, int UP=22, int DOWN=18, int LEFT=0, int RIGHT=3, int FIRE=57, int player\+Level=0, float player\+Exp=0, float player\+Exp\+Next=16, int player\+Hp=10, int player\+Hp\+Max=10, int player\+Score=0, int upper\+Weapon\+Level=0, int lower\+Weapon\+Level=0, bool uper\+Weapon=false, bool lower\+Weapon=false)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{class_player}{Player} object. \end{DoxyCompactList}\item 
+\Hypertarget{class_player_a749d2c00e1fe0f5c2746f7505a58c062}\label{class_player_a749d2c00e1fe0f5c2746f7505a58c062} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Player} ()
+\begin{DoxyCompactList}\small\item\em Destructor for \doxylink{class_player}{Player}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_bullet}{Bullet}} \& \mbox{\hyperlink{class_player_a17c5978d3f7ea0dcd3fb10b26c43ceff}{get\+Bullet}} (unsigned index)
+\begin{DoxyCompactList}\small\item\em Retrieves a bullet by index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a1ed1b8453f9f33d357e34ae23c5751de}{remove\+Bullet}} (unsigned index)
+\begin{DoxyCompactList}\small\item\em Removes a bullet from the player\textquotesingle{}s inventory. \end{DoxyCompactList}\item 
+\Hypertarget{class_player_a18540aa256df86e9dbd802d88bb758de}\label{class_player_a18540aa256df86e9dbd802d88bb758de} 
+const int {\bfseries get\+Bullet\+Size} ()
+\item 
+\Hypertarget{class_player_a292ac173f303093259ec3ac33d2da157}\label{class_player_a292ac173f303093259ec3ac33d2da157} 
+const Vector2f \& {\bfseries get\+Position} () const
+\item 
+\Hypertarget{class_player_a3cc7f93b00490c8a4255b267b453e197}\label{class_player_a3cc7f93b00490c8a4255b267b453e197} 
+\mbox{\hyperlink{class_dynamic_array}{Dynamic\+Array}}$<$ \mbox{\hyperlink{class_weapon}{Weapon}} \texorpdfstring{$\ast$}{*} $>$ \& {\bfseries get\+Weapons} ()
+\item 
+\Hypertarget{class_player_a49c0244c57bcab440f55f7cfe977aeb7}\label{class_player_a49c0244c57bcab440f55f7cfe977aeb7} 
+const String {\bfseries get\+HpS} () const
+\item 
+\Hypertarget{class_player_aa757dea2ac755173fb42ad1083a302c1}\label{class_player_aa757dea2ac755173fb42ad1083a302c1} 
+const Float\+Rect {\bfseries get\+Bounds} () const
+\item 
+\Hypertarget{class_player_ad86b6e7105664f9f0126fc9cb48e2d02}\label{class_player_ad86b6e7105664f9f0126fc9cb48e2d02} 
+const bool {\bfseries is\+Dead} () const
+\item 
+\Hypertarget{class_player_aca672026363671dc5ab5f636cdeda490}\label{class_player_aca672026363671dc5ab5f636cdeda490} 
+const int {\bfseries get\+Player\+Number} () const
+\item 
+\Hypertarget{class_player_a7810ae53b6865b47eeb9d61ae36aae35}\label{class_player_a7810ae53b6865b47eeb9d61ae36aae35} 
+const int {\bfseries get\+Level} () const
+\item 
+\Hypertarget{class_player_ab82c638179a6b7305ecafa5a2f438c9a}\label{class_player_ab82c638179a6b7305ecafa5a2f438c9a} 
+const int {\bfseries get\+Max\+Level} () const
+\item 
+\Hypertarget{class_player_aac4e4e592fa1d2cf16e0bcb4395b125b}\label{class_player_aac4e4e592fa1d2cf16e0bcb4395b125b} 
+const bool {\bfseries get\+Is\+At\+Max\+Level} () const
+\item 
+\Hypertarget{class_player_af4221b3eca87196bb220d96ce740b0a2}\label{class_player_af4221b3eca87196bb220d96ce740b0a2} 
+const int {\bfseries get\+Exp} () const
+\item 
+\Hypertarget{class_player_ac4145c9c8f6cea1f4ad07ebb97143db6}\label{class_player_ac4145c9c8f6cea1f4ad07ebb97143db6} 
+const int {\bfseries get\+Exp\+Next} () const
+\item 
+\Hypertarget{class_player_a4bf42e45ac3d0e0e3cd39b6d03eef378}\label{class_player_a4bf42e45ac3d0e0e3cd39b6d03eef378} 
+const int {\bfseries get\+Stat\+Points} () const
+\item 
+\Hypertarget{class_player_ad62acf2749e157dac7a2ddee86679aea}\label{class_player_ad62acf2749e157dac7a2ddee86679aea} 
+const int {\bfseries get\+Hp} () const
+\item 
+\Hypertarget{class_player_ad51ba8b42a25ae0d2b2826d60102b79c}\label{class_player_ad51ba8b42a25ae0d2b2826d60102b79c} 
+const int {\bfseries get\+Hp\+Max} () const
+\item 
+\Hypertarget{class_player_a4e9dfa8f56f823e4e4faa3cf4786601a}\label{class_player_a4e9dfa8f56f823e4e4faa3cf4786601a} 
+const int {\bfseries get\+Score} () const
+\item 
+\Hypertarget{class_player_a61ffc38afa3d0c4c0b1b55b01a948cdf}\label{class_player_a61ffc38afa3d0c4c0b1b55b01a948cdf} 
+const int {\bfseries get\+Current\+Weapon} () const
+\item 
+\Hypertarget{class_player_ad83caf3e03e24f3fea8c8a2f34df8daa}\label{class_player_ad83caf3e03e24f3fea8c8a2f34df8daa} 
+bool {\bfseries gain\+Exp} (float exp)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{class_player_ade7f2d0caad36a822e7681d79bc28a46}{set\+Bullet\+Type}} (Vector2f pos, int upgrade, int level, Vector2f direction\+Up=Vector2f(1.f, -\/0.\+1f), Vector2f direction\+Down=Vector2f(1.f, 0.\+1f), float initial\+Velocity=2.f, float max\+Velocity=50.f, float acceleration=1.f)
+\begin{DoxyCompactList}\small\item\em Sets the type of bullet fired by the player. \end{DoxyCompactList}\item 
+\Hypertarget{class_player_a6b60023d6d7247e16fec64cdb3460e74}\label{class_player_a6b60023d6d7247e16fec64cdb3460e74} 
+void {\bfseries set\+To\+Default} ()
+\item 
+\Hypertarget{class_player_a8126f75520553401bb52d5c7111c350c}\label{class_player_a8126f75520553401bb52d5c7111c350c} 
+void {\bfseries set\+Current\+Weapon} (int weapon)
+\item 
+\Hypertarget{class_player_aa7a843a3202e96fb0de458ace418dbc9}\label{class_player_aa7a843a3202e96fb0de458ace418dbc9} 
+void {\bfseries set\+Upper\+Weapon\+Level} (int level)
+\item 
+\Hypertarget{class_player_abcc878cc73abf97cfe080a88c3557a94}\label{class_player_abcc878cc73abf97cfe080a88c3557a94} 
+void {\bfseries set\+Lower\+Weapon\+Level} (int level)
+\item 
+\Hypertarget{class_player_ae99d31dcf1c394138293a0264ea3be40}\label{class_player_ae99d31dcf1c394138293a0264ea3be40} 
+void {\bfseries set\+Uper\+Weapon} (bool uper\+Weapon)
+\item 
+\Hypertarget{class_player_a639ab469cfd85d2d245372bad8ca1ed4}\label{class_player_a639ab469cfd85d2d245372bad8ca1ed4} 
+void {\bfseries set\+Lower\+Weapon} (bool lower\+Weapon)
+\item 
+\Hypertarget{class_player_af717f3bf17090888a9d504d3919d62cd}\label{class_player_af717f3bf17090888a9d504d3919d62cd} 
+void {\bfseries set\+Level} (int level)
+\item 
+\Hypertarget{class_player_a367d1e43a72445ec2b227347f3fdc09e}\label{class_player_a367d1e43a72445ec2b227347f3fdc09e} 
+void {\bfseries set\+Exp} (float exp)
+\item 
+\Hypertarget{class_player_a56c8a0a26b2448c2e2acc50d6128819f}\label{class_player_a56c8a0a26b2448c2e2acc50d6128819f} 
+void {\bfseries set\+Exp\+Next} (float exp\+Next)
+\item 
+\Hypertarget{class_player_a8e001bb712f7537f6051fce58b205f0f}\label{class_player_a8e001bb712f7537f6051fce58b205f0f} 
+void {\bfseries set\+Stat\+Points} (int stat\+Points)
+\item 
+\Hypertarget{class_player_a021f86d4c3ff6e81ec19b77c38550fe9}\label{class_player_a021f86d4c3ff6e81ec19b77c38550fe9} 
+void {\bfseries set\+Hp} (int hp)
+\item 
+\Hypertarget{class_player_a6007909b554de9a0e8372f5bfee199a9}\label{class_player_a6007909b554de9a0e8372f5bfee199a9} 
+void {\bfseries set\+Hp\+Max} (int hp\+Max)
+\item 
+\Hypertarget{class_player_a23c9b25aeb8dd1ff86d03d993e07a73d}\label{class_player_a23c9b25aeb8dd1ff86d03d993e07a73d} 
+void {\bfseries set\+Score} (int score)
+\item 
+void \mbox{\hyperlink{class_player_ac1c857510b27bd65438875d66327b88c}{Move}} (const float \&dt)
+\begin{DoxyCompactList}\small\item\em Moves the player based on input and physics. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_player_ade2efffc2914adff1600bf71506b4876}{update\+Leveling\+System}} ()
+\begin{DoxyCompactList}\small\item\em Updates the player\textquotesingle{}s leveling system. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_aae180f7a4a011ba1fd485e3d8728f489}{Level\+Up}} ()
+\begin{DoxyCompactList}\small\item\em Levels up the player. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a24e1410471757a52c747627ab96048f9}{add\+Weapon}} (int type, int Up\+Or\+Down, int level)
+\begin{DoxyCompactList}\small\item\em Adds a weapon to the player\textquotesingle{}s inventory. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a08899a44ad649026d9d7edd796a736ee}{Combat\+Update}} ()
+\begin{DoxyCompactList}\small\item\em Updates combat-\/related actions of the player. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a2d87aa8c673b0035b1353480db62a880}{Update\+Accessories}} (const float \&dt)
+\begin{DoxyCompactList}\small\item\em Updates the accessories (weapons) of the player. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_ae06d08811198818e0f9f6a6bbc21fd1f}{Take\+Damage}} (int damage)
+\begin{DoxyCompactList}\small\item\em Inflicts damage on the player. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a7226f1ede018b27d93ee99a423bf3365}{Update}} (Vector2u window\+Bounds, const float \&dt)
+\begin{DoxyCompactList}\small\item\em Updates the player\textquotesingle{}s state. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a8eee638cafc06d46bdda1979287d5057}{Render}} (Render\+Target \&target)
+\begin{DoxyCompactList}\small\item\em Renders the player and associated elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_player_a32f83e6505a54da0ce7dbe1eab8fd841}\label{class_player_a32f83e6505a54da0ce7dbe1eab8fd841} 
+static unsigned {\bfseries players} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_player_a1e5bd2f918bcebc2cdb9b182f2dcd35e}\index{Player@{Player}!Player@{Player}}
+\index{Player@{Player}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Player()}{Player()}}
+{\footnotesize\ttfamily \label{class_player_a1e5bd2f918bcebc2cdb9b182f2dcd35e} 
+Player\+::\+Player (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_dynamic_array}{Dynamic\+Array}}$<$ Texture $>$ \&}]{textures}{, }\item[{Vector2u}]{window\+Bounds}{, }\item[{int}]{type\+Of\+Bullet}{, }\item[{int}]{UP}{ = {\ttfamily 22}, }\item[{int}]{DOWN}{ = {\ttfamily 18}, }\item[{int}]{LEFT}{ = {\ttfamily 0}, }\item[{int}]{RIGHT}{ = {\ttfamily 3}, }\item[{int}]{FIRE}{ = {\ttfamily 57}, }\item[{int}]{player\+Level}{ = {\ttfamily 0}, }\item[{float}]{player\+Exp}{ = {\ttfamily 0}, }\item[{float}]{player\+Exp\+Next}{ = {\ttfamily 16}, }\item[{int}]{player\+Hp}{ = {\ttfamily 10}, }\item[{int}]{player\+Hp\+Max}{ = {\ttfamily 10}, }\item[{int}]{player\+Score}{ = {\ttfamily 0}, }\item[{int}]{upper\+Weapon\+Level}{ = {\ttfamily 0}, }\item[{int}]{lower\+Weapon\+Level}{ = {\ttfamily 0}, }\item[{bool}]{uper\+Weapon}{ = {\ttfamily false}, }\item[{bool}]{lower\+Weapon}{ = {\ttfamily false}}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{class_player}{Player} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em textures} & Reference to a \doxylink{class_dynamic_array}{Dynamic\+Array} of textures. \\
+\hline
+{\em window\+Bounds} & The bounds of the game window. \\
+\hline
+{\em type\+Of\+Bullet} & The type of bullet the player uses. \\
+\hline
+{\em UP} & The keycode for moving up. \\
+\hline
+{\em DOWN} & The keycode for moving down. \\
+\hline
+{\em LEFT} & The keycode for moving left. \\
+\hline
+{\em RIGHT} & The keycode for moving right. \\
+\hline
+{\em FIRE} & The keycode for firing. \\
+\hline
+{\em player\+Level} & The player\textquotesingle{}s level. \\
+\hline
+{\em player\+Exp} & The player\textquotesingle{}s experience points. \\
+\hline
+{\em player\+Exp\+Next} & The experience points needed for the next level. \\
+\hline
+{\em player\+Hp} & The player\textquotesingle{}s health points. \\
+\hline
+{\em player\+Hp\+Max} & The maximum health points of the player. \\
+\hline
+{\em player\+Score} & The player\textquotesingle{}s score. \\
+\hline
+{\em upper\+Weapon\+Level} & The level of the upper weapon. \\
+\hline
+{\em lower\+Weapon\+Level} & The level of the lower weapon. \\
+\hline
+{\em upper\+Weapon} & Flag indicating whether the upper weapon is equipped. \\
+\hline
+{\em lower\+Weapon} & Flag indicating whether the lower weapon is equipped. \\
+\hline
+\end{DoxyParams}
+Delta time multiplier
+
+Stats
+
+Set up the sprite
+
+Controls
+
+\doxylink{class_player}{Player} number
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_player_a24e1410471757a52c747627ab96048f9}\index{Player@{Player}!addWeapon@{addWeapon}}
+\index{addWeapon@{addWeapon}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{addWeapon()}{addWeapon()}}
+{\footnotesize\ttfamily \label{class_player_a24e1410471757a52c747627ab96048f9} 
+void Player\+::add\+Weapon (\begin{DoxyParamCaption}\item[{int}]{type}{, }\item[{int}]{Up\+Or\+Down}{, }\item[{int}]{level}{}\end{DoxyParamCaption})}
+
+
+
+Adds a weapon to the player\textquotesingle{}s inventory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The type of weapon to add. \\
+\hline
+{\em Up\+Or\+Down} & Specifies upper or lower weapon. \\
+\hline
+{\em level} & The level of the weapon. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_a08899a44ad649026d9d7edd796a736ee}\index{Player@{Player}!CombatUpdate@{CombatUpdate}}
+\index{CombatUpdate@{CombatUpdate}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{CombatUpdate()}{CombatUpdate()}}
+{\footnotesize\ttfamily \label{class_player_a08899a44ad649026d9d7edd796a736ee} 
+void Player\+::\+Combat\+Update (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Updates combat-\/related actions of the player. 
+
+change main gun level with number keys
+
+Fire main gun
+
+Fire side guns\Hypertarget{class_player_a17c5978d3f7ea0dcd3fb10b26c43ceff}\index{Player@{Player}!getBullet@{getBullet}}
+\index{getBullet@{getBullet}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{getBullet()}{getBullet()}}
+{\footnotesize\ttfamily \label{class_player_a17c5978d3f7ea0dcd3fb10b26c43ceff} 
+\mbox{\hyperlink{class_bullet}{Bullet}} \& Player\+::get\+Bullet (\begin{DoxyParamCaption}\item[{unsigned}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Retrieves a bullet by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the bullet. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Reference to the bullet. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em An} & exception if index is out of bounds. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_player_aae180f7a4a011ba1fd485e3d8728f489}\index{Player@{Player}!LevelUp@{LevelUp}}
+\index{LevelUp@{LevelUp}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{LevelUp()}{LevelUp()}}
+{\footnotesize\ttfamily \label{class_player_aae180f7a4a011ba1fd485e3d8728f489} 
+void Player\+::\+Level\+Up (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Levels up the player. 
+
+this-\/\texorpdfstring{$>$}{>}hp\+Max = static\+\_\+cast$<$int$>$(10 \texorpdfstring{$\ast$}{*} pow(1.\+1, (this-\/\texorpdfstring{$>$}{>}level + 1)));\Hypertarget{class_player_ac1c857510b27bd65438875d66327b88c}\index{Player@{Player}!Move@{Move}}
+\index{Move@{Move}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Move()}{Move()}}
+{\footnotesize\ttfamily \label{class_player_ac1c857510b27bd65438875d66327b88c} 
+void Player\+::\+Move (\begin{DoxyParamCaption}\item[{const float \&}]{dt}{}\end{DoxyParamCaption})}
+
+
+
+Moves the player based on input and physics. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dt} & The change in time since the last update. \\
+\hline
+\end{DoxyParams}
+Update velocity
+
+Drag
+
+Wall collision\Hypertarget{class_player_a1ed1b8453f9f33d357e34ae23c5751de}\index{Player@{Player}!removeBullet@{removeBullet}}
+\index{removeBullet@{removeBullet}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{removeBullet()}{removeBullet()}}
+{\footnotesize\ttfamily \label{class_player_a1ed1b8453f9f33d357e34ae23c5751de} 
+void Player\+::remove\+Bullet (\begin{DoxyParamCaption}\item[{unsigned}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Removes a bullet from the player\textquotesingle{}s inventory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the bullet to remove. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em An} & exception if index is out of bounds. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_player_a8eee638cafc06d46bdda1979287d5057}\index{Player@{Player}!Render@{Render}}
+\index{Render@{Render}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Render()}{Render()}}
+{\footnotesize\ttfamily \label{class_player_a8eee638cafc06d46bdda1979287d5057} 
+void Player\+::\+Render (\begin{DoxyParamCaption}\item[{Render\+Target \&}]{target}{}\end{DoxyParamCaption})}
+
+
+
+Renders the player and associated elements. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & The render target. \\
+\hline
+\end{DoxyParams}
+Render bullets
+
+Render weapons
+
+Render the player\Hypertarget{class_player_ade7f2d0caad36a822e7681d79bc28a46}\index{Player@{Player}!setBulletType@{setBulletType}}
+\index{setBulletType@{setBulletType}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{setBulletType()}{setBulletType()}}
+{\footnotesize\ttfamily \label{class_player_ade7f2d0caad36a822e7681d79bc28a46} 
+template$<$typename T $>$ \\
+void Player\+::set\+Bullet\+Type (\begin{DoxyParamCaption}\item[{Vector2f}]{pos}{, }\item[{int}]{upgrade}{, }\item[{int}]{level}{, }\item[{Vector2f}]{direction\+Up}{ = {\ttfamily Vector2f(1.f,~-\/0.1f)}, }\item[{Vector2f}]{direction\+Down}{ = {\ttfamily Vector2f(1.f,~0.1f)}, }\item[{float}]{initial\+Velocity}{ = {\ttfamily 2.f}, }\item[{float}]{max\+Velocity}{ = {\ttfamily 50.f}, }\item[{float}]{acceleration}{ = {\ttfamily 1.f}}\end{DoxyParamCaption})}
+
+
+
+Sets the type of bullet fired by the player. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of bullet. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & The position from which the bullet is fired. \\
+\hline
+{\em upgrade} & The upgrade level of the bullet. \\
+\hline
+{\em level} & The level of the player. \\
+\hline
+{\em direction\+Up} & The direction vector for upper bullet. \\
+\hline
+{\em direction\+Down} & The direction vector for lower bullet. \\
+\hline
+{\em initial\+Velocity} & The initial velocity of the bullet. \\
+\hline
+{\em max\+Velocity} & The maximum velocity of the bullet. \\
+\hline
+{\em acceleration} & The acceleration of the bullet. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_ae06d08811198818e0f9f6a6bbc21fd1f}\index{Player@{Player}!TakeDamage@{TakeDamage}}
+\index{TakeDamage@{TakeDamage}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{TakeDamage()}{TakeDamage()}}
+{\footnotesize\ttfamily \label{class_player_ae06d08811198818e0f9f6a6bbc21fd1f} 
+void Player\+::\+Take\+Damage (\begin{DoxyParamCaption}\item[{int}]{damage}{}\end{DoxyParamCaption})}
+
+
+
+Inflicts damage on the player. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em damage} & The amount of damage to inflict. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_a7226f1ede018b27d93ee99a423bf3365}\index{Player@{Player}!Update@{Update}}
+\index{Update@{Update}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_player_a7226f1ede018b27d93ee99a423bf3365} 
+void Player\+::\+Update (\begin{DoxyParamCaption}\item[{Vector2u}]{window\+Bounds}{, }\item[{const float \&}]{dt}{}\end{DoxyParamCaption})}
+
+
+
+Updates the player\textquotesingle{}s state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em window\+Bounds} & The bounds of the game window. \\
+\hline
+{\em dt} & The change in time since the last update. \\
+\hline
+\end{DoxyParams}
+Update fire rate
+
+Update weapons and bullets
+
+Remove bullets that have gone off-\/screen
+
+Decrement j to account for the erased element
+
+Update player movement and accessories
+
+Check for firing input and perform combat update\Hypertarget{class_player_a2d87aa8c673b0035b1353480db62a880}\index{Player@{Player}!UpdateAccessories@{UpdateAccessories}}
+\index{UpdateAccessories@{UpdateAccessories}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{UpdateAccessories()}{UpdateAccessories()}}
+{\footnotesize\ttfamily \label{class_player_a2d87aa8c673b0035b1353480db62a880} 
+void Player\+::\+Update\+Accessories (\begin{DoxyParamCaption}\item[{const float \&}]{dt}{}\end{DoxyParamCaption})}
+
+
+
+Updates the accessories (weapons) of the player. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dt} & The change in time since the last update. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_ade2efffc2914adff1600bf71506b4876}\index{Player@{Player}!updateLevelingSystem@{updateLevelingSystem}}
+\index{updateLevelingSystem@{updateLevelingSystem}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{updateLevelingSystem()}{updateLevelingSystem()}}
+{\footnotesize\ttfamily \label{class_player_ade2efffc2914adff1600bf71506b4876} 
+bool Player\+::update\+Leveling\+System (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Updates the player\textquotesingle{}s leveling system. 
+
+\begin{DoxyReturn}{Returns}
+True if player leveled up, false otherwise. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/kaloyanbakardzhiev/\+Documents/\+Uni/\+OOP/\+Project/sfml/\+Space\+Shooter/include/\mbox{\hyperlink{_player_8hpp}{Player.\+hpp}}\item 
+/\+Users/kaloyanbakardzhiev/\+Documents/\+Uni/\+OOP/\+Project/sfml/\+Space\+Shooter/src/\mbox{\hyperlink{_player_8cpp}{Player.\+cpp}}\end{DoxyCompactItemize}

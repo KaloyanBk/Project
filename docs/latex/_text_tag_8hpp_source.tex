@@ -1,0 +1,57 @@
+\doxysection{Text\+Tag.\+hpp}
+\hypertarget{_text_tag_8hpp_source}{}\label{_text_tag_8hpp_source}\index{/Users/kaloyanbakardzhiev/Documents/Uni/OOP/Project/sfml/SpaceShooter/include/TextTag.hpp@{/Users/kaloyanbakardzhiev/Documents/Uni/OOP/Project/sfml/SpaceShooter/include/TextTag.hpp}}
+\mbox{\hyperlink{_text_tag_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <cstdlib>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <SFML/System.hpp>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <SFML/Window.hpp>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <SFML/Audio.hpp>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <SFML/Network.hpp>}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_dynamic_array_8hpp}{./Resources/DynamicArray.hpp}}"{}}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_save_data_8hpp}{./Resources/SaveData.hpp}}"{}}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{using\ namespace\ }sf;}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_text_tag}{TextTag}}}
+\DoxyCodeLine{00030\ \{}
+\DoxyCodeLine{00031\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{float}\ dtMultiplier;}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ Font\ *font;}
+\DoxyCodeLine{00035\ \ \ \ \ Text\ text;}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{float}\ speed;}
+\DoxyCodeLine{00038\ \ \ \ \ Vector2f\ direction;}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{float}\ timerMax;}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{float}\ timer;}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{bool}\ accelerate;}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{class_text_tag_a19e2b131d83190e838ccc8157be38a3e}{TextTag}}(Font\ *font,\ std::string\ text,}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ Vector2f\ position,Vector2f\ direction,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ size,}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ timerMax,\ \textcolor{keywordtype}{bool}\ accelerate,}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ Color\ color);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{class_text_tag_a19e2b131d83190e838ccc8157be38a3e}{TextTag}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_text_tag}{TextTag}}\ \&other);}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{class_text_tag}{TextTag}}\ \&\mbox{\hyperlink{class_text_tag_acadcd969f2360254209311c6caafae86}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_text_tag}{TextTag}}\ \&other);}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_text_tag_aaae7035c8416e17cebef10d56e764577}{\string~TextTag}}();}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{comment}{//\ Accessors}}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&getTimer()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ this-\/>timer;\ \}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_text_tag_adc421006253788e4cb101ea1605bd7f9}{Update}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&dt);}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_text_tag_ae69e496e3570cd14f8b0000092c0989f}{Render}}(RenderTarget\ \&target);}
+\DoxyCodeLine{00060\ \};}
+
+\end{DoxyCode}

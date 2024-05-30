@@ -1,3 +1,13 @@
+/**
+ * @file Enemy.hpp
+ * @author Kaloyan
+ * @brief This is the header file for the Enemy class, which is used to create enemies for the player to fight against.
+ * @version 0.1
+ * @date 2024-05-30
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #pragma once
 
 #include "../Bullets/Bullet.hpp"

@@ -1,3 +1,13 @@
+/**
+ * @file DarkMatter.hpp
+ * @author Kaloyan
+ * @brief This is the header file for the DarkMatter class, child of Bullet, which is used to create DarkMatter bullets for the player to shoot.
+ * @version 0.1
+ * @date 2024-05-30
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #pragma once
 
 #include "Bullet.hpp"

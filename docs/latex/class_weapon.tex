@@ -1,0 +1,189 @@
+\doxysection{Weapon Class Reference}
+\hypertarget{class_weapon}{}\label{class_weapon}\index{Weapon@{Weapon}}
+Inheritance diagram for Weapon\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_weapon}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_weapon_a42dbc46dd70319a24763992c4ebbd396}\label{class_weapon_a42dbc46dd70319a24763992c4ebbd396} 
+{\bfseries Weapon} ()
+\begin{DoxyCompactList}\small\item\em Default constructor for the \doxylink{class_weapon}{Weapon} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_weapon_a09dda677ff53b6fae099537a67ed1d71}{Weapon}} (int type, int level, int Up\+Or\+Down, int fire\+Rate\+Max=25, int damage\+Max=1)
+\begin{DoxyCompactList}\small\item\em Parameterized constructor for the \doxylink{class_weapon}{Weapon} class. \end{DoxyCompactList}\item 
+\Hypertarget{class_weapon_a420e7ba3d2017e6de3e93eb579cfd3fa}\label{class_weapon_a420e7ba3d2017e6de3e93eb579cfd3fa} 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Weapon} ()
+\begin{DoxyCompactList}\small\item\em Destructor for the \doxylink{class_weapon}{Weapon} class. \end{DoxyCompactList}\item 
+\Hypertarget{class_weapon_afdca9ee42e3efb672202c1f064f60c86}\label{class_weapon_afdca9ee42e3efb672202c1f064f60c86} 
+std\+::vector$<$ \mbox{\hyperlink{class_bullet}{Bullet}} \texorpdfstring{$\ast$}{*} $>$ \& {\bfseries get\+Bullets} ()
+\item 
+\Hypertarget{class_weapon_af4de1ee0a6b2e48b604a794a88cf1bc3}\label{class_weapon_af4de1ee0a6b2e48b604a794a88cf1bc3} 
+const Vector2f \& {\bfseries get\+Position} () const
+\item 
+\Hypertarget{class_weapon_adf0e2bc43056a389faa8af6a92fe2083}\label{class_weapon_adf0e2bc43056a389faa8af6a92fe2083} 
+const Float\+Rect {\bfseries get\+Bounds} () const
+\item 
+\Hypertarget{class_weapon_a7ef9d5ee2d0d6969d028a5507f2143fb}\label{class_weapon_a7ef9d5ee2d0d6969d028a5507f2143fb} 
+void {\bfseries set\+Position} (const Vector2f \&position)
+\item 
+virtual void \mbox{\hyperlink{class_weapon_ae51cc4f2369dd08808d035c99772e9f4}{Update}} (Vector2f target\+Position, Float\+Rect bounds, const float \&dt)
+\begin{DoxyCompactList}\small\item\em Update method for the \doxylink{class_weapon}{Weapon} class. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_weapon_ab2cb13eccba20ed1fabe4454ee1248f6}{Fire}} (const Vector2f \&position, const Vector2f \&direction, const Vector2f \&scale)
+\begin{DoxyCompactList}\small\item\em Fire method for the \doxylink{class_weapon}{Weapon} class. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_weapon_a0b599385c909713ad4d3f1ab86757cab}{Upgrade}} ()
+\begin{DoxyCompactList}\small\item\em Upgrade method for the \doxylink{class_weapon}{Weapon} class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_weapon_ab34f600ed2d4dbb0d3c9f7038d7319e0}{Render}} (Render\+Target \&target)
+\begin{DoxyCompactList}\small\item\em Render method for the \doxylink{class_weapon}{Weapon} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_weapon_aa8aaa1fa22a97ff7bfea0cd6b39300f1}\label{class_weapon_aa8aaa1fa22a97ff7bfea0cd6b39300f1} 
+float {\bfseries dt\+Multiplier}
+\item 
+\Hypertarget{class_weapon_af9ecfd61d26d1648ee16c091f293ee13}\label{class_weapon_af9ecfd61d26d1648ee16c091f293ee13} 
+int {\bfseries fire\+Rate}
+\item 
+\Hypertarget{class_weapon_a0b7cc7f3f2aa24659cc9cd89feb16503}\label{class_weapon_a0b7cc7f3f2aa24659cc9cd89feb16503} 
+int {\bfseries fire\+Rate\+Max}
+\item 
+\Hypertarget{class_weapon_ad229314f1c9da6dafdfc493dcfec7e24}\label{class_weapon_ad229314f1c9da6dafdfc493dcfec7e24} 
+Sprite {\bfseries sprite}
+\item 
+\Hypertarget{class_weapon_ae05d57b69f8aee9250cc64ad37b8e9b8}\label{class_weapon_ae05d57b69f8aee9250cc64ad37b8e9b8} 
+Texture \texorpdfstring{$\ast$}{*} {\bfseries weapon\+Texture}
+\item 
+\Hypertarget{class_weapon_ae77994a7933e61d51ddae0f89a783d09}\label{class_weapon_ae77994a7933e61d51ddae0f89a783d09} 
+std\+::vector$<$ \mbox{\hyperlink{class_bullet}{Bullet}} \texorpdfstring{$\ast$}{*} $>$ {\bfseries bullets}
+\item 
+\Hypertarget{class_weapon_acee08fc59432949983baea4ae6552422}\label{class_weapon_acee08fc59432949983baea4ae6552422} 
+int {\bfseries bullet\+Level}
+\item 
+\Hypertarget{class_weapon_abb463127151d807804c556ddbd767e18}\label{class_weapon_abb463127151d807804c556ddbd767e18} 
+int {\bfseries damage}
+\item 
+\Hypertarget{class_weapon_a44be15471387cb170c2ca44e67c6e671}\label{class_weapon_a44be15471387cb170c2ca44e67c6e671} 
+int {\bfseries damage\+Max}
+\item 
+\Hypertarget{class_weapon_a48e92e94cbaee27f8b71d3f04399c881}\label{class_weapon_a48e92e94cbaee27f8b71d3f04399c881} 
+int {\bfseries Up\+Or\+Down}
+\item 
+\Hypertarget{class_weapon_a5a47f9f570cc5d006b45fc5c3d467235}\label{class_weapon_a5a47f9f570cc5d006b45fc5c3d467235} 
+int {\bfseries level}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_weapon_a09dda677ff53b6fae099537a67ed1d71}\index{Weapon@{Weapon}!Weapon@{Weapon}}
+\index{Weapon@{Weapon}!Weapon@{Weapon}}
+\doxysubsubsection{\texorpdfstring{Weapon()}{Weapon()}}
+{\footnotesize\ttfamily \label{class_weapon_a09dda677ff53b6fae099537a67ed1d71} 
+Weapon\+::\+Weapon (\begin{DoxyParamCaption}\item[{int}]{type}{, }\item[{int}]{level}{, }\item[{int}]{Up\+Or\+Down}{, }\item[{int}]{fire\+Rate\+Max}{ = {\ttfamily 25}, }\item[{int}]{damage\+Max}{ = {\ttfamily 1}}\end{DoxyParamCaption})}
+
+
+
+Parameterized constructor for the \doxylink{class_weapon}{Weapon} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The type of weapon. \\
+\hline
+{\em level} & The level of the weapon. \\
+\hline
+{\em Up\+Or\+Down} & Whether the weapon is positioned up or down. \\
+\hline
+{\em fire\+Rate\+Max} & The maximum fire rate of the weapon. \\
+\hline
+{\em damage\+Max} & The maximum damage of the weapon. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_weapon_ab2cb13eccba20ed1fabe4454ee1248f6}\index{Weapon@{Weapon}!Fire@{Fire}}
+\index{Fire@{Fire}!Weapon@{Weapon}}
+\doxysubsubsection{\texorpdfstring{Fire()}{Fire()}}
+{\footnotesize\ttfamily \label{class_weapon_ab2cb13eccba20ed1fabe4454ee1248f6} 
+void Weapon\+::\+Fire (\begin{DoxyParamCaption}\item[{const Vector2f \&}]{position}{, }\item[{const Vector2f \&}]{direction}{, }\item[{const Vector2f \&}]{scale}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Fire method for the \doxylink{class_weapon}{Weapon} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The position to fire from. \\
+\hline
+{\em direction} & The firing direction. \\
+\hline
+{\em scale} & The scale of the fired object. \\
+\hline
+\end{DoxyParams}
+Fire method implementation goes here
+
+Reimplemented in \mbox{\hyperlink{class_pea_shooter_a0c2645e0393774e9b00be17e72fbf103}{Pea\+Shooter}}.
+
+\Hypertarget{class_weapon_ab34f600ed2d4dbb0d3c9f7038d7319e0}\index{Weapon@{Weapon}!Render@{Render}}
+\index{Render@{Render}!Weapon@{Weapon}}
+\doxysubsubsection{\texorpdfstring{Render()}{Render()}}
+{\footnotesize\ttfamily \label{class_weapon_ab34f600ed2d4dbb0d3c9f7038d7319e0} 
+void Weapon\+::\+Render (\begin{DoxyParamCaption}\item[{Render\+Target \&}]{target}{}\end{DoxyParamCaption})}
+
+
+
+Render method for the \doxylink{class_weapon}{Weapon} class. 
+
+Renders the weapon and its bullets.
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & The render target. \\
+\hline
+\end{DoxyParams}
+Render bullets
+
+Render the weapon\Hypertarget{class_weapon_ae51cc4f2369dd08808d035c99772e9f4}\index{Weapon@{Weapon}!Update@{Update}}
+\index{Update@{Update}!Weapon@{Weapon}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_weapon_ae51cc4f2369dd08808d035c99772e9f4} 
+void Weapon\+::\+Update (\begin{DoxyParamCaption}\item[{Vector2f}]{target\+Position}{, }\item[{Float\+Rect}]{bounds}{, }\item[{const float \&}]{dt}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Update method for the \doxylink{class_weapon}{Weapon} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target\+Position} & The position of the target. \\
+\hline
+{\em bounds} & The bounds of the weapon. \\
+\hline
+{\em dt} & The delta time for updating. \\
+\hline
+\end{DoxyParams}
+Update method implementation goes here
+
+Reimplemented in \mbox{\hyperlink{class_pea_shooter_ae42f3fcbb5f0f8fb3568ef0845ed6daf}{Pea\+Shooter}}.
+
+\Hypertarget{class_weapon_a0b599385c909713ad4d3f1ab86757cab}\index{Weapon@{Weapon}!Upgrade@{Upgrade}}
+\index{Upgrade@{Upgrade}!Weapon@{Weapon}}
+\doxysubsubsection{\texorpdfstring{Upgrade()}{Upgrade()}}
+{\footnotesize\ttfamily \label{class_weapon_a0b599385c909713ad4d3f1ab86757cab} 
+void Weapon\+::\+Upgrade (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Upgrade method for the \doxylink{class_weapon}{Weapon} class. 
+
+Increases the damage and reduces the fire rate. 
+
+Reimplemented in \mbox{\hyperlink{class_pea_shooter_ad240d94b9a9f6af2dc47680ac4a6ffcd}{Pea\+Shooter}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/kaloyanbakardzhiev/\+Documents/\+Uni/\+OOP/\+Project/sfml/\+Space\+Shooter/include/\+Weapons/\mbox{\hyperlink{_weapon_8hpp}{Weapon.\+hpp}}\item 
+/\+Users/kaloyanbakardzhiev/\+Documents/\+Uni/\+OOP/\+Project/sfml/\+Space\+Shooter/src/\+Weapons/\mbox{\hyperlink{_weapon_8cpp}{Weapon.\+cpp}}\end{DoxyCompactItemize}

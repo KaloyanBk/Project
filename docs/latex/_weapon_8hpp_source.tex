@@ -1,0 +1,51 @@
+\doxysection{Weapon.\+hpp}
+\hypertarget{_weapon_8hpp_source}{}\label{_weapon_8hpp_source}\index{/Users/kaloyanbakardzhiev/Documents/Uni/OOP/Project/sfml/SpaceShooter/include/Weapons/Weapon.hpp@{/Users/kaloyanbakardzhiev/Documents/Uni/OOP/Project/sfml/SpaceShooter/include/Weapons/Weapon.hpp}}
+\mbox{\hyperlink{_weapon_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_bullet_8hpp}{../Bullets/Bullet.hpp}}"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_textures_8hpp}{../Resources/Textures.hpp}}"{}}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_weapon}{Weapon}}}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{float}\ dtMultiplier;}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{int}\ fireRate;}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{int}\ fireRateMax;}
+\DoxyCodeLine{00023\ \ \ \ \ Sprite\ sprite;}
+\DoxyCodeLine{00024\ \ \ \ \ Texture*\ weaponTexture;}
+\DoxyCodeLine{00025\ \ \ \ \ std::vector<Bullet\ *>\ bullets;}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{int}\ bulletLevel;}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{int}\ damage;}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{int}\ damageMax;}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{int}\ UpOrDown;}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{int}\ level;}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{comment}{//\ Constructor}}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{class_weapon_a42dbc46dd70319a24763992c4ebbd396}{Weapon}}();}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{class_weapon_a42dbc46dd70319a24763992c4ebbd396}{Weapon}}(\textcolor{keywordtype}{int}\ type,\ \textcolor{keywordtype}{int}\ level,\ \textcolor{keywordtype}{int}\ UpOrDown,\textcolor{keywordtype}{int}\ fireRateMax\ =\ 25,\ \textcolor{keywordtype}{int}\ damageMax\ =\ 1);}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_weapon_a420e7ba3d2017e6de3e93eb579cfd3fa}{\string~Weapon}}();}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{comment}{//\ Accessors}}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{inline}\ std::vector<Bullet*>\&\ getBullets()\ \{\ \textcolor{keywordflow}{return}\ bullets;\ \}}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{const}\ Vector2f\&\ getPosition()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ sprite.getPosition();\ \}}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{const}\ FloatRect\ getBounds()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ sprite.getGlobalBounds();\ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{comment}{//\ Setters}}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ setPosition(\textcolor{keyword}{const}\ Vector2f\&\ position)\ \{\ sprite.setPosition(position);\ \}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{comment}{//\ Virtual\ functions}}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_weapon_ae51cc4f2369dd08808d035c99772e9f4}{Update}}(Vector2f\ targetPosition,\ FloatRect\ bounds,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&dt);}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_weapon_ab2cb13eccba20ed1fabe4454ee1248f6}{Fire}}(\textcolor{keyword}{const}\ Vector2f\&\ position,\ \textcolor{keyword}{const}\ Vector2f\&\ direction,\ \textcolor{keyword}{const}\ Vector2f\&\ scale);}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_weapon_a0b599385c909713ad4d3f1ab86757cab}{Upgrade}}();}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{comment}{//\ Functions}}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_weapon_ab34f600ed2d4dbb0d3c9f7038d7319e0}{Render}}(RenderTarget\&\ target);}
+\DoxyCodeLine{00054\ \};}
+
+\end{DoxyCode}

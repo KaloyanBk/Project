@@ -1,0 +1,192 @@
+\doxysection{Player.\+hpp}
+\hypertarget{_player_8hpp_source}{}\label{_player_8hpp_source}\index{/Users/kaloyanbakardzhiev/Documents/Uni/OOP/Project/sfml/SpaceShooter/include/Player.hpp@{/Users/kaloyanbakardzhiev/Documents/Uni/OOP/Project/sfml/SpaceShooter/include/Player.hpp}}
+\mbox{\hyperlink{_player_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_bullet_8hpp}{./Bullets/Bullet.hpp}}"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_weapon_8hpp}{../include/Weapons/Weapon.hpp}}"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_pea_shooter_8hpp}{../include/Weapons/PeaShooter.hpp}}"{}}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_fonts_8hpp}{./Resources/Fonts.hpp}}"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_textures_8hpp}{./Resources/Textures.hpp}}"{}}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_laser_bullet_8hpp}{../include/Bullets/LaserBullet.hpp}}"{}}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_lightning_8hpp}{../include/Bullets/Lightning.hpp}}"{}}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_dark_matter_8hpp}{../include/Bullets/DarkMatter.hpp}}"{}}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_nuclier_material_8hpp}{../include/Bullets/NuclierMaterial.hpp}}"{}}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_plasma_8hpp}{../include/Bullets/Plasma.hpp}}"{}}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_planetary_bomb_8hpp}{../include/Bullets/PlanetaryBomb.hpp}}"{}}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_player}{Player}}}
+\DoxyCodeLine{00029\ \{}
+\DoxyCodeLine{00030\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ playerNumber;}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{float}\ dtMultiplier;}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{comment}{//\ Player\ sprite}}
+\DoxyCodeLine{00035\ \ \ \ \ Sprite\ sprite;}
+\DoxyCodeLine{00036\ \ \ \ \ RectangleShape\ hitbox;}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ Vector2u\ windowBounds;}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{comment}{//\ Bullets}}
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{class_dynamic_array}{DynamicArray<Bullet\ *>}}\ bullets;}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{comment}{//\ Controls}}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{int}\ controls[5];}
+\DoxyCodeLine{00045\ \ \ \ \ Vector2f\ direction;}
+\DoxyCodeLine{00046\ \ \ \ \ Vector2f\ currentVelocity;}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{float}\ maxVelocity;}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{float}\ acceleration;}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{float}\ drag;}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{comment}{//\ Player\ stats}}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{float}\ fireRate;}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{float}\ fireRateMax;}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{float}\ damageTimer;}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{float}\ damageTimerMax;}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{int}\ damage;}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{int}\ damageMax;}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{int}\ level;}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{int}\ maxLevel;}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{bool}\ isAtMaxLevel\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{float}\ exp;}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{float}\ expNext;}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{int}\ statPoints;}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{int}\ hp;}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{int}\ hpMax;}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{int}\ score;}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{int}\ endurance;}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{int}\ armor;}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{int}\ strength;}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{int}\ agility;}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{int}\ upgrade;}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{comment}{//\ Weapons}}
+\DoxyCodeLine{00080\ \ \ \ \ \mbox{\hyperlink{class_dynamic_array}{DynamicArray<Weapon\ *>}}\ weapons;}
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{class_weapon}{Weapon}}\ *sideGunUp;}
+\DoxyCodeLine{00082\ \ \ \ \ \mbox{\hyperlink{class_weapon}{Weapon}}\ *sideGunDown;}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{int}\ currentWeapon;}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{bool}\ addedUpperWeapon\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{bool}\ addedLowerWeapon\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{comment}{//\ Upgarde\ system}}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{int}\ sideGunLevel\ =\ 0;}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{bool}\ uperWeapon;}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{bool}\ lowerWeapon;}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{int}\ upperWeaponLevel;}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{int}\ lowerWeaponLevel;}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{comment}{//\ Constructor}}
+\DoxyCodeLine{00099\ \ \ \ \ \mbox{\hyperlink{class_player_a1e5bd2f918bcebc2cdb9b182f2dcd35e}{Player}}(\mbox{\hyperlink{class_dynamic_array}{DynamicArray<Texture>}}\ \&textures,\ Vector2u\ windowBounds,\ \textcolor{keywordtype}{int}\ typeOfBullet,}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ UP\ =\ 22,\ \textcolor{keywordtype}{int}\ DOWN\ =\ 18,\ \textcolor{keywordtype}{int}\ LEFT\ =\ 0,\ \textcolor{keywordtype}{int}\ RIGHT\ =\ 3,\ \textcolor{keywordtype}{int}\ FIRE\ =\ 57,}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ playerLevel\ =\ 0,\ \textcolor{keywordtype}{float}\ playerExp\ =\ 0,\ \textcolor{keywordtype}{float}\ playerExpNext\ =\ 16,\ \textcolor{keywordtype}{int}\ playerHp\ =\ 10,\ \textcolor{keywordtype}{int}\ playerHpMax\ =\ 10,\ \textcolor{keywordtype}{int}\ playerScore\ =\ 0,}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ upperWeaponLevel\ =\ 0,\ \textcolor{keywordtype}{int}\ lowerWeaponLevel\ =\ 0,}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ uperWeapon\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{bool}\ lowerWeapon\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ \mbox{\hyperlink{class_player_a749d2c00e1fe0f5c2746f7505a58c062}{\string~Player}}();}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{comment}{//\ Accessors}}
+\DoxyCodeLine{00108\ \ \ \ \ \mbox{\hyperlink{class_bullet}{Bullet}}\ \&\mbox{\hyperlink{class_player_a17c5978d3f7ea0dcd3fb10b26c43ceff}{getBullet}}(\textcolor{keywordtype}{unsigned}\ index);}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_a1ed1b8453f9f33d357e34ae23c5751de}{removeBullet}}(\textcolor{keywordtype}{unsigned}\ index);}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ getBulletSize()\ \{\ \textcolor{keywordflow}{return}\ this-\/>bullets.size();\ \}}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ Vector2f\ \&getPosition()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ this-\/>sprite.getPosition();\ \}}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keyword}{inline}\ \mbox{\hyperlink{class_dynamic_array}{DynamicArray<Weapon\ *>}}\ \&getWeapons()\ \{\ \textcolor{keywordflow}{return}\ this-\/>weapons;\ \};}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ String\ getHpS()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ std::to\_string(this-\/>hp)\ +\ \textcolor{stringliteral}{"{}/"{}}\ +\ std::to\_string(this-\/>hpMax);\ \}}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ FloatRect\ getBounds()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ this-\/>sprite.getGlobalBounds();\ \}}
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ isDead()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ this-\/>hp\ <=\ 0;\ \}}
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ getPlayerNumber()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ this-\/>playerNumber;\ \}}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ getLevel()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ this-\/>level;\ \}}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ getMaxLevel()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ this-\/>maxLevel;\ \}}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ getIsAtMaxLevel()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ this-\/>isAtMaxLevel;\ \}}
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ getExp()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ this-\/>exp;\ \}}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ getExpNext()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ this-\/>expNext;\ \}}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ getStatPoints()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ this-\/>statPoints;\ \}}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ getHp()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ this-\/>hp;\ \}}
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ getHpMax()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ this-\/>hpMax;\ \}}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ getScore()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ this-\/>score;\ \}}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ getCurrentWeapon()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ this-\/>currentWeapon;\ \}}
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ gainExp(\textcolor{keywordtype}{float}\ exp)}
+\DoxyCodeLine{00128\ \ \ \ \ \{}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!this-\/>isAtMaxLevel)}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>exp\ +=\ exp;}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ this-\/>\mbox{\hyperlink{class_player_ade2efffc2914adff1600bf71506b4876}{updateLevelingSystem}}();}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00135\ \ \ \ \ \}}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{comment}{//\ Templait\ function\ adding\ to\ bullet\ vector}}
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_ade7f2d0caad36a822e7681d79bc28a46}{setBulletType}}(Vector2f\ pos,\ \textcolor{keywordtype}{int}\ upgrade,\ \textcolor{keywordtype}{int}\ level,\ Vector2f\ directionUp\ =\ Vector2f(1.f,\ -\/0.1f),\ Vector2f\ directionDown\ =\ Vector2f(1.f,\ 0.1f),}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ initialVelocity\ =\ 2.f,\ \textcolor{keywordtype}{float}\ maxVelocity\ =\ 50.f,\ \textcolor{keywordtype}{float}\ acceleration\ =\ 1.f);}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{comment}{//\ Modifiers}}
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordtype}{void}\ setToDefault();}
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordtype}{void}\ setCurrentWeapon(\textcolor{keywordtype}{int}\ weapon)\ \{\ this-\/>currentWeapon\ =\ weapon;\ \}}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordtype}{void}\ setUpperWeaponLevel(\textcolor{keywordtype}{int}\ level)\ \{\ this-\/>upperWeaponLevel\ =\ level;\ \}}
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordtype}{void}\ setLowerWeaponLevel(\textcolor{keywordtype}{int}\ level)\ \{\ this-\/>lowerWeaponLevel\ =\ level;\ \}}
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordtype}{void}\ setUperWeapon(\textcolor{keywordtype}{bool}\ uperWeapon)\ \{\ this-\/>uperWeapon\ =\ uperWeapon;\ \}}
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordtype}{void}\ setLowerWeapon(\textcolor{keywordtype}{bool}\ lowerWeapon)\ \{\ this-\/>lowerWeapon\ =\ lowerWeapon;\ \}}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordtype}{void}\ setLevel(\textcolor{keywordtype}{int}\ level)\ \{\ this-\/>level\ =\ level;\ \}}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordtype}{void}\ setExp(\textcolor{keywordtype}{float}\ exp)\ \{\ this-\/>exp\ =\ exp;\ \}}
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keywordtype}{void}\ setExpNext(\textcolor{keywordtype}{float}\ expNext)\ \{\ this-\/>expNext\ =\ expNext;\ \}}
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keywordtype}{void}\ setStatPoints(\textcolor{keywordtype}{int}\ statPoints)\ \{\ this-\/>statPoints\ =\ statPoints;\ \}}
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keywordtype}{void}\ setHp(\textcolor{keywordtype}{int}\ hp)\ \{\ this-\/>hp\ =\ hp;\ \}}
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keywordtype}{void}\ setHpMax(\textcolor{keywordtype}{int}\ hpMax)\ \{\ this-\/>hpMax\ =\ hpMax;\ \}}
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keywordtype}{void}\ setScore(\textcolor{keywordtype}{int}\ score)\ \{\ this-\/>score\ =\ score;\ \}}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{comment}{//\ Functionsc}}
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_ac1c857510b27bd65438875d66327b88c}{Move}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&dt);}
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_player_ade2efffc2914adff1600bf71506b4876}{updateLevelingSystem}}();}
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_aae180f7a4a011ba1fd485e3d8728f489}{LevelUp}}();}
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_a24e1410471757a52c747627ab96048f9}{addWeapon}}(\textcolor{keywordtype}{int}\ type,\ \textcolor{keywordtype}{int}\ UpOrDown,\ \textcolor{keywordtype}{int}\ level);}
+\DoxyCodeLine{00163\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_a08899a44ad649026d9d7edd796a736ee}{CombatUpdate}}();}
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_a2d87aa8c673b0035b1353480db62a880}{UpdateAccessories}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&dt);}
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_ae06d08811198818e0f9f6a6bbc21fd1f}{TakeDamage}}(\textcolor{keywordtype}{int}\ damage);}
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_a7226f1ede018b27d93ee99a423bf3365}{Update}}(Vector2u\ windowBounds,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \&dt);}
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_a8eee638cafc06d46bdda1979287d5057}{Render}}(RenderTarget\ \&target);}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{unsigned}\ players;}
+\DoxyCodeLine{00170\ \};}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \textcolor{comment}{//\ Enumerations}}
+\DoxyCodeLine{00173\ \textcolor{keyword}{enum}\ controls}
+\DoxyCodeLine{00174\ \{}
+\DoxyCodeLine{00175\ \ \ \ \ UP\ =\ 0,}
+\DoxyCodeLine{00176\ \ \ \ \ DOWN,}
+\DoxyCodeLine{00177\ \ \ \ \ LEFT,}
+\DoxyCodeLine{00178\ \ \ \ \ RIGHT,}
+\DoxyCodeLine{00179\ \ \ \ \ FIRE}
+\DoxyCodeLine{00180\ \};}
+\DoxyCodeLine{00181\ \textcolor{keyword}{enum}\ mainWeapons}
+\DoxyCodeLine{00182\ \{}
+\DoxyCodeLine{00183\ \ \ \ \ LASER\ =\ 0,}
+\DoxyCodeLine{00184\ \ \ \ \ LIGHTNING,}
+\DoxyCodeLine{00185\ \ \ \ \ DARK\_MATTER,}
+\DoxyCodeLine{00186\ \ \ \ \ NUCLIER\_MATERIAL,}
+\DoxyCodeLine{00187\ \ \ \ \ PLASMA,}
+\DoxyCodeLine{00188\ \ \ \ \ PLANETARY\_BOMB}
+\DoxyCodeLine{00189\ \};}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00191\ \textcolor{keyword}{enum}\ sideWeapons}
+\DoxyCodeLine{00192\ \{}
+\DoxyCodeLine{00193\ \ \ \ \ WEAPON\_UP\ =\ 0,}
+\DoxyCodeLine{00194\ \ \ \ \ WEAPON\_DOWN}
+\DoxyCodeLine{00195\ \};}
+
+\end{DoxyCode}

@@ -1,3 +1,13 @@
+/**
+ * @file Follow.hpp
+ * @author Kaloyan
+ * @brief This is the header file for the FollowEnemy class, child of Enemy, which is used to create enemies that follow the player.
+ * @version 0.1
+ * @date 2024-05-30
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #pragma once
 
 #include "./Enemy.hpp"

@@ -1,0 +1,116 @@
+\doxysection{Pea\+Bullet Class Reference}
+\hypertarget{class_pea_bullet}{}\label{class_pea_bullet}\index{PeaBullet@{PeaBullet}}
+Inheritance diagram for Pea\+Bullet\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_pea_bullet}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_pea_bullet_ae0445cd292d6226c65bd0cfd641f6349}{Pea\+Bullet}} (Vector2f pos, int level, Vector2f direction=Vector2f(1.f, 0.f), float initial\+Velocity=5.f, float max\+Velocity=10.f, float acceleration=1.f)
+\begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{class_pea_bullet}{Pea\+Bullet} object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_pea_bullet_a9c009c080ac6cbb4efa6608dfaa2e5e6}{Update}} (const float \&dt) override
+\begin{DoxyCompactList}\small\item\em Updates the \doxylink{class_pea_bullet}{Pea\+Bullet}\textquotesingle{}s movement. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_bullet}{Bullet}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_bullet_a52afadd16e72cc4657ca9597223d9b49}{Bullet}} (Vector2f pos, int level, Vector2f direction=Vector2f(1.f, 0.f), float initial\+Velocity=2.f, float max\+Velocity=50.f, float acceleration=1.f)
+\begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{class_bullet}{Bullet} object. \end{DoxyCompactList}\item 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Bullet} ()
+\begin{DoxyCompactList}\small\item\em Destroys the \doxylink{class_bullet}{Bullet} object. \end{DoxyCompactList}\item 
+const Float\+Rect {\bfseries get\+Bounds} () const
+\item 
+const Vector2f \& {\bfseries get\+Position} () const
+\item 
+const int \& {\bfseries get\+Damage} () const
+\item 
+void \mbox{\hyperlink{class_bullet_a7eb35dd47e88c719817eb73988a16914}{set\+Texture}} (int type, int level)
+\begin{DoxyCompactList}\small\item\em Sets the texture of the bullet based on its type and level. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_bullet_a8796cb4bf3754659c218ee6fe9fa322e}{set\+Damage}} (int damage, int level)
+\begin{DoxyCompactList}\small\item\em Sets the damage of the bullet based on its type and level. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_bullet_a62b81c40626e465d7a82b3606d9109b2}{Move}} (const float \&dt)
+\begin{DoxyCompactList}\small\item\em Moves the bullet based on its current velocity. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_bullet_a1b7b227c6a3c9ed92a3bb257b6ec9e0e}{Render}} (Render\+Target \&target)
+\begin{DoxyCompactList}\small\item\em Renders the bullet on the target. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_bullet}{Bullet}}}
+\begin{DoxyCompactItemize}
+\item 
+float {\bfseries dt\+Multiplier}
+\item 
+Sprite {\bfseries sprite}
+\item 
+Texture \texorpdfstring{$\ast$}{*} {\bfseries texture}
+\item 
+Vector2f {\bfseries current\+Velocity}
+\item 
+Vector2f {\bfseries direction}
+\item 
+float {\bfseries max\+Velocity}
+\item 
+float {\bfseries acceleration}
+\item 
+int {\bfseries damage}
+\item 
+int {\bfseries damage\+Max}
+\item 
+int {\bfseries level}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_pea_bullet_ae0445cd292d6226c65bd0cfd641f6349}\index{PeaBullet@{PeaBullet}!PeaBullet@{PeaBullet}}
+\index{PeaBullet@{PeaBullet}!PeaBullet@{PeaBullet}}
+\doxysubsubsection{\texorpdfstring{PeaBullet()}{PeaBullet()}}
+{\footnotesize\ttfamily \label{class_pea_bullet_ae0445cd292d6226c65bd0cfd641f6349} 
+Pea\+Bullet\+::\+Pea\+Bullet (\begin{DoxyParamCaption}\item[{Vector2f}]{pos}{, }\item[{int}]{level}{, }\item[{Vector2f}]{direction}{ = {\ttfamily Vector2f(1.f,~0.f)}, }\item[{float}]{initial\+Velocity}{ = {\ttfamily 5.f}, }\item[{float}]{max\+Velocity}{ = {\ttfamily 10.f}, }\item[{float}]{acceleration}{ = {\ttfamily 1.f}}\end{DoxyParamCaption})}
+
+
+
+Constructs a new \doxylink{class_pea_bullet}{Pea\+Bullet} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & Initial position of the \doxylink{class_pea_bullet}{Pea\+Bullet}. \\
+\hline
+{\em level} & Level of the \doxylink{class_pea_bullet}{Pea\+Bullet}. \\
+\hline
+{\em direction} & Direction of the \doxylink{class_pea_bullet}{Pea\+Bullet}. \\
+\hline
+{\em initial\+Velocity} & Initial velocity of the \doxylink{class_pea_bullet}{Pea\+Bullet}. \\
+\hline
+{\em max\+Velocity} & Maximum velocity of the \doxylink{class_pea_bullet}{Pea\+Bullet}. \\
+\hline
+{\em acceleration} & Acceleration of the \doxylink{class_pea_bullet}{Pea\+Bullet}. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_pea_bullet_a9c009c080ac6cbb4efa6608dfaa2e5e6}\index{PeaBullet@{PeaBullet}!Update@{Update}}
+\index{Update@{Update}!PeaBullet@{PeaBullet}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_pea_bullet_a9c009c080ac6cbb4efa6608dfaa2e5e6} 
+void Pea\+Bullet\+::\+Update (\begin{DoxyParamCaption}\item[{const float \&}]{dt}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Updates the \doxylink{class_pea_bullet}{Pea\+Bullet}\textquotesingle{}s movement. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dt} & Time elapsed since the last update. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_bullet_a7201b09644ef8aab96f32ac6a7d9bba2}{Bullet}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/kaloyanbakardzhiev/\+Documents/\+Uni/\+OOP/\+Project/sfml/\+Space\+Shooter/include/\+Bullets/\mbox{\hyperlink{_pea_bullet_8hpp}{Pea\+Bullet.\+hpp}}\item 
+/\+Users/kaloyanbakardzhiev/\+Documents/\+Uni/\+OOP/\+Project/sfml/\+Space\+Shooter/src/\+Bullets/\mbox{\hyperlink{_pea_bullet_8cpp}{Pea\+Bullet.\+cpp}}\end{DoxyCompactItemize}

@@ -1,3 +1,13 @@
+/**
+ * @file SaveData.hpp
+ * @author Kaloyan
+ * @brief This is the header file for the SaveData class, which is used to save and load data from the game.
+ * @version 0.1
+ * @date 2024-05-30
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #pragma once
 
 #include <nlohmann/json.hpp>

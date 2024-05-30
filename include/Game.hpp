@@ -1,3 +1,13 @@
+/**
+ * @file Game.hpp
+ * @author Kaloyan
+ * @brief This is the header file for the Game class, which is used to create the game and manage the game state.
+ * @version 0.1
+ * @date 2024-05-30
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #pragma once
 
 // Include necessary headers

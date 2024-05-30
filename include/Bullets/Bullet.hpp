@@ -1,3 +1,13 @@
+/**
+ * @file Bullet.hpp
+ * @author Kaloyan
+ * @brief This is the header file for the Bullet class, which is used to create bullets for the player to shoot.
+ * @version 0.1
+ * @date 2024-05-30
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #pragma once
 
 #include "../Resources/BulletResources.hpp"

@@ -1,6 +1,26 @@
+/**
+ * @file LaserBullet.cpp
+ * @author Kaloyan
+ * @brief This is the implementation file for the LaserBullet class, child of Bullet, which is used to create Laser bullets for the player to shoot.
+ * @version 0.1
+ * @date 2024-05-30
+ * 
+ * @copyright Copyright (c) 2024
+ */
+
 #include "../../include/Bullets/LaserBullet.hpp"
 
-LaserBullet::LaserBullet(  Vector2f pos, int level, Vector2f direction,
+/**
+ * @brief Constructs a new LaserBullet object.
+ * 
+ * @param pos Initial position of the LaserBullet.
+ * @param level Level of the LaserBullet.
+ * @param direction Direction of the LaserBullet.
+ * @param initialVelocity Initial velocity of the LaserBullet.
+ * @param maxVelocity Maximum velocity of the LaserBullet.
+ * @param acceleration Acceleration of the LaserBullet.
+ */
+LaserBullet::LaserBullet(Vector2f pos, int level, Vector2f direction,
                 float initialVelocity, float maxVelocity,
                 float acceleration)
     : Bullet(pos, level, direction, initialVelocity, maxVelocity, acceleration)
@@ -13,9 +33,12 @@ LaserBullet::LaserBullet(  Vector2f pos, int level, Vector2f direction,
 
 }
 
+/**
+ * @brief Updates the LaserBullet's movement.
+ * 
+ * @param dt Time elapsed since the last update.
+ */
 void LaserBullet::Update(const float &dt)
 {
-    // Implement LASERBullet specific behavior here
-    // For example, adjust position, check for collisions, etc.
     Move(dt);
 }

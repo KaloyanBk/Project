@@ -1,3 +1,13 @@
+/**
+ * @file Textures.hpp
+ * @author Kaloyen
+ * @brief This is the header file for the Textures enum, which is used to store the paths to the textures used in the game.
+ * @version 0.1
+ * @date 2024-05-30
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #pragma once
 
 #include <unordered_map>

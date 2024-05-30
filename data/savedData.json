@@ -4,9 +4,9 @@
         "enabled": true,
         "level": 0
     },
-    "numberOfPlayers": 2,
+    "numberOfPlayers": 1,
     "player1": {
-        "exp": 5.0,
+        "exp": 7.0,
         "expNext": 112.0,
         "hp": 10,
         "hpMax": 10,
@@ -14,16 +14,16 @@
         "score": 0
     },
     "player2": {
-        "exp": 94.0,
-        "expNext": 112.0,
-        "hp": 4,
-        "hpMax": 10,
-        "level": 1,
+        "exp": 0.0,
+        "expNext": 0.0,
+        "hp": 10,
+        "hpMax": 0,
+        "level": 0,
         "score": 0
     },
-    "typeOfBullet": 4,
+    "typeOfBullet": 0,
     "upperWeapon": {
         "enabled": true,
-        "level": 1
+        "level": 2
     }
 }
