@@ -10,9 +10,8 @@
  */
 #include "../../include/Weapons/Weapon.hpp"
 #include <iostream>
-/**
- * @brief Default constructor for the Weapon class.
- */
+
+
 Weapon::Weapon()
     : fireRate(0), fireRateMax(10), weaponTexture(nullptr),
       bulletLevel(1), damage(1), damageMax(2)
@@ -57,9 +56,6 @@ Weapon::Weapon(int type, int level, int UpOrDown, int fireRateMax, int damageMax
     sprite.setOrigin(sprite.getGlobalBounds().width / 2, sprite.getGlobalBounds().height / 2);
 }
 
-/**
- * @brief Destructor for the Weapon class.
- */
 Weapon::~Weapon() {}
 
 /**
@@ -71,7 +67,6 @@ Weapon::~Weapon() {}
  */
 void Weapon::Update(Vector2f targetPosition, FloatRect bounds, const float &dt)
 {
-    /// Update method implementation goes here
 }
 
 /**
@@ -83,7 +78,6 @@ void Weapon::Update(Vector2f targetPosition, FloatRect bounds, const float &dt)
  */
 void Weapon::Fire(const Vector2f &position, const Vector2f &direction, const Vector2f &scale)
 {
-    /// Fire method implementation goes here
 }
 
 /**

@@ -33,9 +33,6 @@ Bullet::Bullet(Vector2f pos, int level, Vector2f direction,
     this->texture = new Texture();
 }
 
-/**
- * @brief Destroys the Bullet object.
- */
 Bullet::~Bullet()
 {
     delete this->texture;

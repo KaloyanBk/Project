@@ -4,9 +4,9 @@
  * @brief This is the header file for the Game class, which is used to create the game and manage the game state.
  * @version 0.1
  * @date 2024-05-30
- * 
+ *
  * @copyright Copyright (c) 2024
- * 
+ *
  */
 #pragma once
 
@@ -110,13 +110,6 @@ public:
 
     // Accessors
     inline RenderWindow &getWindow() { return *this->window; }
-    inline const bool &isGameOver() const { return this->gameOver; }
-    inline const bool &isGamePaused() const { return this->gamePaused; }
-    inline const bool &isInGame() const { return this->inGame; }
-    inline void pause() { this->gamePaused = true; }
-    inline void resume() { this->gamePaused = false; }
-    inline bool hasBeenReset() { return this->isReset; }
-    inline bool isCountinue() { return this->countinue; }
 
     inline const int &getNumberOfPlayers() const { return this->numberOfPlayers; }
     inline const int &getPlayer1Level() const { return this->player1Level; }
@@ -137,6 +130,23 @@ public:
     inline const int &getLowerWeaponLevel() const { return this->lowerWeaponLevel; }
     inline const int getBulletType() const { return this->players[0]->getCurrentWeapon(); }
 
+    inline const bool &isGameOver() const { return this->gameOver; }
+    inline const bool &isGamePaused() const { return this->gamePaused; }
+    inline const bool &isInGame() const { return this->inGame; }
+    inline bool hasBeenReset() { return this->isReset; }
+    inline bool isCountinue() { return this->countinue; }
+    inline void pause() { this->gamePaused = true; }
+    inline void resume() { this->gamePaused = false; }
+
+
+    // Modifying functions
+    void setIsGameStarted(bool isGameStarted) { this->inGame = isGameStarted; }
+    void setWeaponType(int weaponType);
+    void setUpperWeapon(bool upperWeapon);
+    void setLowerWeapon(bool lowerWeapon);
+    void setUpperWeaponLevel(int upperWeaponLevel);
+    void setLowerWeaponLevel(int lowerWeaponLevel);
+
     // Functions
     Player *createPlayer(DynamicArray<Texture> &textures, Vector2u windowBounds,
                          int level, float playerExp, float playerExpNext, int playerHp, int playerHpMax, int playerScore,
@@ -147,81 +157,12 @@ public:
                       int &player2Level, int &player2Hp, int &player2HpMax, float &player2Exp, float &player2ExpNext, int &player2Score,
                       bool &upperWeapon, int &upperWeaponLevel,
                       bool &lowerWeapon, int &lowerWeaponLevel);
-
-    // Modifying functions
     void loadSavedGameData(int numberOfPlayers,
-                       int player1Level, int player1Hp, int player1HpMax, float player1Exp, float player1ExpNext, int player1Score,
-                       int player2Level, int player2Hp, int player2HpMax, float player2Exp, float player2ExpNext, int player2Score,
-                       bool upperWeapon, int upperWeaponLevel, bool lowerWeapon, int lowerWeaponLevel, int typeOfBullet)
-    {
-        this->numberOfPlayers = numberOfPlayers;
-        this->player1Level = player1Level;
-        this->player2Level = player2Level;
-        this->player1Hp = player1Hp;
-        this->player2Hp = player2Hp;
-        this->player1HpMax = player1HpMax;
-        this->player2HpMax = player2HpMax;
-        this->player1Exp = player1Exp;
-        this->player2Exp = player2Exp;
-        this->player1ExpNext = player1ExpNext;
-        this->player2ExpNext = player2ExpNext;
-        this->player1Score = player1Score;
-        this->player2Score = player2Score;
-        this->upperWeapon = upperWeapon;
-        this->upperWeaponLevel = upperWeaponLevel;
-        this->lowerWeapon = lowerWeapon;
-        this->lowerWeaponLevel = lowerWeaponLevel;
-        this->typeOfBullet = typeOfBullet;
-    }
-    void setIsGameStarted(bool isGameStarted) { this->inGame = isGameStarted; }
-    void setWeaponType(int weaponType)
-    {
-        this->players[0]->setCurrentWeapon(weaponType);
-        if (this->numberOfPlayers == 2)
-        {
-            this->players[1]->setCurrentWeapon(weaponType);
-        }
-    }
-
-    void setUpperWeapon(bool upperWeapon)
-    {
-        this->upperWeapon = upperWeapon;
-        this->players[0]->setUperWeapon(upperWeapon);
-        if (this->numberOfPlayers == 2)
-        {
-            this->players[1]->setUperWeapon(upperWeapon);
-        }
-    }
-    void setLowerWeapon(bool lowerWeapon)
-    {
-        this->lowerWeapon = lowerWeapon;
-        this->players[0]->setLowerWeapon(lowerWeapon);
-        if (this->numberOfPlayers == 2)
-        {
-            this->players[1]->setLowerWeapon(lowerWeapon);
-        }
-    }
-    void setUpperWeaponLevel(int upperWeaponLevel)
-    {
-        this->upperWeaponLevel = upperWeaponLevel;
-        this->players[0]->setUpperWeaponLevel(upperWeaponLevel);
-        if (this->numberOfPlayers == 2)
-        {
-            this->players[1]->setUpperWeaponLevel(upperWeaponLevel);
-        }
-    }
-    void setLowerWeaponLevel(int lowerWeaponLevel)
-    {
-        this->lowerWeaponLevel = lowerWeaponLevel;
-        this->players[0]->setLowerWeaponLevel(lowerWeaponLevel);
-        if (this->numberOfPlayers == 2)
-        {
-            this->players[1]->setLowerWeaponLevel(lowerWeaponLevel);
-        }
-    }
-    // seters
+                           int player1Level, int player1Hp, int player1HpMax, float player1Exp, float player1ExpNext, int player1Score,
+                           int player2Level, int player2Hp, int player2HpMax, float player2Exp, float player2ExpNext, int player2Score,
+                           bool upperWeapon, int upperWeaponLevel, bool lowerWeapon, int lowerWeaponLevel, int typeOfBullet);
+    
     void reseted(bool reset) { this->isReset = reset; }
-
     void restart();
     void exit();
 

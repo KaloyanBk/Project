@@ -92,8 +92,6 @@ void PeaShooter::Fire(const Vector2f &position, const Vector2f &direction, const
 
 /**
  * @brief Upgrade method for the PeaShooter class.
- * 
- * Increases the damage and reduces the fire rate.
  */
 void PeaShooter::Upgrade()
 {

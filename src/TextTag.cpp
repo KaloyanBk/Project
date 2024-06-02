@@ -83,9 +83,6 @@ TextTag& TextTag::operator=(const TextTag& other)
     return *this;
 }
 
-/**
- * @brief Destructor for TextTag.
- */
 TextTag::~TextTag()
 {
 }

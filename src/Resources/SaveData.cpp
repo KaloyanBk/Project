@@ -168,14 +168,14 @@ void saveDefaultData()
     /// Update default data
     savedData["player1"]["level"] = 0;
     savedData["player1"]["hp"] = 10;
-    savedData["player1"]["hpMax"] = 0;
+    savedData["player1"]["hpMax"] = 10;
     savedData["player1"]["exp"] = 0.0;
     savedData["player1"]["expNext"] = 0.0;
     savedData["player1"]["score"] = 0;
 
     savedData["player2"]["level"] = 0;
     savedData["player2"]["hp"] = 10;
-    savedData["player2"]["hpMax"] = 0;
+    savedData["player2"]["hpMax"] = 10;
     savedData["player2"]["exp"] = 0.0;
     savedData["player2"]["expNext"] = 0.0;
     savedData["player2"]["score"] = 0;
@@ -202,8 +202,8 @@ void eraceSavedData()
     /// Create default data
     json defaultData = {
         {"numberOfPlayers", 1},
-        {"player1", {{"level", 0}, {"hp", 10}, {"hpMax", 0}, {"exp", 0.0}, {"expNext", 0.0}, {"score", 0}}},
-        {"player2", {{"level", 0}, {"hp", 10}, {"hpMax", 0}, {"exp", 0.0}, {"expNext", 0.0}, {"score", 0}}},
+        {"player1", {{"level", 0}, {"hp", 10}, {"hpMax", 10}, {"exp", 0.0}, {"expNext", 0.0}, {"score", 0}}},
+        {"player2", {{"level", 0}, {"hp", 10}, {"hpMax", 10}, {"exp", 0.0}, {"expNext", 0.0}, {"score", 0}}},
         {"upperWeapon", {{"enabled", false}, {"level", 0}}},
         {"lowerWeapon", {{"enabled", false}, {"level", 0}}},
         {"continueGame", false},

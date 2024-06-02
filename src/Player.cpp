@@ -41,7 +41,7 @@ Player::Player(DynamicArray<Texture> &textures, Vector2u windowBounds, int typeO
                int upperWeaponLevel, int lowerWeaponLevel,
                bool uperWeapon, bool lowerWeapon)
     : windowBounds(windowBounds), level(playerLevel), maxLevel(4), exp(playerExp),
-      hp(playerHp), hpMax(10),
+      hp(playerHp), hpMax(playerHpMax),
       upperWeaponLevel(upperWeaponLevel), lowerWeaponLevel(lowerWeaponLevel),
       uperWeapon(uperWeapon), lowerWeapon(lowerWeapon),
       damage(1), damageMax(2),
@@ -94,38 +94,6 @@ Player::~Player()
         delete weapons[i];
     }
 }
-
-//  void Player::setToDefault(){
-//      this->hp = this->hpMax;
-//      this->exp = 0;
-//      this->score = 0;
-//      this->statPoints = 0;
-//      this->upgrade = 0;
-//      this->endurance = 0;
-//      this->armor = 0;
-//      this->strength = 0;
-//      this->agility = 0;
-//      this->fireRate = this->fireRateMax;
-//      this->damageTimerMax = 5.f;
-//      this->damageTimer = 0.f;
-//      this->weapons.clear();
-//      this->bullets.clear();
-//      this->level = 0;
-//      this->maxLevel = 4;
-//      this->hpMax = 10;
-//      this->upperWeaponLevel = 0;
-//      this->lowerWeaponLevel = 0;
-//      this->expNext = static_cast<int>((50 / 3) *
-//                                       (pow((this->level + 1), 3) -
-//                                        6 * pow((this->level + 1), 2) +
-//                                        17 * (this->level + 1) - 11));
-//      this->uperWeapon = false;
-//      this->lowerWeapon = false;
-//      this->sprite.setColor(Color(255, 255, 255, 255));
-//      this->exp = 0;
-//      this->score = 0;
-//      this->players = 0;
-//  }
 
 /**
  * @brief Moves the player based on input and physics.
@@ -240,7 +208,7 @@ void Player::LevelUp()
                                       6 * pow((this->level + 1), 2) +
                                       17 * (this->level + 1) - 12));
 
-    /// this->hpMax = static_cast<int>(10 * pow(1.1, (this->level + 1)));
+    this->hpMax = static_cast<int>(10 * pow(1.1, (this->level + 1)));
     this->hp = this->hpMax;
 }
 

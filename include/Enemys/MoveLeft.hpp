@@ -24,6 +24,5 @@ public:
                   int hpMax, int damageMax, int damageMin);
     virtual ~MoveLeftEnemy();
 
-    // Override functions
     void Move(float dt,  Vector2f playerPosition) override;
 };

@@ -27,7 +27,6 @@ public:
                 int hpMax, int damageMax, int damageMin, int playerToFollow = 0);
     virtual ~FollowEnemy();
 
-    // Override functions
     void Move(float dt,  Vector2f playerPosition) override;
 
 

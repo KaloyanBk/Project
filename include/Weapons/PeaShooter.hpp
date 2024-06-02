@@ -20,7 +20,6 @@ private:
     int level;
 
 public:
-    // Constructors/Destructors
     PeaShooter();
     PeaShooter(int level, int UpOrDown);
     virtual ~PeaShooter();

@@ -35,9 +35,6 @@ MoveLeftEnemy::MoveLeftEnemy(sf::Texture *texture, sf::Vector2u windowBounds,
     this->speedy = 0.f;
 }
 
-/**
- * @brief Destroys the MoveLeftEnemy object.
- */
 MoveLeftEnemy::~MoveLeftEnemy() {}
 
 /**

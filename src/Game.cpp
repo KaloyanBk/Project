@@ -170,8 +170,8 @@ Player *Game::createPlayer(DynamicArray<Texture> &textures, Vector2u windowBound
 
 /**
  * @brief Create player instances based on the number of players.
- * 
- * This function loads saved player data and creates player instances based on the 
+ *
+ * This function loads saved player data and creates player instances based on the
  * number of players specified. Players are configured with control keys and statistics.
  */
 void Game::createPlayers()
@@ -213,10 +213,10 @@ void Game::createPlayers()
 
 /**
  * @brief Get the current game state including player information and weapon states.
- * 
+ *
  * This function sets the provided references with the current game state information.
  * If the number of players is one, it throws an exception if player 2 is accessed.
- * 
+ *
  * @param numberOfPlayers The reference to store the number of players.
  * @param player1Level The reference to store player 1's level.
  * @param player1Hp The reference to store player 1's current health points.
@@ -234,7 +234,7 @@ void Game::createPlayers()
  * @param upperWeaponLevel The reference to store the level of the upper weapon.
  * @param lowerWeapon The reference to store the state of the lower weapon.
  * @param lowerWeaponLevel The reference to store the level of the lower weapon.
- * 
+ *
  * @throws std::runtime_error If player 1 or player 2 does not exist when expected.
  */
 void Game::getGameState(int &numberOfPlayers,
@@ -285,12 +285,85 @@ void Game::getGameState(int &numberOfPlayers,
     lowerWeaponLevel = this->lowerWeaponLevel;
 }
 
+void Game::loadSavedGameData(int numberOfPlayers,
+                             int player1Level, int player1Hp, int player1HpMax, float player1Exp, float player1ExpNext, int player1Score,
+                             int player2Level, int player2Hp, int player2HpMax, float player2Exp, float player2ExpNext, int player2Score,
+                             bool upperWeapon, int upperWeaponLevel, bool lowerWeapon, int lowerWeaponLevel, int typeOfBullet)
+{
+    this->numberOfPlayers = numberOfPlayers;
+    this->player1Level = player1Level;
+    this->player2Level = player2Level;
+    this->player1Hp = player1Hp;
+    this->player2Hp = player2Hp;
+    this->player1HpMax = player1HpMax;
+    this->player2HpMax = player2HpMax;
+    this->player1Exp = player1Exp;
+    this->player2Exp = player2Exp;
+    this->player1ExpNext = player1ExpNext;
+    this->player2ExpNext = player2ExpNext;
+    this->player1Score = player1Score;
+    this->player2Score = player2Score;
+    this->upperWeapon = upperWeapon;
+    this->upperWeaponLevel = upperWeaponLevel;
+    this->lowerWeapon = lowerWeapon;
+    this->lowerWeaponLevel = lowerWeaponLevel;
+    this->typeOfBullet = typeOfBullet;
+}
+
+void Game::setWeaponType(int weaponType)
+{
+    this->players[0]->setCurrentWeapon(weaponType);
+    if (this->numberOfPlayers == 2)
+    {
+        this->players[1]->setCurrentWeapon(weaponType);
+    }
+}
+
+void Game::setUpperWeapon(bool upperWeapon)
+{
+    this->upperWeapon = upperWeapon;
+    this->players[0]->setUperWeapon(upperWeapon);
+    if (this->numberOfPlayers == 2)
+    {
+        this->players[1]->setUperWeapon(upperWeapon);
+    }
+}
+
+void Game::setLowerWeapon(bool lowerWeapon)
+{
+    this->lowerWeapon = lowerWeapon;
+    this->players[0]->setLowerWeapon(lowerWeapon);
+    if (this->numberOfPlayers == 2)
+    {
+        this->players[1]->setLowerWeapon(lowerWeapon);
+    }
+}
+
+void Game::setUpperWeaponLevel(int upperWeaponLevel)
+{
+    this->upperWeaponLevel = upperWeaponLevel;
+    this->players[0]->setUpperWeaponLevel(upperWeaponLevel);
+    if (this->numberOfPlayers == 2)
+    {
+        this->players[1]->setUpperWeaponLevel(upperWeaponLevel);
+    }
+}
+
+void Game::setLowerWeaponLevel(int lowerWeaponLevel)
+{
+    this->lowerWeaponLevel = lowerWeaponLevel;
+    this->players[0]->setLowerWeaponLevel(lowerWeaponLevel);
+    if (this->numberOfPlayers == 2)
+    {
+        this->players[1]->setLowerWeaponLevel(lowerWeaponLevel);
+    }
+}
 /**
  * @brief Initialize the UI elements.
- * 
+ *
  * This function loads the font, sets up text elements, progress bars, and initializes buttons
  * for restarting, exiting, and pausing the game.
- * 
+ *
  * @throws std::runtime_error If the font fails to load.
  */
 void Game::initUI()
@@ -365,115 +438,13 @@ void Game::initUI()
 }
 
 /**
- * @brief Restart the game.
- * 
- * This function clears all current players and enemies, resets the game state, reloads saved data,
- * and recreates players. It also decrements the times counter and emits a signal indicating the game reset.
- * 
- * @throws std::runtime_error If loading saved data fails.
- */
-void Game::restart()
-{
-    /// Delete existing player objects
-    for (auto &p : players)
-    {
-        delete p;
-    }
-    players.clear();
-
-    /// Delete existing enemy objects
-    for (size_t i = 0; i < enemies.size(); ++i)
-    {
-        delete enemies[i];
-    }
-    enemies.clear();
-
-    /// Reset game over state and position of game over text
-    this->gameOver = false;
-    this->gameOverText.setPosition(
-        0.f - this->gameOverText.getGlobalBounds().width,
-        this->window->getSize().y / 2.f - this->gameOverText.getGlobalBounds().height / 2.f);
-
-    /// Save default data and load saved data
-    saveDefaultData();
-    try
-    {
-        loadSavedData(this->numberOfPlayers,
-                      this->player1Level, this->player1Hp, this->player1HpMax, this->player1Exp, this->player1ExpNext, this->player1Score,
-                      this->player2Level, this->player2Hp, this->player2HpMax, this->player2Exp, this->player2ExpNext, this->player2Score,
-                      this->upperWeapon, this->upperWeaponLevel,
-                      this->lowerWeapon, this->lowerWeaponLevel,
-                      this->typeOfBullet);
-    }
-    catch (const std::exception &e)
-    {
-        throw std::runtime_error(std::string("Failed to load data: ") + e.what());
-    }
-
-    /// Reset player count
-    Player::players = 0;
-
-    /// Create players
-    createPlayers();
-
-    /// Decrement times and set game started state
-    this->times--;
-    this->setIsGameStarted(true);
-
-    /// Emit signal indicating game reset
-    this->reseted(true);
-}
-
-/**
- * @brief Exit the game.
- * 
- * This function closes the game window and saves the current game data for the number of players.
- * 
- * @throws std::runtime_error If saving data fails.
- */
-void Game::exit()
-{
-    /// Close the game window
-    this->window->close();
-
-    /// Save game data based on the number of players
-    try
-    {
-        if (this->numberOfPlayers == 1)
-        {
-            saveData(
-                this->numberOfPlayers,
-                this->players[0]->getLevel(), this->players[0]->getHp(), this->players[0]->getHpMax(), this->players[0]->getExp(), this->players[0]->getExpNext(), this->players[0]->getScore(),
-                0, 10, 0, 0.0, 0.0, 0,
-                this->upperWeapon, this->upperWeaponLevel,
-                this->lowerWeapon, this->lowerWeaponLevel,
-                this->typeOfBullet);
-        }
-        else if (this->numberOfPlayers == 2)
-        {
-            saveData(
-                this->numberOfPlayers,
-                this->players[0]->getLevel(), this->players[0]->getHp(), this->players[0]->getHpMax(), this->players[0]->getExp(), this->players[0]->getExpNext(), this->players[0]->getScore(),
-                this->players[1]->getLevel(), this->players[1]->getHp(), this->players[1]->getHpMax(), this->players[1]->getExp(), this->players[1]->getExpNext(), this->players[1]->getScore(),
-                this->upperWeapon, this->upperWeaponLevel,
-                this->lowerWeapon, this->lowerWeaponLevel,
-                this->typeOfBullet);
-        }
-    }
-    catch (const std::exception &e)
-    {
-        throw std::runtime_error(std::string("Failed to save data: ") + e.what());
-    }
-}
-
-/**
  * @brief Update the UI elements for a specified player.
- * 
+ *
  * This function updates the position and content of the UI elements (such as text and experience bar)
  * to reflect the current state of the specified player.
- * 
+ *
  * @param index The index of the player whose UI elements are to be updated.
- * 
+ *
  * @throws std::out_of_range If the player index is out of bounds.
  */
 void Game::updateUI(int index)
@@ -515,12 +486,12 @@ void Game::updateUI(int index)
 
 /**
  * @brief Update the game state.
- * 
+ *
  * This function handles the game logic, including player updates, enemy spawning and updates,
  * collision detection, and UI updates. It also manages the game over state and button interactions.
- * 
+ *
  * @param dt Delta time since the last frame update.
- * 
+ *
  * @throws std::runtime_error If there is an error in loading saved data or updating button states.
  */
 void Game::update(const float &dt)
@@ -737,13 +708,12 @@ void Game::update(const float &dt)
     }
 }
 
-
 /**
  * @brief Update player bullets.
- * 
+ *
  * This function updates the position of each bullet fired by the player, checks for collisions
  * with enemies, and removes bullets that are out of bounds or have hit enemies.
- * 
+ *
  * @param p Pointer to the player object.
  * @param dt Delta time since the last frame update.
  */
@@ -808,10 +778,10 @@ void Game::updateBullets(Player *p, const float &dt)
 
 /**
  * @brief Update side gun bullets.
- * 
+ *
  * This function updates the position of each bullet fired by the player's side guns, checks for collisions
  * with enemies, and removes bullets that have hit enemies.
- * 
+ *
  * @param p Pointer to the player object.
  * @param dt Delta time since the last frame update.
  */
@@ -875,10 +845,10 @@ void Game::updateSideGunBullets(Player *p, const float &dt)
 
 /**
  * @brief Handle enemy death.
- * 
+ *
  * This function is called when an enemy dies. It updates the player's experience points,
  * displays text tags indicating level up or gained experience, and removes the enemy object.
- * 
+ *
  * @param p Pointer to the player object.
  * @param enemyIndex Index of the enemy in the enemies vector.
  */
@@ -936,8 +906,110 @@ void Game::handleEnemyDeath(Player *p, size_t enemyIndex)
 }
 
 /**
+ * @brief Restart the game.
+ *
+ * This function clears all current players and enemies, resets the game state, reloads saved data,
+ * and recreates players. It also decrements the times counter and emits a signal indicating the game reset.
+ *
+ * @throws std::runtime_error If loading saved data fails.
+ */
+void Game::restart()
+{
+    /// Delete existing player objects
+    for (auto &p : players)
+    {
+        delete p;
+    }
+    players.clear();
+
+    /// Delete existing enemy objects
+    for (size_t i = 0; i < enemies.size(); ++i)
+    {
+        delete enemies[i];
+    }
+    enemies.clear();
+
+    /// Reset game over state and position of game over text
+    this->gameOver = false;
+    this->gameOverText.setPosition(
+        0.f - this->gameOverText.getGlobalBounds().width,
+        this->window->getSize().y / 2.f - this->gameOverText.getGlobalBounds().height / 2.f);
+
+    /// Save default data and load saved data
+    saveDefaultData();
+    try
+    {
+        loadSavedData(this->numberOfPlayers,
+                      this->player1Level, this->player1Hp, this->player1HpMax, this->player1Exp, this->player1ExpNext, this->player1Score,
+                      this->player2Level, this->player2Hp, this->player2HpMax, this->player2Exp, this->player2ExpNext, this->player2Score,
+                      this->upperWeapon, this->upperWeaponLevel,
+                      this->lowerWeapon, this->lowerWeaponLevel,
+                      this->typeOfBullet);
+    }
+    catch (const std::exception &e)
+    {
+        throw std::runtime_error(std::string("Failed to load data: ") + e.what());
+    }
+
+    /// Reset player count
+    Player::players = 0;
+
+    /// Create players
+    createPlayers();
+
+    /// Decrement times and set game started state
+    this->times--;
+    this->setIsGameStarted(true);
+
+    /// Emit signal indicating game reset
+    this->reseted(true);
+}
+
+/**
+ * @brief Exit the game.
+ *
+ * This function closes the game window and saves the current game data for the number of players.
+ *
+ * @throws std::runtime_error If saving data fails.
+ */
+void Game::exit()
+{
+    /// Close the game window
+    this->window->close();
+
+    /// Save game data based on the number of players
+    try
+    {
+        if (this->numberOfPlayers == 1)
+        {
+            saveData(
+                this->numberOfPlayers,
+                this->players[0]->getLevel(), this->players[0]->getHp(), this->players[0]->getHpMax(), this->players[0]->getExp(), this->players[0]->getExpNext(), this->players[0]->getScore(),
+                0, 10, 0, 0.0, 0.0, 0,
+                this->upperWeapon, this->upperWeaponLevel,
+                this->lowerWeapon, this->lowerWeaponLevel,
+                this->typeOfBullet);
+        }
+        else if (this->numberOfPlayers == 2)
+        {
+            saveData(
+                this->numberOfPlayers,
+                this->players[0]->getLevel(), this->players[0]->getHp(), this->players[0]->getHpMax(), this->players[0]->getExp(), this->players[0]->getExpNext(), this->players[0]->getScore(),
+                this->players[1]->getLevel(), this->players[1]->getHp(), this->players[1]->getHpMax(), this->players[1]->getExp(), this->players[1]->getExpNext(), this->players[1]->getScore(),
+                this->upperWeapon, this->upperWeaponLevel,
+                this->lowerWeapon, this->lowerWeaponLevel,
+                this->typeOfBullet);
+        }
+    }
+    catch (const std::exception &e)
+    {
+        throw std::runtime_error(std::string("Failed to save data: ") + e.what());
+    }
+}
+
+/**
  * @brief Render UI elements.
- * 
+ *
  * This function renders all UI elements including text tags and buttons.
  */
 void Game::renderUI()
@@ -993,7 +1065,7 @@ void Game::renderUI()
 
 /**
  * @brief Renders the game elements.
- * 
+ *
  * This method renders the game elements, including players, enemies, and UI components.
  * It checks for null pointers and handles exceptions appropriately.
  */

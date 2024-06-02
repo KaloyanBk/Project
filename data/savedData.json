@@ -1,16 +1,16 @@
 {
     "continueGame": true,
     "lowerWeapon": {
-        "enabled": true,
+        "enabled": false,
         "level": 0
     },
     "numberOfPlayers": 1,
     "player1": {
-        "exp": 7.0,
-        "expNext": 112.0,
-        "hp": 10,
-        "hpMax": 10,
-        "level": 1,
+        "exp": 4.0,
+        "expNext": 192.0,
+        "hp": 13,
+        "hpMax": 13,
+        "level": 2,
         "score": 0
     },
     "player2": {
@@ -23,7 +23,7 @@
     },
     "typeOfBullet": 0,
     "upperWeapon": {
-        "enabled": true,
-        "level": 2
+        "enabled": false,
+        "level": 0
     }
 }

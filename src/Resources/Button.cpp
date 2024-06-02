@@ -43,7 +43,7 @@ Button::Button(float x, float y, float width, float height, float radius, sf::Fo
     this->text.setCharacterSize(24);
 
     /// Adjust the vertical offset by changing the Y position of the text
-    float verticalOffset = -5.0f; /// Adjust this value as needed
+    float verticalOffset = -5.0f; 
     this->text.setPosition(
         this->shape.getPosition().x + (width / 2.f) - (this->text.getGlobalBounds().width / 2.f),
         this->shape.getPosition().y + (height / 2.f) - (this->text.getGlobalBounds().height / 2.f) + verticalOffset);
@@ -51,11 +51,6 @@ Button::Button(float x, float y, float width, float height, float radius, sf::Fo
     this->shape.setFillColor(this->idleColor);
 }
 
-/**
- * @brief Destroys the Button object.
- *
- * Does not perform any specific actions. Provided for completeness.
- */
 Button::~Button()
 {
 }
@@ -168,18 +163,13 @@ void Button::updateColor()
  */
 void Button::setRoundedRectangle(sf::ConvexShape &shape, float width, float height, float radius)
 {
-    /// Define the number of points per corner
     const int pointsPerCorner = 10;
-    /// Calculate the total number of points needed for all corners
     const int totalPoints = pointsPerCorner * 4;
 
-    /// Set the total number of points for the shape
     shape.setPointCount(totalPoints);
 
-    /// Iterate through each point for all corners
     for (int i = 0; i < pointsPerCorner; ++i)
     {
-        /// Calculate the angle for the current point
         float angle = i * M_PI / 2.0 / (pointsPerCorner - 1);
 
         /// Top-left corner
@@ -194,35 +184,34 @@ void Button::setRoundedRectangle(sf::ConvexShape &shape, float width, float heig
         /// Bottom-left corner
         shape.setPoint(3 * pointsPerCorner + i, sf::Vector2f(radius * (1 - sin(angle)), height - radius + radius * cos(angle)));
     }
-    /// Set the outline thickness and color of the shape
     shape.setOutlineThickness(1);
     shape.setOutlineColor(sf::Color::Black);
 }
 
-/// void Button::setRoundedRectangle(sf::ConvexShape &shape, float width, float height, float radius)
-/// {
-///     const int pointsPerCorner = 10;
-///     const int totalPoints = pointsPerCorner * 4;
+//  void Button::setRoundedRectangle(sf::ConvexShape &shape, float width, float height, float radius)
+//  {
+//      const int pointsPerCorner = 10;
+//      const int totalPoints = pointsPerCorner * 4;
 
-///     shape.setPointCount(totalPoints);
+//     shape.setPointCount(totalPoints);
 
-///     for (int i = 0; i < pointsPerCorner; ++i)
-///     {
-///         float angle = i * M_PI / 2.0 / (pointsPerCorner - 1);
+//      for (int i = 0; i < pointsPerCorner; ++i)
+//     {
+//          float angle = i * M_PI / 2.0 / (pointsPerCorner - 1);
 
-///         /// Top-left corner
-///         shape.setPoint(i, sf::Vector2f(radius * (1 - cos(angle)), radius * (1 - sin(angle))));
+//          /// Top-left corner
+//          shape.setPoint(i, sf::Vector2f(radius * (1 - cos(angle)), radius * (1 - sin(angle))));
 
-///         /// Top-right corner
-///         shape.setPoint(pointsPerCorner + i, sf::Vector2f(width - radius + radius * cos(angle), radius * (1 - sin(angle))));
+//          /// Top-right corner
+//          shape.setPoint(pointsPerCorner + i, sf::Vector2f(width - radius + radius * cos(angle), radius * (1 - sin(angle))));
 
-///         /// Bottom-right corner
-///         shape.setPoint(2 * pointsPerCorner + i, sf::Vector2f(width - radius + radius * cos(angle), height - radius + radius * sin(angle)));
+//          /// Bottom-right corner
+//          shape.setPoint(2 * pointsPerCorner + i, sf::Vector2f(width - radius + radius * cos(angle), height - radius + radius * sin(angle)));
 
-///         /// Bottom-left corner
-///         shape.setPoint(3 * pointsPerCorner + i, sf::Vector2f(radius * (1 - cos(angle)), height - radius + radius * sin(angle)));
-///     }
+//          /// Bottom-left corner
+//          shape.setPoint(3 * pointsPerCorner + i, sf::Vector2f(radius * (1 - cos(angle)), height - radius + radius * sin(angle)));
+//      }
 
-///     shape.setOutlineThickness(1);
-///     shape.setOutlineColor(sf::Color::Black);
-/// }
+//      shape.setOutlineThickness(1);
+//     shape.setOutlineColor(sf::Color::Black);
+//  }
