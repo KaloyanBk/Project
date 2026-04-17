@@ -103,25 +103,25 @@ Player::~Player()
 void Player::Move(const float &dt)
 {
     /// Update velocity
-    if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::UP])))
+    if (this->inputUp)
     {
         this->direction = Vector2f(0.f, -1.f);
         if (this->currentVelocity.y > -this->maxVelocity && this->direction.y < 0)
             this->currentVelocity.y += this->direction.y * this->acceleration * dt * this->dtMultiplier;
     }
-    else if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::DOWN])))
+    else if (this->inputDown)
     {
         this->direction = Vector2f(0.f, 1.f);
         if (this->currentVelocity.y < this->maxVelocity && this->direction.y > 0)
             this->currentVelocity.y += this->direction.y * this->acceleration * dt * this->dtMultiplier;
     }
-    if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::LEFT])))
+    if (this->inputLeft)
     {
         this->direction = Vector2f(-1.f, 0.f);
         if (this->currentVelocity.x < this->maxVelocity && this->direction.x < 0)
             this->currentVelocity.x += this->direction.x * this->acceleration * dt * this->dtMultiplier;
     }
-    else if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::RIGHT])))
+    else if (this->inputRight)
     {
         this->direction = Vector2f(1.f, 0.f);
         if (this->currentVelocity.x < this->maxVelocity && this->direction.x > 0)
@@ -424,7 +424,7 @@ void Player::Update(Vector2u windowBounds, const float &dt)
     this->UpdateAccessories(dt);
 
     /// Check for firing input and perform combat update
-    if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::FIRE])) && this->fireRate >= this->fireRateMax)
+    if (this->inputFire && this->fireRate >= this->fireRateMax)
     {
         this->CombatUpdate();
     }

@@ -14,9 +14,9 @@
 #include "Player.hpp"
 #include "./Resources/Fonts.hpp"
 #include "./Resources/Textures.hpp"
-#include "./Enemys/Enemy.hpp"
-#include "./Enemys/MoveLeft.hpp"
-#include "./Enemys/Follow.hpp"
+#include "./Enemies/Enemy.hpp"
+#include "./Enemies/MoveLeft.hpp"
+#include "./Enemies/Follow.hpp"
 #include "../include/Weapons/PeaShooter.hpp"
 #include "TextTag.hpp"
 #include "./Resources/Button.hpp"
@@ -39,6 +39,8 @@ private:
     Text stationaryText;
     Text gameOverText;
     Text playerLevelText;
+    Text debugText;
+    float debugTimer = 0.f;
     DynamicArray<TextTag> textTags;
 
     // Fonts
@@ -171,4 +173,7 @@ public:
     void update(const float &dt);
     void renderUI();
     void render();
+
+    // Input API
+    void setInputState(int playerIndex, bool up, bool down, bool left, bool right, bool fire);
 };

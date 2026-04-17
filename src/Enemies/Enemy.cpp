@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2024
  */
 
-#include "../../include/Enemys/Enemy.hpp"
+#include "../../include/Enemies/Enemy.hpp"
 
 /**
  * @brief Constructs a new Enemy object.

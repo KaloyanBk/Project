@@ -37,8 +37,8 @@ Menu::Menu(sf::RenderWindow *window, Game *game)
     float cornerRadius = 10.0f;
 
     /// Add buttons to the beginning menu
-    addButtonToBeginMenu(window->getSize().x / 2.f - 100.f, window->getSize().y / 2.f + 50.f, 150.f, 50.f, cornerRadius, font, "Continue");
-    addButtonToBeginMenu(window->getSize().x / 2.f + 100.f, window->getSize().y / 2.f + 50.f, 150.f, 50.f, cornerRadius, font, "New Game");
+    addButtonToBeginMenu(window->getSize().x / 2.f - 250.f, window->getSize().y / 2.f - 35.f, 200.f, 75.f, cornerRadius, font, "Continue");
+    addButtonToBeginMenu(window->getSize().x / 2.f + 50.f, window->getSize().y / 2.f - 35.f, 200.f, 75.f, cornerRadius, font, "New Game");
 
     /// Add buttons to the main menu
     addButton(100.f, 200.f, 150.f, 50.f, cornerRadius, font, "Start");

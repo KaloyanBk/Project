@@ -397,6 +397,12 @@ void Game::initUI()
     this->playerLevelText.setCharacterSize(22);
     this->playerLevelText.setFillColor(Color::White);
 
+    /// Debug text
+    this->debugText.setFont(font);
+    this->debugText.setCharacterSize(16);
+    this->debugText.setFillColor(Color::Green);
+    this->debugText.setPosition(10.f, 10.f);
+
     /// Create buttons
     float cornerRadius = 10.0f;
 
@@ -1055,6 +1061,7 @@ void Game::renderUI()
         this->restartButton->render(*this->window);
         this->exitButton->render(*this->window);
         this->pauseButton->render(*this->window);
+
     }
     catch (const std::exception &ex)
     {
@@ -1116,5 +1123,13 @@ void Game::render()
     {
         /// Handle any exceptions and print error messages
         std::cerr << "Error in Game::render(): " << ex.what() << std::endl;
+    }
+}
+
+void Game::setInputState(int playerIndex, bool up, bool down, bool left, bool right, bool fire)
+{
+    if (playerIndex >= 0 && playerIndex < static_cast<int>(players.size()))
+    {
+        players[playerIndex]->setInput(up, down, left, right, fire);
     }
 }

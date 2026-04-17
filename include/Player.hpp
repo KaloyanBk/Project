@@ -93,6 +93,12 @@ private:
     bool lowerWeapon;
     int upperWeaponLevel;
     int lowerWeaponLevel;
+    // Input state (event-driven)
+    bool inputUp = false;
+    bool inputDown = false;
+    bool inputLeft = false;
+    bool inputRight = false;
+    bool inputFire = false;
 
 public:
     // Constructor
@@ -146,6 +152,16 @@ public:
     void setLowerWeaponLevel(int level) { this->lowerWeaponLevel = level; }
     void setUperWeapon(bool uperWeapon) { this->uperWeapon = uperWeapon; }
     void setLowerWeapon(bool lowerWeapon) { this->lowerWeapon = lowerWeapon; }
+
+    // Input setters
+    void setInput(bool up, bool down, bool left, bool right, bool fire)
+    {
+        this->inputUp = up;
+        this->inputDown = down;
+        this->inputLeft = left;
+        this->inputRight = right;
+        this->inputFire = fire;
+    }
 
     void setLevel(int level) { this->level = level; }
     void setExp(float exp) { this->exp = exp; }

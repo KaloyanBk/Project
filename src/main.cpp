@@ -22,11 +22,12 @@ int main()
     /// Seed the random number generator
     srand(static_cast<unsigned>(time(nullptr)));
 
-    /// Create a fullscreen window
+    /// Create fullscreen window
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
-    unsigned int screenWidth = desktop.width;
-    unsigned int screenHeight = desktop.height;
-    sf::RenderWindow window(sf::VideoMode(screenWidth, screenHeight), "Fullscreen Window", sf::Style::Fullscreen);
+    sf::RenderWindow window(desktop, "Alien Invasion", sf::Style::Fullscreen);
+    window.setVerticalSyncEnabled(true);
+    window.setKeyRepeatEnabled(true);
+    window.requestFocus();
 
     if (!window.isOpen())
     {
@@ -78,6 +79,12 @@ int main()
     /// Create the menu object
     Menu* menu = new Menu(&window, game);
 
+    /// Start in menu; game begins when menu sets isInGame
+
+    /// Input state (event-driven)
+    bool p1Up=false, p1Down=false, p1Left=false, p1Right=false, p1Fire=false;
+    bool p2Up=false, p2Down=false, p2Left=false, p2Right=false, p2Fire=false;
+
     /// Main game loop
     while (window.isOpen())
     {
@@ -94,15 +101,49 @@ int main()
                                   lowerWeapon, lowerWeaponLevel);
 
                 /// Save current game state
+                int bulletTypeToSave = typeOfBullet;
+                if (game->isInGame())
+                {
+                    bulletTypeToSave = game->getBulletType();
+                }
                 saveData(
                     numberOfPlayers,
                     player1Level, player1Hp, player1HpMax, player1Exp, player1ExpNext, player1Score,
                     player2Level, player2Hp, player2HpMax, player2Exp, player2ExpNext, player2Score,
                     upperWeapon, upperWeaponLevel,
                     lowerWeapon, lowerWeaponLevel,
-                    0);
+                    bulletTypeToSave);
 
                 window.close();
+            }
+
+            if (event.type == sf::Event::KeyPressed)
+            {
+                if (event.key.code == sf::Keyboard::W) p1Up = true;
+                if (event.key.code == sf::Keyboard::S) p1Down = true;
+                if (event.key.code == sf::Keyboard::A) p1Left = true;
+                if (event.key.code == sf::Keyboard::D) p1Right = true;
+                if (event.key.code == sf::Keyboard::Space) p1Fire = true;
+
+                if (event.key.code == sf::Keyboard::Up) p2Up = true;
+                if (event.key.code == sf::Keyboard::Down) p2Down = true;
+                if (event.key.code == sf::Keyboard::Left) p2Left = true;
+                if (event.key.code == sf::Keyboard::Right) p2Right = true;
+                if (event.key.code == sf::Keyboard::RShift) p2Fire = true;
+            }
+            else if (event.type == sf::Event::KeyReleased)
+            {
+                if (event.key.code == sf::Keyboard::W) p1Up = false;
+                if (event.key.code == sf::Keyboard::S) p1Down = false;
+                if (event.key.code == sf::Keyboard::A) p1Left = false;
+                if (event.key.code == sf::Keyboard::D) p1Right = false;
+                if (event.key.code == sf::Keyboard::Space) p1Fire = false;
+
+                if (event.key.code == sf::Keyboard::Up) p2Up = false;
+                if (event.key.code == sf::Keyboard::Down) p2Down = false;
+                if (event.key.code == sf::Keyboard::Left) p2Left = false;
+                if (event.key.code == sf::Keyboard::Right) p2Right = false;
+                if (event.key.code == sf::Keyboard::RShift) p2Fire = false;
             }
         }
 
@@ -143,13 +184,19 @@ int main()
         }
 
         /// Render
-        if (!game->isInGame())
+        // Feed input only during gameplay
+        if (game->isInGame())
         {
-            menu->render(window);
+            game->setInputState(0, p1Up, p1Down, p1Left, p1Right, p1Fire);
+            if (numberOfPlayers == 2)
+            {
+                game->setInputState(1, p2Up, p2Down, p2Left, p2Right, p2Fire);
+            }
+            game->render();
         }
         else
         {
-            game->render();
+            menu->render(window);
         }
     }
 

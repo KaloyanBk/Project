@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2024
  */
 
-#include "../../include/Enemys/MoveLeft.hpp"
+#include "../../include/Enemies/MoveLeft.hpp"
 
 /**
  * @brief Constructs a new MoveLeftEnemy object.

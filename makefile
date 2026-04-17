@@ -2,10 +2,10 @@
 CC = g++
 
 # Compiler flags
-CFLAGS = -std=c++11 -g -fsanitize=address -I/opt/homebrew/Cellar/sfml/2.6.1/include -I/opt/homebrew/include
+CFLAGS = -std=c++11 -g -I/opt/homebrew/Cellar/sfml/2.6.1/include -I/opt/homebrew/include -I$(INC_DIR)
 
 # Linker flags
-LDFLAGS = -L/opt/homebrew/Cellar/sfml/2.6.1/lib -fsanitize=address
+LDFLAGS = -L/opt/homebrew/Cellar/sfml/2.6.1/lib
 
 # Libraries
 LIBS = -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lsfml-network
@@ -17,7 +17,7 @@ OBJ_DIR = build
 DATA_DIR = data
 
 # Find all .cpp files in src directory and its subdirectories
-SOURCES := $(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(SRC_DIR)/**/*.cpp)
+SOURCES := $(shell find $(SRC_DIR) -name '*.cpp')
 
 # Generate corresponding .o files for each .cpp file
 OBJECTS := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SOURCES))

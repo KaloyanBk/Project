@@ -13,6 +13,12 @@
 
 #include "../../include/Resources/Button.hpp"
 #include <iostream>
+#include <cmath>
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+using std::cos;
+using std::sin;
 
 /**
  * @brief Constructs a Button object.
@@ -161,57 +167,57 @@ void Button::updateColor()
  * @param height The height of the rounded rectangle.
  * @param radius The radius of the rounded corners.
  */
-void Button::setRoundedRectangle(sf::ConvexShape &shape, float width, float height, float radius)
-{
-    const int pointsPerCorner = 10;
-    const int totalPoints = pointsPerCorner * 4;
-
-    shape.setPointCount(totalPoints);
-
-    for (int i = 0; i < pointsPerCorner; ++i)
-    {
-        float angle = i * M_PI / 2.0 / (pointsPerCorner - 1);
-
-        /// Top-left corner
-        shape.setPoint(i, sf::Vector2f(radius * (1 - cos(angle)), radius * (1 - sin(angle))));
-
-        /// Top-right corner
-        shape.setPoint(pointsPerCorner + i, sf::Vector2f(width - radius + radius * sin(angle), radius * (1 - cos(angle))));
-
-        /// Bottom-right corner
-        shape.setPoint(2 * pointsPerCorner + i, sf::Vector2f(width - radius + radius * cos(angle), height - radius + radius * sin(angle)));
-
-        /// Bottom-left corner
-        shape.setPoint(3 * pointsPerCorner + i, sf::Vector2f(radius * (1 - sin(angle)), height - radius + radius * cos(angle)));
-    }
-    shape.setOutlineThickness(1);
-    shape.setOutlineColor(sf::Color::Black);
-}
-
-//  void Button::setRoundedRectangle(sf::ConvexShape &shape, float width, float height, float radius)
-//  {
-//      const int pointsPerCorner = 10;
-//      const int totalPoints = pointsPerCorner * 4;
+// void Button::setRoundedRectangle(sf::ConvexShape &shape, float width, float height, float radius)
+// {
+//     const int pointsPerCorner = 10;
+//     const int totalPoints = pointsPerCorner * 4;
 
 //     shape.setPointCount(totalPoints);
 
-//      for (int i = 0; i < pointsPerCorner; ++i)
+//     for (int i = 0; i < pointsPerCorner; ++i)
 //     {
-//          float angle = i * M_PI / 2.0 / (pointsPerCorner - 1);
+//         float angle = i * M_PI / 2.0 / (pointsPerCorner - 1);
 
-//          /// Top-left corner
-//          shape.setPoint(i, sf::Vector2f(radius * (1 - cos(angle)), radius * (1 - sin(angle))));
+//         /// Top-left corner
+//         shape.setPoint(i, sf::Vector2f(radius * (1 - cos(angle)), radius * (1 - sin(angle))));
 
-//          /// Top-right corner
-//          shape.setPoint(pointsPerCorner + i, sf::Vector2f(width - radius + radius * cos(angle), radius * (1 - sin(angle))));
+//         /// Top-right corner
+//         shape.setPoint(pointsPerCorner + i, sf::Vector2f(width - radius + radius * sin(angle), radius * (1 - cos(angle))));
 
-//          /// Bottom-right corner
-//          shape.setPoint(2 * pointsPerCorner + i, sf::Vector2f(width - radius + radius * cos(angle), height - radius + radius * sin(angle)));
+//         /// Bottom-right corner
+//         shape.setPoint(2 * pointsPerCorner + i, sf::Vector2f(width - radius + radius * cos(angle), height - radius + radius * sin(angle)));
 
-//          /// Bottom-left corner
-//          shape.setPoint(3 * pointsPerCorner + i, sf::Vector2f(radius * (1 - cos(angle)), height - radius + radius * sin(angle)));
-//      }
-
-//      shape.setOutlineThickness(1);
+//         /// Bottom-left corner
+//         shape.setPoint(3 * pointsPerCorner + i, sf::Vector2f(radius * (1 - sin(angle)), height - radius + radius * cos(angle)));
+//     }
+//     shape.setOutlineThickness(1);
 //     shape.setOutlineColor(sf::Color::Black);
-//  }
+// }
+
+ void Button::setRoundedRectangle(sf::ConvexShape &shape, float width, float height, float radius)
+ {
+     const int pointsPerCorner = 10;
+     const int totalPoints = pointsPerCorner * 4;
+
+    shape.setPointCount(totalPoints);
+
+     for (int i = 0; i < pointsPerCorner; ++i)
+    {
+         float angle = i * M_PI / 2.0 / (pointsPerCorner - 1);
+
+         /// Top-left corner
+         shape.setPoint(i, sf::Vector2f(radius * (1 - cos(angle)), radius * (1 - sin(angle))));
+
+         /// Top-right corner
+         shape.setPoint(pointsPerCorner + i, sf::Vector2f(width - radius + radius * cos(angle), radius * (1 - sin(angle))));
+
+         /// Bottom-right corner
+         shape.setPoint(2 * pointsPerCorner + i, sf::Vector2f(width - radius + radius * cos(angle), height - radius + radius * sin(angle)));
+
+         /// Bottom-left corner
+         shape.setPoint(3 * pointsPerCorner + i, sf::Vector2f(radius * (1 - cos(angle)), height - radius + radius * sin(angle)));
+     }
+
+     shape.setOutlineThickness(1);
+    shape.setOutlineColor(sf::Color::Black);
+ }

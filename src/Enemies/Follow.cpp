@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2024
  */
 
-#include "../../include/Enemys/Follow.hpp"
+#include "../../include/Enemies/Follow.hpp"
 #include <cmath>
 
 /**
